@@ -1,0 +1,5 @@
+nightly new
+tag latest
+PWG SIDIS 
+generator elSpectro
+collision ep_5x100
