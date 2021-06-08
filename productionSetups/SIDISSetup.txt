@@ -1,0 +1,5 @@
+nightly new
+tag latest
+PWG SIDIS 
+generator pythia6
+collision ep_18x100

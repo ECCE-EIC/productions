@@ -3,26 +3,28 @@
 export HOME=/sphenix/u/${LOGNAME}
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $6
 
-'''
-export ECCE=/sphenix/user/cdean/ECCE
-export MYINSTALL=$ECCE/install
-export LD_LIBRARY_PATH=$MYINSTALL/lib:$LD_LIBRARY_PATH
-export ROOT_INCLUDE_PATH=$MYINSTALL/include:$ROOT_INCLUDE_PATH
+logFile="${12}.out"
+d=`date +%Y/%m/%d`
+t=`date +%H:%M`
 
-source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/setup_local.sh $MYINSTALL
+echo ====== Your production details ======
+echo Production started: ${d} ${t}
+echo Production site: $9
+echo ECCE build: $6
+echo ECCE macros branch: production_$7
+echo ECCE macros hash: $8
+echo PWG: $7
+echo Generator: ${10} 
+echo Collision type: ${11}
+echo Input file: $2
+echo Output file: $3
+echo Output dir: $5 
+echo Number of events: $1
+echo Skip: $4
+echo =====================================
 
-export ROOT_INCLUDE_PATH=${ECCE}/macros/common:${ROOT_INCLUDE_PATH}
-'''
-
-echo 'here comes your environment'
-#printenv
-echo arg1 \(nEvents\) : $1
-echo arg2 \(input file\): $2
-echo arg3 \(output file\): $3
-echo arg4 \(skip\): $4
-echo arg5 \(output dir\): $5
-echo arg6 \(ECCE build\): $6
 echo running root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
 root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
-#root.exe -q -b testScript.C\(\"$3\", \"$5\"\)
+echo production script finished, writing metadata
+root.exe -q -b writeMetaData.C\(\"$3\",\"$5\",\"${logFile}\"\)
 echo "script done"

@@ -5,8 +5,8 @@ from ROOT import TFile, TObjString
 
 
 nArgs = len(sys.argv)
-if nArgs != 9:
-    print("Usage: python makeCondorJob <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir>")
+if nArgs != 11:
+    print("Usage: python makeCondorJob <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite>")
     sys.exit()
 
 
@@ -27,6 +27,8 @@ class pars:
   submitPath = sys.argv[6]
   macrosPath = sys.argv[7]
   prodTopDir = sys.argv[8]
+  macrosHash = sys.argv[9]
+  prodSite = sys.argv[10]  
 
 
 def getNumEvtsInFile(theFile):
@@ -93,12 +95,18 @@ def makeCondorJob():
                                                            pars.thisCollision,
                                                            jobNumber)
 
-            argument = "{} {} {} {} {} {}".format(pars.nEventsPerJob, 
-                                                  inputFile, 
-                                                  outputFile, 
-                                                  skip, 
-                                                  outputPath, 
-                                                  pars.build)
+            argument = "{} {} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob, 
+                                                                    inputFile, 
+                                                                    outputFile, 
+                                                                    skip, 
+                                                                    outputPath, 
+                                                                    pars.build,
+                                                                    pars.thisWorkingGroup,
+                                                                    pars.macrosHash,
+                                                                    pars.prodSite,
+                                                                    pars.thisGenerator,
+                                                                    pars.thisCollision,
+                                                                    condorOutputInfo)
             condorFile.write("Arguments       = \"{}\"\n".format(argument))
             condorFile.write("Output          = {}.out\n".format(condorOutputInfo))
             condorFile.write("Error           = {}.err\n".format(condorOutputInfo))

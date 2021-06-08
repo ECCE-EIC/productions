@@ -84,14 +84,16 @@ def getMacrosRepo():
 
 
 def setupBNLJob():
-  arguments = "{} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
-                                               steering.PWG, 
-                                               steering.generator, 
-                                               steering.collisionType, 
-                                               steering.nightly, 
-                                               submissionProdDir, 
-                                               detectorMacroLocation, 
-                                               steering.submissionTopDir)
+  arguments = "{} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
+                                                     steering.PWG, 
+                                                     steering.generator, 
+                                                     steering.collisionType, 
+                                                     steering.nightly, 
+                                                     submissionProdDir, 
+                                                     detectorMacroLocation, 
+                                                     steering.submissionTopDir,
+                                                     config.macrosVersion[steering.macrosTag],
+                                                     steering.site)
   os.system("python {}/{}/makeCondorJobs.py {}".format(steering.submissionTopDir, steering.site, arguments))
 
 
