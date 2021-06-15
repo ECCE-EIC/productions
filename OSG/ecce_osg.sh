@@ -78,7 +78,9 @@ pwd
 # Copy files to final storage destination.
 
 # Test S3
-./copy_to_S3.sh
+if [[ ${outputdest} == s3://* ]] ; then
+	./copy_to_S3.sh
+fi
 
 echo "----------------------------------------------"
 echo "files:"
