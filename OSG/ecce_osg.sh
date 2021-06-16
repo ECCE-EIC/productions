@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This is run from inside the sinugularity container on
+# This is run from inside the singularity container on
 # the remote node.
 #
 # The submit script needs to pass in 5 arguments:
@@ -62,9 +62,16 @@ export outputPath=${5}
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n new.3
 
 # Run the specified script (e.g. run_EIC_production.sh)
+mv productions/extras/* macros/detectors/EICDetector  # mv run_EIC_production.sh, writeMetaData.C into the macros working directory
 cd macros/detectors/EICDetector
 mkdir -p ${outputPath}/eval
+echo ./${script_name} "$@"
 ./${script_name} "$@"
+
+echo ":::::::::::::::::::::::::::::::::::::::::::::"
+echo " output directory contents"
+find ${outputPath}
+echo ":::::::::::::::::::::::::::::::::::::::::::::"
 
 # Output files will be written into $outputPath which should be
 # just "DST_files" in the local directory. Move the outputs to 
