@@ -17,16 +17,21 @@
 #
 
 import math
-import sys, os
+import sys, os, subprocess
 from os import environ
 from ROOT import TFile, TObjString
 
+# productionSite    : used for recording metadata. This is always OSG@JLab for this script
+# release           : nightly build version to use. default is "new" (don't ask)
 # macrosDir         : full path to macros directory, ending with ".../macros"
 # generatedDir      : should be top level corresponding to generated events location e.g. /gpfs/mnt/gpfs02/eic/ on SDCC gpfs
 # simulationsTopDir : top of output directory tree for DST and eval files
-macrosDir         = '/work/eic/users/davidl/2021.06.11.ecce_jlab_test_campaign/macros'
+productionSite    = 'OSG@JLab'
+release           = 'new'
+macrosDir         = '/work/eic/users/davidl/2021.06.15.ecce_test_campaign/macros'
+productionsDir    = '/work/eic/users/davidl/2021.06.15.ecce_test_campaign/productions'
 generatedTopDir   = 'root://sci-xrootd.jlab.org//osgpool/eic'
-outputDest        = '/u/scratch/davidl/2021.06.11.ecce_jlab_test_campaign'
+outputDest        = '/u/scratch/davidl/2021.06.15.ecce_test_campaign'
 simulationsTopDir = 'DST_files'
 
 nArgs = len(sys.argv)
@@ -41,6 +46,10 @@ myShell='/bin/bash'
 #    print("Your shell {} was not recognised".format(myShell))
 #    sys.exit()
 
+
+# Automatically extract macros branch name and hash from the specified directory
+macrosBranch = subprocess.Popen(['git', '-C', macrosDir, 'branch', '--points-at', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].split()[-1].decode().strip()
+macrosHash = subprocess.Popen(['git', '-C', macrosDir, 'rev-parse', '--short', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].decode().strip()
 
 nEventsPerJob = int(sys.argv[1])
 
@@ -118,20 +127,21 @@ def makeOSGJob(PWG):
 
             outputFile = "DST_{}_{}_{}-{:05d}.root".format(PWG, thisGenerator, thisCollision, jobNumber)
             argument = "{} {} {} {} {}".format(nEventsPerJob, inputFile, outputFile, skip, outputPath)
+            argument = argument + " {} {} {} {} {} {} {}".format(release, macrosBranch, macrosHash, productionSite, thisGenerator, thisCollision, '_condor_stdout')
 
             osgFileName = "osgJob_{0}_{1}_{2}-{3:05d}.job".format(PWG, thisGenerator, thisCollision, jobNumber)
             osgFile = open("{0}/{1}".format(osgDir, osgFileName), "w")
 
             #osgFile.write("JOB_NAME       = ecce-osg-{0}_{1}_{2}-{3:05d}\n".format(PWG, thisGenerator, thisCollision, jobNumber))
             osgFile.write("\n")
-            osgFile.write("executable     = ecce_osg.sh\n")
+            osgFile.write("executable     = " + productionsDir + "/OSG/ecce_osg.sh\n")
             osgFile.write("arguments      = run_EIC_production.sh " + outputDest + " " + argument + "\n")
             osgFile.write("request_cpus   = 1\n")
             osgFile.write("request_memory = 2 GB\n")
             osgFile.write("request_disk   = 3 GB\n")
             osgFile.write("\n")
             osgFile.write("should_transfer_files  = YES\n")
-            osgFile.write("transfer_input_files   = " + macrosDir + ",copy_to_S3.sh\n")
+            osgFile.write("transfer_input_files   = copy_to_S3.sh," + macrosDir + "," + productionsDir + "\n")
             if outputDest.startswith('/'):
                 osgFile.write("transfer_output_files  = " + simulationsTopDir + "\n")
                 osgFile.write("transfer_output_remaps = \"%s=%s\"\n" % (simulationsTopDir, os.path.join(outputDest, simulationsTopDir)))
