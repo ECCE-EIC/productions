@@ -24,58 +24,38 @@ generatedTopDir   = '/work/osgpool/eic'
 simulationsTopDir = '/volatile/eic/davidl/2021.06.11.ecce_jlab_test_campaign/DST_files'
 
 nArgs = len(sys.argv)
-if nArgs != 5:
-    print("Usage: python makeSLURMJob <nEventsPerJob> <physics WG> <generator> <collision>")
+if nArgs != 11:
+    print("Usage: python makeSLURMJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite>")
     sys.exit()
 
 myShell='/bin/bash'
-#myShell = str(environ['SHELL'])
-#goodShells = ['/bin/bash', '/bin/tcsh']
-#if myShell not in goodShells:
-#    print("Your shell {} was not recognised".format(myShell))
-#    sys.exit()
 
-
-nEventsPerJob = int(sys.argv[1])
-
-thisWorkingGroup = sys.argv[2]
-ecceWorkingGroup = ['SIDIS', 'HFandJets', 'ExclusiveReactions']
-if thisWorkingGroup not in ecceWorkingGroup:
-    print("Physics WG: {} was not recognised".format(thisWorkingGroup))
-    sys.exit()
-else:
-    print("Physics WG: {}".format(thisWorkingGroup))
-
-
-thisGenerator = sys.argv[3]
-ecceGenerator = ['pythia6', 'pythia8']
-if thisGenerator not in ecceGenerator:
-    print("Generator: {} was not recognised".format(thisGenerator))
-    sys.exit()
-else:
-    print("Generator: {}".format(thisGenerator))
-
-
-thisCollision = sys.argv[4]
-ecceCollision = ['ep_10x100', 'ep_18x100']
-if thisCollision not in ecceCollision:
-    print("Collision: {} was not recognised".format(thisCollision))
-    sys.exit()
-else:
-    print("Collision: {}".format(thisCollision))
+class pars:
+  simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  nEventsPerJob = int(sys.argv[1])
+  thisWorkingGroup = sys.argv[2]
+  thisGenerator = sys.argv[3]
+  thisCollision = sys.argv[4]
+  build = sys.argv[5]
+  submitPath = sys.argv[6]
+  macrosPath = sys.argv[7]
+  prodTopDir = sys.argv[8]
+  macrosHash = sys.argv[9]
+  prodSite = sys.argv[10]
 
 
 def getNumEvtsInFile(theFile):
     inputFile = TFile(theFile)
     return inputFile.Get("EICTree").GetEntries()
-    #nEvents = inputFile.Get("nEvents")
-    #return nEvents.GetString().Atoi()
 
 
-def makeSLURMJob(PWG):
-    print("Creating SLURM submission files for {} production".format(PWG))
+def makeSLURMJob():
+    print("Creating SLURM submission files for {} production".format(pars.thisWorkingGroup))
     #Find and open the PWG list of input event files
-    inputFileList = "eic-smear_{}_{}_{}.list".format(PWG, thisGenerator, thisCollision)
+    inputFileList = "{}/inputFileLists/eic-smear_{}_{}_{}.list".format(pars.prodTopDir,
+                                                                       pars.thisWorkingGroup,
+                                                                       pars.thisGenerator,
+                                                                       pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
     if not line.startswith('/') : line = generatedTopDir + '/' + line
@@ -88,7 +68,12 @@ def makeSLURMJob(PWG):
     os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
     #Now make output directory (plus eval folder)
-    outputPath = "{}/{}/{}/{}".format(simulationsTopDir, thisWorkingGroup, thisGenerator, thisCollision)
+    outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir,
+                                            pars.build,
+                                            pars.macrosHash,
+                                            pars.thisWorkingGroup,
+                                            pars.thisGenerator,
+                                            pars.thisCollision)
     outputEvalPath = outputPath + "/eval"
     os.makedirs(outputPath, exist_ok=True)
     os.makedirs(outputEvalPath, exist_ok=True)
@@ -97,21 +82,39 @@ def makeSLURMJob(PWG):
     print("Output directory: {}".format(outputPath))
     #Now loop over all input trees and make a submission script that fits the request
     nJobs = 0
+    fileNumber = 0
     while line:
        inputFile = line.replace("\n", "")
        nEventsInFile = getNumEvtsInFile(inputFile)
-       nJobsFromFile = math.ceil(nEventsInFile/nEventsPerJob)
+       nJobsFromFile = math.ceil(nEventsInFile/pars.nEventsPerJob)
        for i in range(nJobsFromFile):
 
             jobNumber = nJobs
-            skip = i*nEventsPerJob
+            skip = i*pars.nEventsPerJob
 
-            slurmOutputInfo = "{0}/log/slurm-{1}_{2}_{3}-{4:05d}".format(slurmDir, PWG, thisGenerator, thisCollision, jobNumber)
+            fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
+                                                                   pars.thisGenerator,
+                                                                   pars.thisCollision,
+                                                                   fileNumber,
+                                                                   skip,
+                                                                   pars.nEventsPerJob)
 
-            outputFile = "DST_{}_{}_{}-{:05d}.root".format(PWG, thisGenerator, thisCollision, jobNumber)
-            argument = "{} {} {} {} {}".format(nEventsPerJob, inputFile, outputFile, skip, outputPath)
+            slurmOutputInfo = "{0}/log/slurm-{1}".format(slurmDir, fileTag)
 
-            slurmFileName = "slurmJob_{0}_{1}_{2}-{3:05d}.job".format(PWG, thisGenerator, thisCollision, jobNumber)
+            outputFile = "DST_{}.root".format(fileTag)
+            argument = "{} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
+                                                                 inputFile,
+                                                                 outputFile,
+                                                                 skip,
+                                                                 outputPath,
+                                                                 pars.build,
+                                                                 pars.thisWorkingGroup,
+                                                                 pars.macrosHash,
+                                                                 pars.prodSite,
+                                                                 pars.thisGenerator,
+                                                                 pars.thisCollision)
+
+            slurmFileName = "slurmJob_{}.job".format(fileTag)
             slurmFile = open("{0}/{1}".format(slurmDir, slurmFileName), "w")				
             slurmFile.write("#!/bin/bash\n")
             slurmFile.write("#\n")
@@ -119,7 +122,7 @@ def makeSLURMJob(PWG):
             slurmFile.write("#SBATCH --nodes=1\n")
             slurmFile.write("#SBATCH --ntasks=1\n")
             slurmFile.write("#SBATCH --mem-per-cpu=2000\n")
-            slurmFile.write("#SBATCH --job-name=slurm-{0}_{1}_{2}-{3:05d}\n".format(PWG, thisGenerator, thisCollision, jobNumber))
+            slurmFile.write("#SBATCH --job-name=slurm-{0}\n".format(fileTag))
             slurmFile.write("#SBATCH --time=05:30:00\n")
             slurmFile.write("#SBATCH --gres=disk:10000\n")
             slurmFile.write("#SBATCH --output=" + slurmOutputInfo + ".out\n")
@@ -162,6 +165,7 @@ def makeSLURMJob(PWG):
             submitScript.write("sbatch {}\n".format(slurmFileName))
 
             nJobs += 1
+       fileNumber += 1
        line = infile.readline()
 
     print("SLURM submission files have been written to:\n{}/slurmJobs".format(myOutputPath))
@@ -169,4 +173,4 @@ def makeSLURMJob(PWG):
     print("You can submit your jobs with the script:\n{}".format(submitScriptName))
 
 
-makeSLURMJob(thisWorkingGroup)
+makeSLURMJob()

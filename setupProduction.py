@@ -64,7 +64,6 @@ def getProductionRequirements():
   checkRequirements(steering.generator, config.ecceGenerator)
   checkRequirements(steering.collisionType, config.ecceCollision)
 
-
 def getMacrosRepo():
   steering.simulationsDir += "/{}/{}/{}/ECCE_build_{}/macros_tag_{}".format(steering.PWG,
                                                                             steering.generator,
@@ -83,7 +82,7 @@ def getMacrosRepo():
   os.system("git checkout {}".format(config.macrosVersion[steering.macrosTag]))
 
 
-def setupBNLJob():
+def setupJob():
   arguments = "{} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
                                                      steering.PWG, 
                                                      steering.generator, 
@@ -94,7 +93,13 @@ def setupBNLJob():
                                                      steering.submissionTopDir,
                                                      config.macrosVersion[steering.macrosTag],
                                                      steering.site)
-  os.system("python {}/{}/makeCondorJobs.py {}".format(steering.submissionTopDir, steering.site, arguments))
+
+  submitScript = ""
+  if steering.site == "BNL": submitScript = "makeCondorJobs.py"
+  elif steering.site == "JLAB": submitScript = "makeSLURMJobs.py"
+  elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
+  else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
+  os.system("python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
 
 
 def createSubmissionFiles():
@@ -107,7 +112,7 @@ def createSubmissionFiles():
   os.makedirs(submissionProdDir, exist_ok=True)
   os.chdir(submissionProdDir)
   detectorMacroLocation = "{}/macros/detectors/EICDetector".format(steering.simulationsDir)
-  if steering.site == "BNL": setupBNLJob()
+  if steering.site == "BNL" or steering.site == "JLAB" or steering.site == "OSG": setupJob()
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
 
 

@@ -35,50 +35,28 @@ outputDest        = '/u/scratch/davidl/2021.06.15.ecce_test_campaign'
 simulationsTopDir = 'DST_files'
 
 nArgs = len(sys.argv)
-if nArgs != 5:
-    print("Usage: python makeOSGJob <nEventsPerJob> <physics WG> <generator> <collision>")
+if nArgs != 11:
+    print("Usage: python makeOSGJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite>")
     sys.exit()
 
 myShell='/bin/bash'
-#myShell = str(environ['SHELL'])
-#goodShells = ['/bin/bash', '/bin/tcsh']
-#if myShell not in goodShells:
-#    print("Your shell {} was not recognised".format(myShell))
-#    sys.exit()
 
+class pars:
+  simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  nEventsPerJob = int(sys.argv[1])
+  thisWorkingGroup = sys.argv[2]
+  thisGenerator = sys.argv[3]
+  thisCollision = sys.argv[4]
+  build = sys.argv[5]
+  submitPath = sys.argv[6]
+  macrosPath = sys.argv[7]
+  prodTopDir = sys.argv[8]
+  macrosHash = sys.argv[9]
+  prodSite = sys.argv[10]
 
 # Automatically extract macros branch name and hash from the specified directory
-macrosBranch = subprocess.Popen(['git', '-C', macrosDir, 'branch', '--points-at', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].split()[-1].decode().strip()
-macrosHash = subprocess.Popen(['git', '-C', macrosDir, 'rev-parse', '--short', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].decode().strip()
-
-nEventsPerJob = int(sys.argv[1])
-
-thisWorkingGroup = sys.argv[2]
-ecceWorkingGroup = ['SIDIS', 'HFandJets', 'ExclusiveReactions']
-if thisWorkingGroup not in ecceWorkingGroup:
-    print("Physics WG: {} was not recognised".format(thisWorkingGroup))
-    sys.exit()
-else:
-    print("Physics WG: {}".format(thisWorkingGroup))
-
-
-thisGenerator = sys.argv[3]
-ecceGenerator = ['pythia6', 'pythia8']
-if thisGenerator not in ecceGenerator:
-    print("Generator: {} was not recognised".format(thisGenerator))
-    sys.exit()
-else:
-    print("Generator: {}".format(thisGenerator))
-
-
-thisCollision = sys.argv[4]
-ecceCollision = ['ep_10x100', 'ep_18x100', 'ep_18x275']
-if thisCollision not in ecceCollision:
-    print("Collision: {} was not recognised".format(thisCollision))
-    sys.exit()
-else:
-    print("Collision: {}".format(thisCollision))
-
+#macrosBranch = subprocess.Popen(['git', '-C', macrosDir, 'branch', '--points-at', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].split()[-1].decode().strip()
+#pars.macrosHash = subprocess.Popen(['git', '-C', macrosDir, 'rev-parse', '--short', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].decode().strip()
 
 def getNumEvtsInFile(theFile):
     # For some reason pyroot is failing when using xrootd so if 
@@ -89,10 +67,13 @@ def getNumEvtsInFile(theFile):
     return inputFile.Get("EICTree").GetEntries()
 
 
-def makeOSGJob(PWG):
-    print("Creating OSG condor submission files for {} production".format(PWG))
-    #Find and open the PWG list of input event files
-    inputFileList = "eic-smear_{}_{}_{}.list".format(PWG, thisGenerator, thisCollision)
+def makeOSGJob():
+    print("Creating OSG condor submission files for {} production".format(pars.thisWorkingGroup))
+    #Find and open the pars.thisWorkingGroup list of input event files
+    inputFileList = "{}/inputFileLists/eic-smear_{}_{}_{}.list".format(pars.prodTopDir,
+                                                                       pars.thisWorkingGroup,
+                                                                       pars.thisGenerator,
+                                                                       pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
     if not line.startswith('/') : line = generatedTopDir + '/' + line
@@ -105,7 +86,12 @@ def makeOSGJob(PWG):
     os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
     #Now make output directory (plus eval folder)
-    outputPath = "{}/{}/{}/{}".format(simulationsTopDir, thisWorkingGroup, thisGenerator, thisCollision)
+    outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir,
+                                            pars.build,
+                                            pars.macrosHash,
+                                            pars.thisWorkingGroup,
+                                            pars.thisGenerator,
+                                            pars.thisCollision)
     outputEvalPath = outputPath + "/eval"
     os.makedirs(outputPath, exist_ok=True)
     os.makedirs(outputEvalPath, exist_ok=True)
@@ -114,22 +100,40 @@ def makeOSGJob(PWG):
     print("Output directory: {}".format(outputPath))
     #Now loop over all input trees and make a submission script that fits the request
     nJobs = 0
+    fileNumber = 0
     while line:
        inputFile = line.replace("\n", "")
        nEventsInFile = getNumEvtsInFile(inputFile)
-       nJobsFromFile = math.ceil(nEventsInFile/nEventsPerJob)
+       nJobsFromFile = math.ceil(nEventsInFile/pars.nEventsPerJob)
        for i in range(nJobsFromFile):
 
             jobNumber = nJobs
-            skip = i*nEventsPerJob
+            skip = i*pars.nEventsPerJob
 
-            osgOutputInfo = "{0}/log/osg-{1}_{2}_{3}-{4:05d}".format(osgDir, PWG, thisGenerator, thisCollision, jobNumber)
+            fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
+                                                                   pars.thisGenerator,
+                                                                   pars.thisCollision,
+                                                                   fileNumber,
+                                                                   skip,
+                                                                   pars.nEventsPerJob)
 
-            outputFile = "DST_{}_{}_{}-{:05d}.root".format(PWG, thisGenerator, thisCollision, jobNumber)
-            argument = "{} {} {} {} {}".format(nEventsPerJob, inputFile, outputFile, skip, outputPath)
-            argument = argument + " {} {} {} {} {} {} {}".format(release, macrosBranch, macrosHash, productionSite, thisGenerator, thisCollision, '_condor_stdout')
+            osgOutputInfo = "{0}/log/osg-{1}".format(osgDir, fileTag)
 
-            osgFileName = "osgJob_{0}_{1}_{2}-{3:05d}.job".format(PWG, thisGenerator, thisCollision, jobNumber)
+            outputFile = "DST_{}.root".format(fileTag)
+            argument = "{} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
+                                                                 inputFile,
+                                                                 outputFile,
+                                                                 skip,
+                                                                 outputPath,
+                                                                 pars.build,
+                                                                 pars.thisWorkingGroup,
+                                                                 pars.macrosHash,
+                                                                 pars.prodSite,
+                                                                 pars.thisGenerator,
+                                                                 pars.thisCollision)
+
+            osgFileName = "osgJob_{}.job".format(fileTag)
+
             osgFile = open("{0}/{1}".format(osgDir, osgFileName), "w")
 
             #osgFile.write("JOB_NAME       = ecce-osg-{0}_{1}_{2}-{3:05d}\n".format(PWG, thisGenerator, thisCollision, jobNumber))
@@ -164,6 +168,7 @@ def makeOSGJob(PWG):
             submitScript.write("condor_submit {}\n".format(osgFileName))
 
             nJobs += 1
+       fileNumber += 1
        line = infile.readline()
 
     print("OSG submission files have been written to:\n{}/osgJobs".format(myOutputPath))
@@ -171,4 +176,4 @@ def makeOSGJob(PWG):
     print("You can submit your jobs with the script:\n{}".format(submitScriptName))
 
 
-makeOSGJob(thisWorkingGroup)
+makeOSGJob()
