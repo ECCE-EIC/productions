@@ -43,7 +43,7 @@ myShell='/bin/bash'
 
 class pars:
   #simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
-  #simulationsTopDir = 'S3://ECCE/MC'
+  #simulationsTopDir = 'S3://eictest/ECCE/MC'
   simulationsTopDir = '/work/eic2/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
@@ -68,6 +68,7 @@ def getNumEvtsInFile(theFile):
 
 def makeOSGJob():
     print("Creating OSG condor submission files for {} production".format(pars.thisWorkingGroup))
+
     #Find and open the pars.thisWorkingGroup list of input event files
     inputFileList = "{}/inputFileLists/eic-smear_{}_{}_{}.list".format(pars.prodTopDir,
                                                                        pars.thisWorkingGroup,
@@ -76,30 +77,42 @@ def makeOSGJob():
     infile = open(inputFileList, "r")
     line = infile.readline()
     for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
-    #Get the current working directory to write submissions and logs to
-    #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
-    osgDir = "{}/osgJobs".format(pars.submitPath)
-    os.makedirs("{}/log".format(osgDir), exist_ok=True)
+
+    # Set directory to write submission scripts and logs to
+    osgDir = "{}/osgJobs".format(pars.submitPath) 
     submitScriptName = "{}/submitJobs.sh".format(osgDir)
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
-    #Now make output directory (plus eval folder)
-    outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir,
-                                            pars.build,
+
+    # Portion of output directory path relative to top-level simulations output dir
+    outputRelPath = "{}/{}/{}/{}+{}".format(pars.build,
                                             pars.macrosHash,
                                             pars.thisWorkingGroup,
                                             pars.thisGenerator,
                                             pars.thisCollision)
-    outputEvalPath = outputPath + "/eval"
-    outputLogPath  = outputPath + "/log"
-    os.makedirs(outputPath, exist_ok=True)
-    os.makedirs(outputEvalPath, exist_ok=True)
+
+    # Copy the topmost directory of the outputRelPath to its own variable.
+    outputRelPathTopDirName = outputRelPath.split('/')[0]
+
+    # Full path to directory where DST files will be written. (n.b. this may start with "S3://")
+    outputPath = "{}/{}".format(pars.simulationsTopDir, outputRelPath)
+
+    # If output files are being brought back here then create the directory tree
+    # If they are being pushed to S3 then the remote job must handle this.
+    if outputPath.startswith('/'):
+      outputEvalPath = outputPath + "/eval"
+      os.makedirs(outputEvalPath, exist_ok=True)
+
+    # Log files must always be local
+    outputLogPath  = osgDir + "/log"
     os.makedirs(outputLogPath, exist_ok=True)
-    #Print input/output info
+
+    # Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
-    #Now loop over all input trees and make a submission script that fits the request
+
+    # Now loop over all input trees and make a submission script that fits the request
     nJobs = 0
     fileNumber = 0
     while line:
@@ -125,7 +138,7 @@ def makeOSGJob():
                                                                  inputFile,
                                                                  outputFile,
                                                                  skip,
-                                                                 'DST_files', #outputPath,
+                                                                 outputRelPath, #outputPath,
                                                                  pars.build,
                                                                  pars.thisWorkingGroup,
                                                                  pars.macrosHash,
@@ -146,9 +159,9 @@ def makeOSGJob():
             osgFile.write("\n")
             osgFile.write("should_transfer_files  = YES\n")
             osgFile.write("transfer_input_files   = copy_to_S3.py," + pars.macrosTopDir + "," + pars.prodTopDir + "\n")
-            if pars.simulationsTopDir.startswith('/'):
-                osgFile.write("transfer_output_files  = DST_files\n")
-                osgFile.write("transfer_output_remaps = \"DST_files=%s\"\n" % (outputPath))
+            if outputPath.startswith('/'):
+                osgFile.write("transfer_output_files  = %s\n" % outputRelPathTopDirName)
+                osgFile.write("transfer_output_remaps = \"%s=%s\"\n" % (outputRelPathTopDirName, os.path.join(pars.simulationsTopDir,outputRelPathTopDirName)))
             osgFile.write("error  = {}.err\n".format(osgOutputInfo))
             osgFile.write("output = {}.out\n".format(osgOutputInfo))
             osgFile.write("log    = {}.log\n".format(osgOutputInfo))
