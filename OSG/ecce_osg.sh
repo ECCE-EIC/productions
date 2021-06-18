@@ -84,9 +84,10 @@ pwd
 
 # Copy files to final storage destination.
 
-# Test S3
+# Write outputs BNL S3 (if appropriate)
 if [[ ${outputDest} == S3://* ]] ; then
-	./copy_to_S3.py ${outputPath} ${outputDest}
+	outputRelPathTopDirName=$(echo "${outputPath}" | cut -d "/" -f1)
+	./copy_to_S3.py ${outputRelPathTopDirName} ${outputDest}
 fi
 
 echo "----------------------------------------------"
