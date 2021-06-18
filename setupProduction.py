@@ -4,9 +4,14 @@ import sys, os
 
 nArgs = len(sys.argv)
 if nArgs != 3:
-    print("Usage: python setupProduction.py <BNL/JLab/MIT> <path/to/configurationFile>")
+    print("Usage: python setupProduction.py <BNL/JLAB/MIT> <path/to/configurationFile>")
     sys.exit()
 
+# Path variable descriptions
+#
+# productionTopDir  : Directory where where this production campaign is being run from
+# simulationsDir    : Directory where the "macros" directory will be cloned to (n.b. this is appended to when getMacrosRepo() is called!)
+# submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
   fileName = sys.argv[2]
@@ -15,7 +20,8 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-  productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
+  #productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
+  productionTopDir = '/work/eic/users/davidl/2021.06.17.test_campaign'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
@@ -24,7 +30,7 @@ class steering():
 
 
 if steering.site not in config.sites:
-  print("Your submission site, {}, was not recongised".format(steering.site))
+  print("Your submission site, {}, was not recognised".format(steering.site))
   sys.exit()
 
 
@@ -80,6 +86,13 @@ def getMacrosRepo():
   os.system("git branch --set-upstream-to=origin/production_{0} production_{0}".format(steering.PWG))
   os.system("git config --local advice.detachedHead false")
   os.system("git checkout {}".format(config.macrosVersion[steering.macrosTag]))
+  
+  # Copy all files from productions/extras into the macros directory
+  extrasDir = steering.submissionTopDir + '/extras'
+  if os.path.isdir(extrasDir):
+    cmd = 'cp %s/* %s' % (extrasDir, os.getcwd() + '/detectors/EICDetector')
+    print(cmd)
+    os.system(cmd)
 
 
 def setupJob():
