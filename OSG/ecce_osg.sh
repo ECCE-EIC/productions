@@ -44,7 +44,7 @@ shift
 # 1. A simple directory signifies that condor/OSG will take
 # care of copying all of the files back to the submit node.
 #
-# 2. If it starts with s3:// then it will call the copy_to_s3.sh
+# 2. If it starts with S3:// then it will call the copy_to_s3.py
 # script to copy the files to BNL's S3 storage
 #  
 export outputDest=${1}
@@ -85,8 +85,8 @@ pwd
 # Copy files to final storage destination.
 
 # Test S3
-if [[ ${outputdest} == s3://* ]] ; then
-	./copy_to_S3.sh
+if [[ ${outputDest} == S3://* ]] ; then
+	./copy_to_S3.py ${outputPath} ${outputDest}
 fi
 
 echo "----------------------------------------------"
