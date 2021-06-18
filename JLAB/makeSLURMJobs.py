@@ -16,12 +16,10 @@ import sys, os, getpass
 from os import environ
 from ROOT import TFile, TObjString
 
-# macrosDir         : full path to macros directory, ending with ".../macros"
-# generatedDir      : should be top level corresponding to generated events location e.g. /gpfs/mnt/gpfs02/eic/ on SDCC gpfs
-# simulationsTopDir : top of output directory tree for DST and eval files
-macrosDir         = '/work/eic/users/davidl/2021.06.11.ecce_jlab_test_campaign/macros'
-generatedTopDir   = '/work/osgpool/eic'
-simulationsTopDir = '/volatile/eic/davidl/2021.06.11.ecce_jlab_test_campaign/DST_files'
+# This is used to map the full path file names in the list of
+# generated files that are on the BNL system to paths on the
+# JLab system.
+generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'/work/osgpool/eic'}
 
 nArgs = len(sys.argv)
 if nArgs != 11:
@@ -30,8 +28,17 @@ if nArgs != 11:
 
 myShell='/bin/bash'
 
+# Path variable descriptions
+#
+# simulationsTopDir : Directory where output DST files should go
+# submitPath        : Directory where the SLURM batch scripts are written
+# macrosPath        : Directory where the Fun4All_G4_EICDetector.C lives (e.g. .../macros/detector/EICDetector)
+# macrosTopDir      : Directory "macros". (This is just <macrosPath>/../..)
+# prodTopDir        : Directory where setProduction.py is being run from (typically "productions")
+
 class pars:
-  simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  #simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  simulationsTopDir = '/work/eic2/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -39,6 +46,7 @@ class pars:
   build = sys.argv[5]
   submitPath = sys.argv[6]
   macrosPath = sys.argv[7]
+  macrosTopDir = os.path.abspath( macrosPath + '/../..')
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
@@ -58,11 +66,10 @@ def makeSLURMJob():
                                                                        pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
-    if not line.startswith('/') : line = generatedTopDir + '/' + line
+    for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
     #Get the current working directory to write submissions and logs to
-    myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
-    slurmDir = "{}/slurmJobs".format(myOutputPath)
-    os.makedirs("{}/log".format(slurmDir), exist_ok=True)
+    #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
+    slurmDir = "{}/slurmJobs".format(pars.submitPath)
     submitScriptName = "{}/submitJobs.sh".format(slurmDir)
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
@@ -75,8 +82,10 @@ def makeSLURMJob():
                                             pars.thisGenerator,
                                             pars.thisCollision)
     outputEvalPath = outputPath + "/eval"
+    outputLogPath  = outputPath + "/log"
     os.makedirs(outputPath, exist_ok=True)
     os.makedirs(outputEvalPath, exist_ok=True)
+    os.makedirs(outputLogPath, exist_ok=True)
     #Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
@@ -99,7 +108,7 @@ def makeSLURMJob():
                                                                    skip,
                                                                    pars.nEventsPerJob)
 
-            slurmOutputInfo = "{0}/log/slurm-{1}".format(slurmDir, fileTag)
+            slurmOutputInfo = "{0}/slurm-{1}".format(outputLogPath, fileTag)
 
             outputFile = "DST_{}.root".format(fileTag)
             argument = "{} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
@@ -152,7 +161,7 @@ def makeSLURMJob():
             slurmFile.write("printf \"cwd: \"; /bin/pwd\n")
             slurmFile.write("\n")
             slurmFile.write("# Copy entire macros directory to local disk\n")
-            slurmFile.write("cp -rp " + macrosDir + " .\n")
+            slurmFile.write("cp -rp " + pars.macrosTopDir + " .\n")
             slurmFile.write("cd macros/detectors/EICDetector\n")
             slurmFile.write("\n")
             slurmFile.write("singularity exec --no-home -B /cvmfs:/cvmfs ${SIMG} ${SCRIPT} " + argument + "\n")
@@ -168,7 +177,7 @@ def makeSLURMJob():
        fileNumber += 1
        line = infile.readline()
 
-    print("SLURM submission files have been written to:\n{}/slurmJobs".format(myOutputPath))
+    print("SLURM submission files have been written to:\n{}".format(slurmDir))
     print("This setup will submit {} jobs".format(nJobs))
     print("You can submit your jobs with the script:\n{}".format(submitScriptName))
 
