@@ -21,18 +21,10 @@ import sys, os, subprocess
 from os import environ
 from ROOT import TFile, TObjString
 
-# productionSite    : used for recording metadata. This is always OSG@JLab for this script
-# release           : nightly build version to use. default is "new" (don't ask)
-# macrosDir         : full path to macros directory, ending with ".../macros"
-# generatedDir      : should be top level corresponding to generated events location e.g. /gpfs/mnt/gpfs02/eic/ on SDCC gpfs
-# simulationsTopDir : top of output directory tree for DST and eval files
-productionSite    = 'OSG@JLab'
-release           = 'new'
-macrosDir         = '/work/eic/users/davidl/2021.06.15.ecce_test_campaign/macros'
-productionsDir    = '/work/eic/users/davidl/2021.06.15.ecce_test_campaign/productions'
-generatedTopDir   = 'root://sci-xrootd.jlab.org//osgpool/eic'
-outputDest        = '/u/scratch/davidl/2021.06.15.ecce_test_campaign'
-simulationsTopDir = 'DST_files'
+# This is used to map the full path file names in the list of
+# generated files that are on the BNL system to paths on the
+# JLab system.
+generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpool/eic'}
 
 nArgs = len(sys.argv)
 if nArgs != 11:
@@ -41,8 +33,18 @@ if nArgs != 11:
 
 myShell='/bin/bash'
 
+# Path variable descriptions
+#
+# simulationsTopDir : Directory where output DST files should go
+# submitPath        : Directory where the SLURM batch scripts are written
+# macrosPath        : Directory where the Fun4All_G4_EICDetector.C lives (e.g. .../macros/detector/EICDetector)
+# macrosTopDir      : Directory "macros". (This is just <macrosPath>/../..)
+# prodTopDir        : Directory where setProduction.py is being run from (typically "productions")
+
 class pars:
-  simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  #simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  #simulationsTopDir = 'S3://ECCE/MC'
+  simulationsTopDir = '/work/eic2/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -50,13 +52,10 @@ class pars:
   build = sys.argv[5]
   submitPath = sys.argv[6]
   macrosPath = sys.argv[7]
+  macrosTopDir = os.path.abspath( macrosPath + '/../..')
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
-
-# Automatically extract macros branch name and hash from the specified directory
-#macrosBranch = subprocess.Popen(['git', '-C', macrosDir, 'branch', '--points-at', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].split()[-1].decode().strip()
-#pars.macrosHash = subprocess.Popen(['git', '-C', macrosDir, 'rev-parse', '--short', 'HEAD'], stdout=subprocess.PIPE).communicate()[0].decode().strip()
 
 def getNumEvtsInFile(theFile):
     # For some reason pyroot is failing when using xrootd so if 
@@ -76,10 +75,10 @@ def makeOSGJob():
                                                                        pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
-    if not line.startswith('/') : line = generatedTopDir + '/' + line
+    for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
     #Get the current working directory to write submissions and logs to
-    myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
-    osgDir = "{}/osgJobs".format(myOutputPath)
+    #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
+    osgDir = "{}/osgJobs".format(pars.submitPath)
     os.makedirs("{}/log".format(osgDir), exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(osgDir)
     submitScript = open("{}".format(submitScriptName), "w")
@@ -93,8 +92,10 @@ def makeOSGJob():
                                             pars.thisGenerator,
                                             pars.thisCollision)
     outputEvalPath = outputPath + "/eval"
+    outputLogPath  = outputPath + "/log"
     os.makedirs(outputPath, exist_ok=True)
     os.makedirs(outputEvalPath, exist_ok=True)
+    os.makedirs(outputLogPath, exist_ok=True)
     #Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
@@ -117,14 +118,14 @@ def makeOSGJob():
                                                                    skip,
                                                                    pars.nEventsPerJob)
 
-            osgOutputInfo = "{0}/log/osg-{1}".format(osgDir, fileTag)
+            osgOutputInfo = "{0}/osg-{1}".format(outputLogPath, fileTag)
 
             outputFile = "DST_{}.root".format(fileTag)
             argument = "{} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
                                                                  inputFile,
                                                                  outputFile,
                                                                  skip,
-                                                                 outputPath,
+                                                                 'DST_files', #outputPath,
                                                                  pars.build,
                                                                  pars.thisWorkingGroup,
                                                                  pars.macrosHash,
@@ -136,19 +137,18 @@ def makeOSGJob():
 
             osgFile = open("{0}/{1}".format(osgDir, osgFileName), "w")
 
-            #osgFile.write("JOB_NAME       = ecce-osg-{0}_{1}_{2}-{3:05d}\n".format(PWG, thisGenerator, thisCollision, jobNumber))
             osgFile.write("\n")
-            osgFile.write("executable     = " + productionsDir + "/OSG/ecce_osg.sh\n")
-            osgFile.write("arguments      = run_EIC_production.sh " + outputDest + " " + argument + "\n")
+            osgFile.write("executable     = " + pars.prodTopDir + "/OSG/ecce_osg.sh\n")
+            osgFile.write("arguments      = run_EIC_production.sh " + pars.simulationsTopDir + " " + argument + "\n")
             osgFile.write("request_cpus   = 1\n")
             osgFile.write("request_memory = 2 GB\n")
             osgFile.write("request_disk   = 3 GB\n")
             osgFile.write("\n")
             osgFile.write("should_transfer_files  = YES\n")
-            osgFile.write("transfer_input_files   = copy_to_S3.sh," + macrosDir + "," + productionsDir + "\n")
-            if outputDest.startswith('/'):
-                osgFile.write("transfer_output_files  = " + simulationsTopDir + "\n")
-                osgFile.write("transfer_output_remaps = \"%s=%s\"\n" % (simulationsTopDir, os.path.join(outputDest, simulationsTopDir)))
+            osgFile.write("transfer_input_files   = copy_to_S3.py," + pars.macrosTopDir + "," + pars.prodTopDir + "\n")
+            if pars.simulationsTopDir.startswith('/'):
+                osgFile.write("transfer_output_files  = DST_files\n")
+                osgFile.write("transfer_output_remaps = \"DST_files=%s\"\n" % (outputPath))
             osgFile.write("error  = {}.err\n".format(osgOutputInfo))
             osgFile.write("output = {}.out\n".format(osgOutputInfo))
             osgFile.write("log    = {}.log\n".format(osgOutputInfo))
@@ -158,7 +158,7 @@ def makeOSGJob():
             osgFile.write("Requirements = (HAS_SINGULARITY == TRUE) && (HAS_CVMFS_oasis_opensciencegrid_org == True) && (SINGULARITY_MODE == \"privileged\") &&  (HAS_CVMFS_sphenix_opensciencegrid_org == True) && (Arch == \"X86_64\")\n")
             osgFile.write("\n")
             osgFile.write("+ProjectName = \"EIC\"\n")
-            osgFile.write("+SingularityImage = \"/cvmfs/oasis.opensciencegrid.org/jlab/epsci/singularity/images/rhic_sl7_ext_S3.simg\"\n")
+            osgFile.write("+SingularityImage = \"/cvmfs/eic.opensciencegrid.org/singularity/rhic_sl7_ext\"\n")
             osgFile.write("+SingularityBindCVMFS = True\n")
             osgFile.write("+SingularityAutoLoad  = True\n")
             osgFile.write("#+DESIRED_Sites=\"JLab-FARM-CE\"\n")
@@ -171,7 +171,7 @@ def makeOSGJob():
        fileNumber += 1
        line = infile.readline()
 
-    print("OSG submission files have been written to:\n{}/osgJobs".format(myOutputPath))
+    print("OSG submission files have been written to:\n{}".format(osgDir))
     print("This setup will submit {} jobs".format(nJobs))
     print("You can submit your jobs with the script:\n{}".format(submitScriptName))
 
