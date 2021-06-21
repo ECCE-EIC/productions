@@ -22,8 +22,8 @@ from ROOT import TFile, TObjString
 generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'/work/osgpool/eic'}
 
 nArgs = len(sys.argv)
-if nArgs != 11:
-    print("Usage: python makeSLURMJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite>")
+if nArgs != 12:
+    print("Usage: python makeSLURMJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch>")
     sys.exit()
 
 myShell='/bin/bash'
@@ -37,7 +37,6 @@ myShell='/bin/bash'
 # prodTopDir        : Directory where setProduction.py is being run from (typically "productions")
 
 class pars:
-  #simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
   simulationsTopDir = '/work/eic2/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
@@ -50,6 +49,7 @@ class pars:
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
+  macrosBranch = sys.argv[11]
 
 
 def getNumEvtsInFile(theFile):
@@ -111,17 +111,18 @@ def makeSLURMJob():
             slurmOutputInfo = "{0}/slurm-{1}".format(outputLogPath, fileTag)
 
             outputFile = "DST_{}.root".format(fileTag)
-            argument = "{} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
-                                                                 inputFile,
-                                                                 outputFile,
-                                                                 skip,
-                                                                 outputPath,
-                                                                 pars.build,
-                                                                 pars.thisWorkingGroup,
-                                                                 pars.macrosHash,
-                                                                 pars.prodSite,
-                                                                 pars.thisGenerator,
-                                                                 pars.thisCollision)
+            argument = "{} {} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
+                                                                    inputFile,
+                                                                    outputFile,
+                                                                    skip,
+                                                                    outputPath,
+                                                                    pars.build,
+                                                                    pars.thisWorkingGroup,
+                                                                    pars.macrosHash,
+                                                                    pars.prodSite,
+                                                                    pars.thisGenerator,
+                                                                    pars.thisCollision,
+                                                                    pars.macrosBranch)
 
             slurmFileName = "slurmJob_{}.job".format(fileTag)
             slurmFile = open("{0}/{1}".format(slurmDir, slurmFileName), "w")				

@@ -2,6 +2,8 @@
 
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $6
 
+export ROOT_INCLUDE_PATH=$(pwd)/../../common:$ROOT_INCLUDE_PATH
+
 metaDataFile=${5}/${3}.txt
 tmpLogFile=${3}.out
 
@@ -15,14 +17,14 @@ Production started: ${d} ${t}
 Production site: $9
 Production Host: ${HOSTNAME}
 ECCE build: $6
-ECCE macros branch: production_$7
+ECCE macros branch: ${12}
 ECCE macros hash: $8
 PWG: $7
 Generator: ${10} 
 Collision type: ${11}
 Input file: $2
 Output file: $3
-Output dir: $5 
+Output dir: $5
 Number of events: $1
 Skip: $4
 =====================================

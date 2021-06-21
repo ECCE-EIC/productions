@@ -5,8 +5,8 @@ from ROOT import TFile, TObjString
 
 
 nArgs = len(sys.argv)
-if nArgs != 11:
-    print("Usage: python makeCondorJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite>")
+if nArgs != 12:
+    print("Usage: python makeCondorJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch>")
     sys.exit()
 
 
@@ -29,6 +29,7 @@ class pars:
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]  
+  macrosBranch = sys.argv[11]
 
 
 def getNumEvtsInFile(theFile):
@@ -94,17 +95,18 @@ def makeCondorJob():
             if myShell == '/bin/tcsh': condorFile.write("Executable      = {}/run_EIC_production.csh\n".format(pars.macrosPath))
             outputFile = "DST_{}.root".format(fileTag)
 
-            argument = "{} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob, 
-                                                                 inputFile, 
-                                                                 outputFile, 
-                                                                 skip, 
-                                                                 outputPath, 
-                                                                 pars.build,
-                                                                 pars.thisWorkingGroup,
-                                                                 pars.macrosHash,
-                                                                 pars.prodSite,
-                                                                 pars.thisGenerator,
-                                                                 pars.thisCollision)
+            argument = "{} {} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob, 
+                                                                    inputFile, 
+                                                                    outputFile, 
+                                                                    skip, 
+                                                                    outputPath, 
+                                                                    pars.build,
+                                                                    pars.thisWorkingGroup,
+                                                                    pars.macrosHash,
+                                                                    pars.prodSite,
+                                                                    pars.thisGenerator,
+                                                                    pars.thisCollision,
+                                                                    pars.macrosBranch)
             condorFile.write("Arguments       = \"{}\"\n".format(argument))
             condorFile.write("Output          = {}.out\n".format(condorOutputInfo))
             condorFile.write("Error           = {}.err\n".format(condorOutputInfo))

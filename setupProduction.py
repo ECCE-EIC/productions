@@ -20,11 +20,11 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-  #productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
   productionTopDir = '/work/eic/users/davidl/2021.06.17.test_campaign'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
+  macrosBranch = "June-2021-Concept"
   nEventsPerJob = 1000
   site = sys.argv[1]
 
@@ -33,6 +33,8 @@ if steering.site not in config.sites:
   print("Your submission site, {}, was not recognised".format(steering.site))
   sys.exit()
 
+if steering.site == "BNL":
+  steering.productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
 
 def getParameter(parameter):
   configFile = open(steering.fileName, "r")
@@ -82,8 +84,8 @@ def getMacrosRepo():
   if not os.path.isdir("{}/macros".format(steering.simulationsDir)):
     os.system("git clone {}".format(steering.macrosRepo))
   os.chdir("macros")
-  os.system("git checkout -b production_{}".format(steering.PWG))
-  os.system("git branch --set-upstream-to=origin/production_{0} production_{0}".format(steering.PWG))
+  os.system("git checkout -b {}".format(steering.macrosBranch))
+  os.system("git branch --set-upstream-to=origin/{0} {0}".format(steering.macrosBranch))
   os.system("git config --local advice.detachedHead false")
   os.system("git checkout {}".format(config.macrosVersion[steering.macrosTag]))
   
@@ -96,16 +98,17 @@ def getMacrosRepo():
 
 
 def setupJob():
-  arguments = "{} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
-                                                     steering.PWG, 
-                                                     steering.generator, 
-                                                     steering.collisionType, 
-                                                     steering.nightly, 
-                                                     submissionProdDir, 
-                                                     detectorMacroLocation, 
-                                                     steering.submissionTopDir,
-                                                     config.macrosVersion[steering.macrosTag],
-                                                     steering.site)
+  arguments = "{} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
+                                                        steering.PWG, 
+                                                        steering.generator, 
+                                                        steering.collisionType, 
+                                                        steering.nightly, 
+                                                        submissionProdDir, 
+                                                        detectorMacroLocation, 
+                                                        steering.submissionTopDir,
+                                                        config.macrosVersion[steering.macrosTag],
+                                                        steering.site, 
+                                                        steering.macrosBranch)
 
   submitScript = ""
   if steering.site == "BNL": submitScript = "makeCondorJobs.py"

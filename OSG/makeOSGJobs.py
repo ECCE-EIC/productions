@@ -27,8 +27,8 @@ from ROOT import TFile, TObjString
 generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpool/eic'}
 
 nArgs = len(sys.argv)
-if nArgs != 11:
-    print("Usage: python makeOSGJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite>")
+if nArgs != 12:
+    print("Usage: python makeOSGJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch>")
     sys.exit()
 
 myShell='/bin/bash'
@@ -56,6 +56,7 @@ class pars:
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
+  macrosBranch = sys.argv[11]
 
 def getNumEvtsInFile(theFile):
     # For some reason pyroot is failing when using xrootd so if 
@@ -134,17 +135,18 @@ def makeOSGJob():
             osgOutputInfo = "{0}/osg-{1}".format(outputLogPath, fileTag)
 
             outputFile = "DST_{}.root".format(fileTag)
-            argument = "{} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
-                                                                 inputFile,
-                                                                 outputFile,
-                                                                 skip,
-                                                                 outputRelPath, #outputPath,
-                                                                 pars.build,
-                                                                 pars.thisWorkingGroup,
-                                                                 pars.macrosHash,
-                                                                 pars.prodSite,
-                                                                 pars.thisGenerator,
-                                                                 pars.thisCollision)
+            argument = "{} {} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob,
+                                                                    inputFile,
+                                                                    outputFile,
+                                                                    skip,
+                                                                    outputRelPath, #outputPath,
+                                                                    pars.build,
+                                                                    pars.thisWorkingGroup,
+                                                                    pars.macrosHash,
+                                                                    pars.prodSite,
+                                                                    pars.thisGenerator,
+                                                                    pars.thisCollision,
+                                                                    pars.macrosBranch)
 
             osgFileName = "osgJob_{}.job".format(fileTag)
 
