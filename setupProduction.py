@@ -4,9 +4,14 @@ import sys, os
 
 nArgs = len(sys.argv)
 if nArgs != 3:
-    print("Usage: python setupProduction.py <BNL/JLab/MIT> <path/to/configurationFile>")
+    print("Usage: python setupProduction.py <BNL/JLAB/MIT> <path/to/configurationFile>")
     sys.exit()
 
+# Path variable descriptions
+#
+# productionTopDir  : Directory where where this production campaign is being run from
+# simulationsDir    : Directory where the "macros" directory will be cloned to (n.b. this is appended to when getMacrosRepo() is called!)
+# submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
   fileName = sys.argv[2]
@@ -15,18 +20,21 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-  productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
+  productionTopDir = '/work/eic/users/davidl/2021.06.17.test_campaign'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
+  macrosBranch = "June-2021-Concept"
   nEventsPerJob = 1000
   site = sys.argv[1]
 
 
 if steering.site not in config.sites:
-  print("Your submission site, {}, was not recongised".format(steering.site))
+  print("Your submission site, {}, was not recognised".format(steering.site))
   sys.exit()
 
+if steering.site == "BNL":
+  steering.productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
 
 def getParameter(parameter):
   configFile = open(steering.fileName, "r")
@@ -64,7 +72,6 @@ def getProductionRequirements():
   checkRequirements(steering.generator, config.ecceGenerator)
   checkRequirements(steering.collisionType, config.ecceCollision)
 
-
 def getMacrosRepo():
   steering.simulationsDir += "/{}/{}/{}/ECCE_build_{}/macros_tag_{}".format(steering.PWG,
                                                                             steering.generator,
@@ -77,24 +84,38 @@ def getMacrosRepo():
   if not os.path.isdir("{}/macros".format(steering.simulationsDir)):
     os.system("git clone {}".format(steering.macrosRepo))
   os.chdir("macros")
-  os.system("git checkout -b production_{}".format(steering.PWG))
-  os.system("git branch --set-upstream-to=origin/production_{0} production_{0}".format(steering.PWG))
+  os.system("git checkout -b {}".format(steering.macrosBranch))
+  os.system("git branch --set-upstream-to=origin/{0} {0}".format(steering.macrosBranch))
   os.system("git config --local advice.detachedHead false")
   os.system("git checkout {}".format(config.macrosVersion[steering.macrosTag]))
+  
+  # Copy all files from productions/extras into the macros directory
+  extrasDir = steering.submissionTopDir + '/extras'
+  if os.path.isdir(extrasDir):
+    cmd = 'cp %s/* %s' % (extrasDir, os.getcwd() + '/detectors/EICDetector')
+    print(cmd)
+    os.system(cmd)
 
 
-def setupBNLJob():
-  arguments = "{} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
-                                                     steering.PWG, 
-                                                     steering.generator, 
-                                                     steering.collisionType, 
-                                                     steering.nightly, 
-                                                     submissionProdDir, 
-                                                     detectorMacroLocation, 
-                                                     steering.submissionTopDir,
-                                                     config.macrosVersion[steering.macrosTag],
-                                                     steering.site)
-  os.system("python {}/{}/makeCondorJobs.py {}".format(steering.submissionTopDir, steering.site, arguments))
+def setupJob():
+  arguments = "{} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
+                                                        steering.PWG, 
+                                                        steering.generator, 
+                                                        steering.collisionType, 
+                                                        steering.nightly, 
+                                                        submissionProdDir, 
+                                                        detectorMacroLocation, 
+                                                        steering.submissionTopDir,
+                                                        config.macrosVersion[steering.macrosTag],
+                                                        steering.site, 
+                                                        steering.macrosBranch)
+
+  submitScript = ""
+  if steering.site == "BNL": submitScript = "makeCondorJobs.py"
+  elif steering.site == "JLAB": submitScript = "makeSLURMJobs.py"
+  elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
+  else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
+  os.system("python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
 
 
 def createSubmissionFiles():
@@ -107,7 +128,7 @@ def createSubmissionFiles():
   os.makedirs(submissionProdDir, exist_ok=True)
   os.chdir(submissionProdDir)
   detectorMacroLocation = "{}/macros/detectors/EICDetector".format(steering.simulationsDir)
-  if steering.site == "BNL": setupBNLJob()
+  if steering.site == "BNL" or steering.site == "JLAB" or steering.site == "OSG": setupJob()
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
 
 

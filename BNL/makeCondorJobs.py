@@ -5,8 +5,8 @@ from ROOT import TFile, TObjString
 
 
 nArgs = len(sys.argv)
-if nArgs != 11:
-    print("Usage: python makeCondorJob <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite>")
+if nArgs != 12:
+    print("Usage: python makeCondorJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch>")
     sys.exit()
 
 
@@ -18,7 +18,7 @@ if myShell not in goodShells:
 
 
 class pars:
-  simulationsTopDir = '/sphenix/user/cdean/ECCE/DST_files'
+  simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -29,13 +29,12 @@ class pars:
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]  
+  macrosBranch = sys.argv[11]
 
 
 def getNumEvtsInFile(theFile):
     inputFile = TFile(theFile)
     return inputFile.Get("EICTree").GetEntries()
-    #nEvents = inputFile.Get("nEvents")
-    #return nEvents.GetString().Atoi()
 
 
 def makeCondorJob():
@@ -53,12 +52,15 @@ def makeCondorJob():
     os.makedirs("{}/log".format(condorDir), exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(condorDir)
     submitScript = open("{}".format(submitScriptName), "w")
+    os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
     #Now make output directory (plus eval folder)
-    outputPath = "{}/{}/{}/{}".format(pars.simulationsTopDir, 
-                                      pars.thisWorkingGroup, 
-                                      pars.thisGenerator, 
-                                      pars.thisCollision)
+    outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir, 
+                                            pars.build,
+                                            pars.macrosHash,
+                                            pars.thisWorkingGroup, 
+                                            pars.thisGenerator, 
+                                            pars.thisCollision)
     outputEvalPath = outputPath + "/eval"
     os.makedirs(outputPath, exist_ok=True)
     os.makedirs(outputEvalPath, exist_ok=True)
@@ -67,6 +69,7 @@ def makeCondorJob():
     print("Output directory: {}".format(outputPath))
     #Now loop over all input trees and make a submission script that fits the request
     nJobs = 0
+    fileNumber = 0
     while line:
        inputFile = line.replace("\n", "")
        nEventsInFile = getNumEvtsInFile(inputFile)
@@ -76,24 +79,21 @@ def makeCondorJob():
             jobNumber = nJobs
             skip = i*pars.nEventsPerJob
 
-            condorOutputInfo = "{0}/log/condor-{1}_{2}_{3}-{4:05d}".format(condorDir, 
-                                                                           pars.thisWorkingGroup, 
-                                                                           pars.thisGenerator, 
-                                                                           pars.thisCollision, 
-                                                                           jobNumber)
+            fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
+                                                                   pars.thisGenerator,
+                                                                   pars.thisCollision,
+                                                                   fileNumber,
+                                                                   skip,
+                                                                   pars.nEventsPerJob)
 
-            condorFileName = "condorJob_{0}_{1}_{2}-{3:05d}.job".format(pars.thisWorkingGroup, 
-                                                                        pars.thisGenerator, 
-                                                                        pars.thisCollision, 
-                                                                        jobNumber)
+            condorOutputInfo = "{0}/log/condor-{1}".format(condorDir, fileTag)
+
+            condorFileName = "condorJob_{}.job".format(fileTag)
             condorFile = open("{0}/{1}".format(condorDir, condorFileName), "w")
             condorFile.write("Universe        = vanilla\n")
             if myShell == '/bin/bash': condorFile.write("Executable      = {}/run_EIC_production.sh\n".format(pars.macrosPath))
             if myShell == '/bin/tcsh': condorFile.write("Executable      = {}/run_EIC_production.csh\n".format(pars.macrosPath))
-            outputFile = "DST_{}_{}_{}-{:05d}.root".format(pars.thisWorkingGroup, 
-                                                           pars.thisGenerator, 
-                                                           pars.thisCollision,
-                                                           jobNumber)
+            outputFile = "DST_{}.root".format(fileTag)
 
             argument = "{} {} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob, 
                                                                     inputFile, 
@@ -106,7 +106,7 @@ def makeCondorJob():
                                                                     pars.prodSite,
                                                                     pars.thisGenerator,
                                                                     pars.thisCollision,
-                                                                    condorOutputInfo)
+                                                                    pars.macrosBranch)
             condorFile.write("Arguments       = \"{}\"\n".format(argument))
             condorFile.write("Output          = {}.out\n".format(condorOutputInfo))
             condorFile.write("Error           = {}.err\n".format(condorOutputInfo))
@@ -121,6 +121,7 @@ def makeCondorJob():
             submitScript.write("condor_submit {}\n".format(condorFileName))
 
             nJobs += 1
+       fileNumber += 1
        line = infile.readline()
 
     print("Condor submission files have been written to:\n{}/condorJobs".format(myOutputPath))

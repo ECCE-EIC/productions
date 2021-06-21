@@ -1,5 +1,5 @@
-nightly new
-tag latest
+nightly ana.13
+tag 20210618
 PWG SIDIS 
 generator pythia6
 collision ep_18x100
