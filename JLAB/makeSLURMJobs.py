@@ -175,11 +175,14 @@ def makeSLURMJob():
             slurmFile.write("cd ..\n")
             slurmFile.write("rm -rf workdir_${SLURM_JOBID}\n")
             slurmFile.write("printf \"End time: \"; /bin/date\n")
+            slurmFile.close()
 
             submitScript.write("sbatch {}\n".format(slurmFileName))
 
             nJobs += 1
-       if nEvents >= pars.nTotalEvents: break
+       if nEvents >= pars.nTotalEvents: 
+           submitScript.close()
+           break
        fileNumber += 1
        line = infile.readline()
 
