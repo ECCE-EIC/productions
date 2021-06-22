@@ -1,5 +1,5 @@
-nightly new
-tag latest
+nightly ana.13
+tag 20210618
 PWG SIDIS 
 generator elSpectro
 collision ep_5x100
