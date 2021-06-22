@@ -183,11 +183,14 @@ def makeOSGJob():
             osgFile.write("#+DESIRED_Sites=\"JLab-FARM-CE\"\n")
             osgFile.write("\n")
             osgFile.write("queue 1\n")
+            osgFile.close()
 
             submitScript.write("condor_submit {}\n".format(osgFileName))
 
             nJobs += 1
-       if nEvents >= pars.nTotalEvents: break
+       if nEvents >= pars.nTotalEvents: 
+           submitScript.close()
+           break
        fileNumber += 1
        line = infile.readline()
 

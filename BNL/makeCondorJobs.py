@@ -122,11 +122,14 @@ def makeCondorJob():
             condorFile.write("Priority        = 20\n")
             condorFile.write("job_lease_duration = 3600\n")
             condorFile.write("Queue 1\n")
+            condorFile.close()
 
             submitScript.write("condor_submit {}\n".format(condorFileName))
 
             nJobs += 1
-       if nEvents >= pars.nTotalEvents: break
+       if nEvents >= pars.nTotalEvents: 
+           submitScript.close()
+           break
        fileNumber += 1
        line = infile.readline()
 
