@@ -35,6 +35,7 @@ if steering.site not in config.sites:
 
 if steering.site == "BNL":
   steering.productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
+  steering.simulationsDir = steering.productionTopDir
 
 def getParameter(parameter):
   configFile = open(steering.fileName, "r")
