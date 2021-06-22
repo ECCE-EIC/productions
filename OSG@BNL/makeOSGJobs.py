@@ -91,9 +91,9 @@ def makeCondorJob():
                                                                    skip,
                                                                    pars.nEventsPerJob)
 
-            osgOutputInfo = "{0}/log/osg-{1}".format(osgDir, fileTag)
+            osgOutputInfo = "{0}/log".format(osgDir, fileTag)
 
-            osgFileName = "osgJob_{}.job".format(fileTag)
+            osgFileName = "osgJob_{}.xml".format(fileTag)
             osgFile = open("{0}/{1}".format(osgDir, osgFileName), "w")
             outputFile = "DST_{}.root".format(fileTag)
             argument = "{} {} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob, 
@@ -128,19 +128,22 @@ def makeCondorJob():
             osgFile.write("    ./run_EIC_production.sh {}\n\n".format(argument))
             osgFile.write("    ]]>\n")
             osgFile.write("  </command>\n\n")
-            osgFile.write("  <stdout URL=\"file:./{}.log\"/>\n".format(osgOutputInfo))
-            osgFile.write("  <stderr URL=\"file:./{}.err\"/>\n".format(osgOutputInfo))
+            osgFile.write("  <stdout URL=\"file:./osg-{}.log\"/>\n".format(fileTag))
+            osgFile.write("  <stderr URL=\"file:./osg-{}.err\"/>\n".format(fileTag))
             osgFile.write("  <input URL=\"file:{}\"/>\n\n".format(inputFile))
             osgFile.write("  <SandBox installer=\"ZIP\">\n")
             osgFile.write("    <Package name=\"ecce_sim_package\">\n")
             osgFile.write("      <File>file:{}/extras/run_EIC_production.sh</File>\n".format(pars.prodTopDir))
             osgFile.write("   </Package>\n")
             osgFile.write(" </SandBox>\n\n")
-            osgFile.write(" <output fromScratch=\"{0}\" toURL=\"{1}/\"/>\n\n".format(outputFile, outputPath))
+            osgFile.write(" <output fromScratch=\"{0}\" toURL=\"{1}/\"/>\n".format(outputFile, outputPath))
+            osgFile.write(" <output fromScratch=\"{0}.txt\" toURL=\"{1}/\"/>\n".format(outputFile, outputPath))
+            osgFile.write(" <output fromScratch=\"osg-{0}.log\" toURL=\"{1}/\"/>\n".format(fileTag, osgOutputInfo))
+            osgFile.write(" <output fromScratch=\"osg-{0}.err\" toURL=\"{1}/\"/>\n".format(fileTag, osgOutputInfo))
             osgFile.write("</job>\n")
             osgFile.close()
 
-            submitScript.write("condor_submit {}\n".format(osgFileName))
+            submitScript.write("/cvmfs/sdcc.bnl.gov/software/sums/sums-submit {}\n".format(osgFileName))
 
             nJobs += 1
        if nEvents >= pars.nTotalEvents: 
