@@ -22,8 +22,8 @@ from ROOT import TFile, TObjString
 generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'/work/osgpool/eic'}
 
 nArgs = len(sys.argv)
-if nArgs != 12:
-    print("Usage: python makeSLURMJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch>")
+if nArgs != 13:
+    print("Usage: python makeSLURMJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
 myShell='/bin/bash'
@@ -50,6 +50,7 @@ class pars:
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
   macrosBranch = sys.argv[11]
+  nTotalEvents = sys.argv[12]
 
 
 def getNumEvtsInFile(theFile):
@@ -100,6 +101,9 @@ def makeSLURMJob():
 
             jobNumber = nJobs
             skip = i*pars.nEventsPerJob
+       
+            nEvents = nJobs*pars.nEventsPerJob
+            if nEvents >= pars.nTotalEvents: break
 
             fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
                                                                    pars.thisGenerator,
@@ -175,6 +179,7 @@ def makeSLURMJob():
             submitScript.write("sbatch {}\n".format(slurmFileName))
 
             nJobs += 1
+       if nEvents >= pars.nTotalEvents: break
        fileNumber += 1
        line = infile.readline()
 

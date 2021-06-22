@@ -5,8 +5,8 @@ from ROOT import TFile, TObjString
 
 
 nArgs = len(sys.argv)
-if nArgs != 12:
-    print("Usage: python makeCondorJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch>")
+if nArgs != 13:
+    print("Usage: python makeCondorJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
 
@@ -30,6 +30,7 @@ class pars:
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]  
   macrosBranch = sys.argv[11]
+  nTotalEvents = int(sys.argv[12])
 
 
 def getNumEvtsInFile(theFile):
@@ -70,6 +71,7 @@ def makeCondorJob():
     #Now loop over all input trees and make a submission script that fits the request
     nJobs = 0
     fileNumber = 0
+    nEvents = 0
     while line:
        inputFile = line.replace("\n", "")
        nEventsInFile = getNumEvtsInFile(inputFile)
@@ -78,6 +80,9 @@ def makeCondorJob():
 
             jobNumber = nJobs
             skip = i*pars.nEventsPerJob
+       
+            nEvents = nJobs*pars.nEventsPerJob
+            if nEvents >= pars.nTotalEvents: break
 
             fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
                                                                    pars.thisGenerator,
@@ -121,6 +126,7 @@ def makeCondorJob():
             submitScript.write("condor_submit {}\n".format(condorFileName))
 
             nJobs += 1
+       if nEvents >= pars.nTotalEvents: break
        fileNumber += 1
        line = infile.readline()
 

@@ -27,8 +27,8 @@ from ROOT import TFile, TObjString
 generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpool/eic'}
 
 nArgs = len(sys.argv)
-if nArgs != 12:
-    print("Usage: python makeOSGJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch>")
+if nArgs != 13:
+    print("Usage: python makeOSGJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
 myShell='/bin/bash'
@@ -57,6 +57,7 @@ class pars:
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
   macrosBranch = sys.argv[11]
+  nTotalEvents = sys.argv[12]
 
 def getNumEvtsInFile(theFile):
     # For some reason pyroot is failing when using xrootd so if 
@@ -124,6 +125,9 @@ def makeOSGJob():
 
             jobNumber = nJobs
             skip = i*pars.nEventsPerJob
+       
+            nEvents = nJobs*pars.nEventsPerJob
+            if nEvents >= pars.nTotalEvents: break
 
             fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
                                                                    pars.thisGenerator,
@@ -183,6 +187,7 @@ def makeOSGJob():
             submitScript.write("condor_submit {}\n".format(osgFileName))
 
             nJobs += 1
+       if nEvents >= pars.nTotalEvents: break
        fileNumber += 1
        line = infile.readline()
 
