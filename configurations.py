@@ -1,7 +1,7 @@
 #This file contains all the possible configurations for ECCE simulations
 
 #Production sites
-sites = ['BNL', 'JLAB', 'MIT', 'OSG']
+sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
 nightlyBuild = ['new', 'ana.8', 'ana.13']

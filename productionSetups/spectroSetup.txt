@@ -1,5 +1,6 @@
 nightly ana.13
-tag 20210618
+tag June-2021-Concept-v0.1
 PWG SIDIS 
 generator elSpectro
 collision ep_5x100
+nTotalEvents 100000

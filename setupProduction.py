@@ -37,6 +37,9 @@ if steering.site not in config.sites:
 if steering.site == "BNL":
   steering.productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
   steering.simulationsDir = steering.productionTopDir
+if steering.site == "OSG@BNL":
+  steering.productionTopDir = 'N/A'
+  steering.simulationsDir = steering.productionTopDir
 
 def getParameter(parameter):
   configFile = open(steering.fileName, "r")
@@ -120,6 +123,7 @@ def setupJob():
   if steering.site == "BNL": submitScript = "makeCondorJobs.py"
   elif steering.site == "JLAB": submitScript = "makeSLURMJobs.py"
   elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
+  elif steering.site == "OSG@BNL": submitScript = "makeOSGJobs.py"
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
   os.system("python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
 
@@ -134,7 +138,7 @@ def createSubmissionFiles():
   os.makedirs(submissionProdDir, exist_ok=True)
   os.chdir(submissionProdDir)
   detectorMacroLocation = "{}/macros/detectors/EICDetector".format(steering.simulationsDir)
-  if steering.site == "BNL" or steering.site == "JLAB" or steering.site == "OSG": setupJob()
+  if steering.site == "BNL" or steering.site == "JLAB" or steering.site == "OSG" or steering.site == "OSG@BNL": setupJob()
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
 
 
@@ -154,8 +158,9 @@ def printSimulation():
 def runProduction():
   print("Getting production requirements")
   getProductionRequirements()
-  print("Checking out the correct macros version")
-  getMacrosRepo()
+  if steering.site != "OSG@BNL":
+      print("Checking out the correct macros version")
+      getMacrosRepo()
   print("Creating production scripts")
   createSubmissionFiles()
   printSimulation()
