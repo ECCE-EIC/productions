@@ -8,7 +8,7 @@ nightlyBuild = ['new', 'ana.8', 'ana.13']
 
 #macros tags
 macrosVersion = {
-  "v0.2" : "38efad6",
+  "June-2021-Concept-v0.1" : "38efad6",
   "v0.1" : "74c9a85",
   "latest_master" : "463a3bb", #from 2021/06/11
   "latest" : "9daf451", #from 2021/05/11
