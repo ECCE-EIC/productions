@@ -24,8 +24,9 @@ class steering():
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
-  macrosBranch = "June-2021-Concept"
+  macrosBranch = "master"
   nEventsPerJob = 1000
+  nTotalEvents = 0
   site = sys.argv[1]
 
 
@@ -68,17 +69,20 @@ def getProductionRequirements():
   steering.PWG = getParameter("PWG")
   steering.generator = getParameter("generator")
   steering.collisionType = getParameter("collision")
+  steering.nTotalEvents = getParameter("nTotalEvents")
 
   checkRequirements(steering.PWG, config.ecceWorkingGroup)
   checkRequirements(steering.generator, config.ecceGenerator)
   checkRequirements(steering.collisionType, config.ecceCollision)
 
 def getMacrosRepo():
-  steering.simulationsDir += "/{}/{}/{}/ECCE_build_{}/macros_tag_{}".format(steering.PWG,
-                                                                            steering.generator,
-                                                                            steering.collisionType,
-                                                                            steering.nightly,
-                                                                            steering.macrosTag)
+  #steering.simulationsDir += "/{}/{}/{}/ECCE_build_{}/macros_tag_{}".format(steering.PWG,
+  #                                                                          steering.generator,
+  #                                                                          steering.collisionType,
+  #                                                                          steering.nightly,
+  #                                                                          steering.macrosTag)
+  steering.simulationsDir += "/ECCE_build_{}/macros_tag_{}".format(steering.nightly,
+                                                                   steering.macrosTag)
   if not os.path.isdir(steering.simulationsDir):
     os.makedirs(steering.simulationsDir)
   os.chdir(steering.simulationsDir)
@@ -99,17 +103,18 @@ def getMacrosRepo():
 
 
 def setupJob():
-  arguments = "{} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
-                                                        steering.PWG, 
-                                                        steering.generator, 
-                                                        steering.collisionType, 
-                                                        steering.nightly, 
-                                                        submissionProdDir, 
-                                                        detectorMacroLocation, 
-                                                        steering.submissionTopDir,
-                                                        config.macrosVersion[steering.macrosTag],
-                                                        steering.site, 
-                                                        steering.macrosBranch)
+  arguments = "{} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
+                                                           steering.PWG, 
+                                                           steering.generator, 
+                                                           steering.collisionType, 
+                                                           steering.nightly, 
+                                                           submissionProdDir, 
+                                                           detectorMacroLocation, 
+                                                           steering.submissionTopDir,
+                                                           config.macrosVersion[steering.macrosTag],
+                                                           steering.site, 
+                                                           steering.macrosBranch,
+                                                           steering.nTotalEvents)
 
   submitScript = ""
   if steering.site == "BNL": submitScript = "makeCondorJobs.py"
