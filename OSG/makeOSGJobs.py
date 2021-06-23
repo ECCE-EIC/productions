@@ -57,7 +57,7 @@ class pars:
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
   macrosBranch = sys.argv[11]
-  nTotalEvents = sys.argv[12]
+  nTotalEvents = int(sys.argv[12])
 
 def getNumEvtsInFile(theFile):
     # For some reason pyroot is failing when using xrootd so if 
@@ -82,6 +82,7 @@ def makeOSGJob():
 
     # Set directory to write submission scripts and logs to
     osgDir = "{}/osgJobs".format(pars.submitPath) 
+    os.makedirs("{}/log".format(osgDir), exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(osgDir)
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)

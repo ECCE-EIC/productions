@@ -50,7 +50,7 @@ class pars:
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
   macrosBranch = sys.argv[11]
-  nTotalEvents = sys.argv[12]
+  nTotalEvents = int(sys.argv[12])
 
 
 def getNumEvtsInFile(theFile):
