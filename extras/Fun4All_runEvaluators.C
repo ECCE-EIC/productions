@@ -4,20 +4,32 @@
 #include <dirent.h>
 #include <stdlib.h>
 
+#include <GlobalVariables.C>
+
+#include <G4Setup_EICDetector.C>
+#include <G4_DSTReader_EICDetector.C>
+#include <G4_EventEvaluator.C>
+#include <G4_FwdJets.C>
+#include <G4_Global.C>
 #include <G4_Input.C>
+#include <G4_Production.C>
+#include <G4_User.C>
+
+#include <fun4all/Fun4AllServer.h>
 
 R__LOAD_LIBRARY(libfun4all.so)
 
-bool checkForDir(const char* name)
+bool checkForDir(std::string name)
 {
-  DIR* dir = opendir(name);
+  DIR* dir = opendir(name.c_str());
 
   return dir == NULL ? 0 : 1;
 }
 
-int Fun4All_G4_EICDetector(
+int Fun4All_runEvaluators(
     const int nEvents = 1,
-    const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
+    const string &inputFile = "myInputFile.root",
+    const string &inputDir = ".",
     const int skip = 0,
     const string &outdir = ".")
 {
@@ -25,7 +37,7 @@ int Fun4All_G4_EICDetector(
   se->Verbosity(0);
 
   Input::READHITS = true;
-  INPUTREADHITS::filename[0] = inputFile;
+  INPUTREADHITS::filename[0] = inputDir + "/" + inputFile;
 
   InputInit();
 
@@ -46,6 +58,8 @@ int Fun4All_G4_EICDetector(
   Enable::EEMC_EVAL = true;
   Enable::FWDJETS_EVAL = true;
 
+  Enable::CEMC_CLUSTER = true;
+
   //-----
   // Output file headers and path
   //-----
@@ -54,21 +68,32 @@ int Fun4All_G4_EICDetector(
   std::string outdirLastChar = outdir.substr(outdir.size() - 1, 1);
   if (outdirLastChar != "/") evalDir += "/";
 
+  unsigned int revisionWidth = 5;
   unsigned int revisionNumber = 0;
-  std::string evalRevision = std::setfill('0') << std::setw(5) << revisionNumber;
-  evalDir += "eval_" + evalRevision;
+  std::ostringstream evalRevision;
+  evalRevision << std::setfill('0') << std::setw(revisionWidth) << to_string(revisionNumber);
+  //std::string evalRevision = std::setfill('0') << std::setw(5) << revisionNumber;
+  //evalDir += "eval_" + evalRevision;
+  evalDir += "eval_" + evalRevision.str();
+
+printf("%s\n", evalDir.c_str());
 
   while (checkForDir(evalDir))
   {
+    evalDir = evalDir.substr(0, evalDir.size() - revisionWidth);
+printf("After removing: %s\n", evalDir.c_str());
     revisionNumber++;
-    evalRevision = std::setfill('0') << std::setw(5) << revisionNumber;
-    evalDir += "eval_" + evalRevision; 
+    evalRevision.str("");
+    evalRevision.clear();
+    evalRevision << std::setfill('0') << std::setw(revisionWidth) << to_string(revisionNumber);
+    evalDir += evalRevision.str(); 
+printf("After appending: %s\n", evalDir.c_str());
   }
 
   std::string makeDirectory = "mkdir -p " + evalDir;
   system(makeDirectory.c_str());
 
-  string outputroot = inputFile;
+  string outputroot = evalDir + "/" + inputFile;
   string remove_this = ".root";
   size_t pos = outputroot.find(remove_this);
   if (pos != string::npos)
@@ -79,7 +104,6 @@ int Fun4All_G4_EICDetector(
   //-----
   // Reader and User analysis
   //-----
-
 
   if (Enable::DSTREADER) G4DSTreader_EICDetector(outputroot + "_DSTReader.root");
   if (Enable::USER) UserAnalysisInit();
@@ -104,7 +128,7 @@ int Fun4All_G4_EICDetector(
 
   if (Enable::EEMC_EVAL) EEMC_Eval(outputroot + "_g4eemc_eval.root");
 
-  if (Enable::FWDJETS_EVAL) Jet_FwdEval();
+  //if (Enable::FWDJETS_EVAL) Jet_FwdEval();
 
   //--------------
   // Set up Input Managers
