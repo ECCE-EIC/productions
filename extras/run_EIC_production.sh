@@ -30,6 +30,9 @@ Skip: $4
 =====================================
 EOF
 
+echo "Disabling evaluators and enabling DST readout"
+./changeFun4All_G4_EICDetector.sh
+
 # Run Fun4all. Send output to stdout but also capture to temporary local file
 echo running root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
 root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\) | tee ${tmpLogFile}
@@ -44,5 +47,10 @@ rm ${tmpLogFile}
 echo "" >> ${metaDataFile}
 echo md5sum: >> ${metaDataFile}
 md5sum ${5}/${3} | awk '{print $1}' >> ${metaDataFile}
+
+echo "DST has been created"
+echo "Now producing evaluators"
+
+root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
 
 echo "script done"
