@@ -105,7 +105,7 @@ def makeSLURMJob():
             nEvents = nJobs*pars.nEventsPerJob
             if nEvents >= pars.nTotalEvents: break
 
-            fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
+            fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:05d}".format(pars.thisWorkingGroup,
                                                                    pars.thisGenerator,
                                                                    pars.thisCollision,
                                                                    fileNumber,

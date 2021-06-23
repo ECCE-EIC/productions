@@ -25,7 +25,7 @@ class steering():
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
   macrosBranch = "master"
-  nEventsPerJob = 1000
+  nEventsPerJob = 2
   nTotalEvents = 0
   site = sys.argv[1]
 
@@ -37,6 +37,7 @@ if steering.site not in config.sites:
 if steering.site == "BNL":
   steering.productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
   steering.simulationsDir = steering.productionTopDir
+
 if steering.site == "OSG@BNL":
   steering.productionTopDir = 'N/A'
   steering.simulationsDir = steering.productionTopDir

@@ -18,7 +18,7 @@ if myShell not in goodShells:
 
 
 class pars:
-  simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  simulationsTopDir = 'S3/eictest/ECCE/MC/'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -56,15 +56,16 @@ def makeCondorJob():
     os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
     #Now make output directory (plus eval folder)
-    outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir, 
-                                            pars.build,
-                                            pars.macrosHash,
-                                            pars.thisWorkingGroup, 
-                                            pars.thisGenerator, 
-                                            pars.thisCollision)
+    S3outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir, 
+                                              pars.build,
+                                              pars.macrosHash,
+                                              pars.thisWorkingGroup, 
+                                              pars.thisGenerator, 
+                                              pars.thisCollision)
+    outputPath = "./outputFiles"
     outputEvalPath = outputPath + "/eval"
-    os.makedirs(outputPath, exist_ok=True)
-    os.makedirs(outputEvalPath, exist_ok=True)
+    #os.makedirs(outputPath, exist_ok=True)
+    #os.makedirs(outputEvalPath, exist_ok=True)
     #Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
@@ -84,7 +85,7 @@ def makeCondorJob():
             nEvents = nJobs*pars.nEventsPerJob
             if nEvents >= pars.nTotalEvents: break
 
-            fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:04d}".format(pars.thisWorkingGroup,
+            fileTag = "{0}_{1}_{2}_{3:03d}_{4:07d}_{5:05d}".format(pars.thisWorkingGroup,
                                                                    pars.thisGenerator,
                                                                    pars.thisCollision,
                                                                    fileNumber,
@@ -112,21 +113,26 @@ def makeCondorJob():
             osgFile.write("<job name=\"grid\"   maxEvents=\"{}\"  simulateSubmission=\"false\">\n\n".format(pars.nEventsPerJob))
             osgFile.write("  <command>\n")
             osgFile.write("    <![CDATA[\n")
-            osgFile.write("    mv $INPUTFILE0 $SCRATCH/\n\n")
-            osgFile.write("    echo \"---------------------- starting setup script -------------------------\"\n")
-            osgFile.write("    /bin/cat /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh | /bin/sed 's| sed | /bin/sed |' | /bin/sed 's| awk | /usr/bin/awk |' | /bin/sed 's| find | /usr/bin/find |' | /bin/sed 's| grep | /bin/grep |' > ecce_setup.sh\n")
-            osgFile.write("    source ecce_setup.sh -n {}\n".format(pars.build))
-            osgFile.write("    echo \"------------------------ done with setup script -----------------------\"\n\n")
-            #osgFile.write("    /usr/bin/git clone https://github.com/ECCE-EIC/macros.git\n")
-            #osgFile.write("    cp run_EIC_production.sh macros/detectors/EICDetector\n")
-            #osgFile.write("    cd macros\n")
-            #osgFile.write("    /usr/bin/git checkout -b {}\n".format(pars.macrosBranch))
-            #osgFile.write("    /usr/bin/git branch --set-upstream-to=origin/{0} {0}\n".format(pars.macrosBranch))
-            #osgFile.write("    /usr/bin/git config --local advice.detachedHead false\n")
-            #osgFile.write("    /usr/bin/git checkout {}\n".format(pars.macrosHash))
-            #osgFile.write("    cd detectors/EICDetector\n")
-            #osgFile.write("    ./run_EIC_production.sh {}\n\n".format(argument))
-            osgFile.write("    ls -ltrh")
+            osgFile.write("      mv $INPUTFILE0 $SCRATCH/\n\n")
+            osgFile.write("      echo \"---------------------- starting setup script -------------------------\"\n")
+            osgFile.write("      /bin/cat /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh | /bin/sed 's| sed | /bin/sed |' | /bin/sed 's| awk | /usr/bin/awk |' | /bin/sed 's| find | /usr/bin/find |' | /bin/sed 's| grep | /bin/grep |' > ecce_setup.sh\n")
+            osgFile.write("      source ecce_setup.sh -n {}\n".format(pars.build))
+            osgFile.write("      echo \"------------------------ done with setup script -----------------------\"\n\n")
+            osgFile.write("      /usr/bin/git clone https://github.com/ECCE-EIC/macros.git\n")
+            osgFile.write("      cd macros\n")
+            osgFile.write("      /usr/bin/git checkout -b {}\n".format(pars.macrosBranch))
+            osgFile.write("      /usr/bin/git branch --set-upstream-to=origin/{0} {0}\n".format(pars.macrosBranch))
+            osgFile.write("      /usr/bin/git config --local advice.detachedHead false\n")
+            osgFile.write("      /usr/bin/git checkout {}\n\n".format(pars.macrosHash))
+            osgFile.write("      cd detectors/EICDetector\n")
+            osgFile.write("      mkdir -p {}/eval\n".format(outputPath))
+            osgFile.write("      cp ../../../run_EIC_production.sh .\n")
+            osgFile.write("      cp ../../../copy_to_S3.py .\n\n")
+            osgFile.write("      sed -i -e 's@// Enable::DSTOUT = true;@Enable::DSTOUT = true;@' Fun4All_G4_EICDetector.C\n")
+            osgFile.write("      sed -i -e 's@string outputroot = outputFile;@string outputroot = outdir + \"/eval/\" + outputFile;@' Fun4All_G4_EICDetector.C\n\n")
+            osgFile.write("      ./run_EIC_production.sh {}\n\n".format(argument))
+            osgFile.write("      ls -ltrh\n\n")
+            osgFile.write("      python copy_to_S3.py\n")
             osgFile.write("    ]]>\n")
             osgFile.write("  </command>\n\n")
             osgFile.write("  <stdout URL=\"file:./osg-{}.log\"/>\n".format(fileTag))
@@ -135,12 +141,13 @@ def makeCondorJob():
             osgFile.write("  <SandBox installer=\"ZIP\">\n")
             osgFile.write("    <Package name=\"ecce_sim_package\">\n")
             osgFile.write("      <File>file:{}/extras/run_EIC_production.sh</File>\n".format(pars.prodTopDir))
+            osgFile.write("      <File>file:{}/OSG/copy_to_S3.py</File>\n".format(pars.prodTopDir))
             osgFile.write("    </Package>\n")
             osgFile.write("  </SandBox>\n\n")
             #osgFile.write("  <output fromScratch=\"{0}\" toURL=\"{1}/\"/>\n".format(outputFile, outputPath))
             #osgFile.write("  <output fromScratch=\"{0}.txt\" toURL=\"{1}/\"/>\n".format(outputFile, outputPath))
-            osgFile.write("  <output fromScratch=\"osg-{0}.log\" toURL=\"{1}/\"/>\n".format(fileTag, osgOutputInfo))
-            osgFile.write("  <output fromScratch=\"osg-{0}.err\" toURL=\"{1}/\"/>\n".format(fileTag, osgOutputInfo))
+            #osgFile.write("  <output fromScratch=\"{0}\" toURL=\"{1}/\"/>\n".format(stdoutFile, osgOutputInfo))
+            #osgFile.write("  <output fromScratch=\"{0}\" toURL=\"{1}/\"/>\n".format(stderrFile, osgOutputInfo))
             osgFile.write("</job>\n")
             osgFile.close()
 
