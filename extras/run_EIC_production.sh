@@ -30,6 +30,9 @@ Skip: $4
 =====================================
 EOF
 
+echo "Disabling evaluators and enabling DST readout"
+./changeFun4All_G4_EICDetector.sh
+
 # Run Fun4all. Send output to stdout but also capture to temporary local file
 echo running root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
 root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\) | tee ${tmpLogFile}
