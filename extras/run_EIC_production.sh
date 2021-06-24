@@ -31,7 +31,7 @@ Skip: $4
 EOF
 
 echo "Disabling evaluators and enabling DST readout"
-./changeFun4All_G4_EICDetector.sh
+./setupFun4All_G4_EICDetector.sh
 
 if [ "${11}" = "singlePion" ]
 then

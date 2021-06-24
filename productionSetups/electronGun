@@ -3,3 +3,4 @@ tag 20210624
 PWG General
 generator particleGun
 collision singleElectron
+nTotalEvents 5000000
