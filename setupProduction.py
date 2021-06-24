@@ -25,7 +25,7 @@ class steering():
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
   macrosBranch = "master"
-  nEventsPerJob = 10000
+  nEventsPerJob = 1000
   nTotalEvents = 0
   site = sys.argv[1]
 
@@ -107,7 +107,7 @@ def getMacrosRepo():
   # Copy all files from productions/extras into the macros directory
   extrasDir = steering.submissionTopDir + '/extras'
   os.chmod("{}/changeStrings.sh".format(extrasDir), 0o744)
-  os.chmod("{}/changeFun4All_G4_EICDetector.sh".format(extrasDir), 0o744)
+  os.chmod("{}/setupFun4All_G4_EICDetector.sh".format(extrasDir), 0o744)
   os.chmod("{}/setupPionGun.sh".format(extrasDir), 0o744)
   os.chmod("{}/run_EIC_production.sh".format(extrasDir), 0o744)
   os.chmod("{}/setupElectronGun.sh".format(extrasDir), 0o744)
