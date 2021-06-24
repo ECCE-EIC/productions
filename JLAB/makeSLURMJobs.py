@@ -75,17 +75,15 @@ def makeSLURMJob():
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
-    #Now make output directory (plus eval folder)
-    outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir,
+    #Now make output directory
+    outputPath = "{}/{}/{}/{}/{}/{}".format(pars.simulationsTopDir,
                                             pars.build,
                                             pars.macrosHash,
                                             pars.thisWorkingGroup,
                                             pars.thisGenerator,
                                             pars.thisCollision)
-    outputEvalPath = outputPath + "/eval"
     outputLogPath  = outputPath + "/log"
     os.makedirs(outputPath, exist_ok=True)
-    os.makedirs(outputEvalPath, exist_ok=True)
     os.makedirs(outputLogPath, exist_ok=True)
     #Print input/output info
     print("Input file list: {}".format(inputFileList))

@@ -55,17 +55,14 @@ def makeCondorJob():
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
-    #Now make output directory (plus eval folder)
-    S3outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir, 
+    #Now make output directory
+    S3outputPath = "{}/{}/{}/{}/{}/{}".format(pars.simulationsTopDir, 
                                               pars.build,
                                               pars.macrosHash,
                                               pars.thisWorkingGroup, 
                                               pars.thisGenerator, 
                                               pars.thisCollision)
     outputPath = "./outputFiles"
-    outputEvalPath = outputPath + "/eval"
-    #os.makedirs(outputPath, exist_ok=True)
-    #os.makedirs(outputEvalPath, exist_ok=True)
     #Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
@@ -125,11 +122,8 @@ def makeCondorJob():
             osgFile.write("      /usr/bin/git config --local advice.detachedHead false\n")
             osgFile.write("      /usr/bin/git checkout {}\n\n".format(pars.macrosHash))
             osgFile.write("      cd detectors/EICDetector\n")
-            osgFile.write("      mkdir -p {}/eval\n".format(outputPath))
             osgFile.write("      cp ../../../run_EIC_production.sh .\n")
             osgFile.write("      cp ../../../copy_to_S3.py .\n\n")
-            osgFile.write("      sed -i -e 's@// Enable::DSTOUT = true;@Enable::DSTOUT = true;@' Fun4All_G4_EICDetector.C\n")
-            osgFile.write("      sed -i -e 's@string outputroot = outputFile;@string outputroot = outdir + \"/eval/\" + outputFile;@' Fun4All_G4_EICDetector.C\n\n")
             osgFile.write("      ./run_EIC_production.sh {}\n\n".format(argument))
             osgFile.write("      ls -ltrh\n\n")
             osgFile.write("      python copy_to_S3.py\n")
