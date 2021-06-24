@@ -18,7 +18,7 @@ if myShell not in goodShells:
 
 
 class pars:
-  simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
+  simulationsTopDir = '/eic/data/ctdean/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -55,16 +55,14 @@ def makeCondorJob():
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
     submitScript.write("#!{}\n".format(myShell))
-    #Now make output directory (plus eval folder)
-    outputPath = "{}/{}/{}/{}/{}+{}".format(pars.simulationsTopDir, 
+    #Now make output directory
+    outputPath = "{}/{}/{}/{}/{}/{}".format(pars.simulationsTopDir, 
                                             pars.build,
                                             pars.macrosHash,
                                             pars.thisWorkingGroup, 
                                             pars.thisGenerator, 
                                             pars.thisCollision)
-    outputEvalPath = outputPath + "/eval"
     os.makedirs(outputPath, exist_ok=True)
-    os.makedirs(outputEvalPath, exist_ok=True)
     #Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
@@ -74,7 +72,10 @@ def makeCondorJob():
     nEvents = 0
     while line:
        inputFile = line.replace("\n", "")
-       nEventsInFile = getNumEvtsInFile(inputFile)
+       if pars.thisGenerator != "particleGun":
+         nEventsInFile = getNumEvtsInFile(inputFile)
+       else:
+         nEventsInFile = pars.nTotalEvents
        nJobsFromFile = math.ceil(nEventsInFile/pars.nEventsPerJob)
        for i in range(nJobsFromFile):
 

@@ -89,7 +89,7 @@ def makeOSGJob():
     submitScript.write("#!{}\n".format(myShell))
 
     # Portion of output directory path relative to top-level simulations output dir
-    outputRelPath = "{}/{}/{}/{}+{}".format(pars.build,
+    outputRelPath = "{}/{}/{}/{}/{}".format(pars.build,
                                             pars.macrosHash,
                                             pars.thisWorkingGroup,
                                             pars.thisGenerator,
@@ -100,12 +100,6 @@ def makeOSGJob():
 
     # Full path to directory where DST files will be written. (n.b. this may start with "S3://")
     outputPath = "{}/{}".format(pars.simulationsTopDir, outputRelPath)
-
-    # If output files are being brought back here then create the directory tree
-    # If they are being pushed to S3 then the remote job must handle this.
-    if outputPath.startswith('/'):
-      outputEvalPath = outputPath + "/eval"
-      os.makedirs(outputEvalPath, exist_ok=True)
 
     # Log files must always be local
     outputLogPath  = osgDir + "/log"

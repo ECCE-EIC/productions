@@ -33,6 +33,17 @@ EOF
 echo "Disabling evaluators and enabling DST readout"
 ./changeFun4All_G4_EICDetector.sh
 
+if [ "${11}" = "singlePion" ]
+then
+  echo "Setting up pion gun"
+  ./setupPionGun.sh
+fi
+if [ "${11}" = "singleElectron" ]
+then
+  echo "Setting up electron gun"
+  ./setupElectronGun.sh
+fi
+
 # Run Fun4all. Send output to stdout but also capture to temporary local file
 echo running root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
 root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\) | tee ${tmpLogFile}

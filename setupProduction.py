@@ -25,7 +25,7 @@ class steering():
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
   macrosBranch = "master"
-  nEventsPerJob = 2
+  nEventsPerJob = 10000
   nTotalEvents = 0
   site = sys.argv[1]
 
@@ -35,7 +35,7 @@ if steering.site not in config.sites:
   sys.exit()
 
 if steering.site == "BNL":
-  steering.productionTopDir = '/sphenix/user/cdean/ECCE/simulationProductions'
+  steering.productionTopDir = '/eic/data/ctdean/ECCE/simulationProductions'
   steering.simulationsDir = steering.productionTopDir
 
 if steering.site == "OSG@BNL":
@@ -80,11 +80,17 @@ def getProductionRequirements():
   checkRequirements(steering.collisionType, config.ecceCollision)
 
 def getMacrosRepo():
-  #steering.simulationsDir += "/{}/{}/{}/ECCE_build_{}/macros_tag_{}".format(steering.PWG,
-  #                                                                          steering.generator,
-  #                                                                          steering.collisionType,
-  #                                                                          steering.nightly,
-  #                                                                          steering.macrosTag)
+
+  if steering.generator == "particleGun":
+    steering.simulationsDir += "/particleGun"
+    if steering.collisionType == "singlePion":
+      steering.simulationsDir += "/singlePion"
+    elif steering.collisionType == "singleElectron":
+      steering.simulationsDir += "/singleElectron"
+    else:
+      print("You cannot have beam condition {} with a particle gun".format(steering.collisionType))
+      sys.exit()
+
   steering.simulationsDir += "/ECCE_build_{}/macros_tag_{}".format(steering.nightly,
                                                                    steering.macrosTag)
   if not os.path.isdir(steering.simulationsDir):
@@ -100,6 +106,11 @@ def getMacrosRepo():
   
   # Copy all files from productions/extras into the macros directory
   extrasDir = steering.submissionTopDir + '/extras'
+  os.chmod("{}/changeStrings.sh".format(extrasDir), 0o744)
+  os.chmod("{}/changeFun4All_G4_EICDetector.sh".format(extrasDir), 0o744)
+  os.chmod("{}/setupPionGun.sh".format(extrasDir), 0o744)
+  os.chmod("{}/run_EIC_production.sh".format(extrasDir), 0o744)
+  os.chmod("{}/setupElectronGun.sh".format(extrasDir), 0o744)
   if os.path.isdir(extrasDir):
     cmd = 'cp %s/* %s' % (extrasDir, os.getcwd() + '/detectors/EICDetector')
     print(cmd)
