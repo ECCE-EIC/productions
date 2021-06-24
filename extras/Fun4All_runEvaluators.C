@@ -72,22 +72,16 @@ int Fun4All_runEvaluators(
   unsigned int revisionNumber = 0;
   std::ostringstream evalRevision;
   evalRevision << std::setfill('0') << std::setw(revisionWidth) << to_string(revisionNumber);
-  //std::string evalRevision = std::setfill('0') << std::setw(5) << revisionNumber;
-  //evalDir += "eval_" + evalRevision;
   evalDir += "eval_" + evalRevision.str();
-
-printf("%s\n", evalDir.c_str());
 
   while (checkForDir(evalDir))
   {
     evalDir = evalDir.substr(0, evalDir.size() - revisionWidth);
-printf("After removing: %s\n", evalDir.c_str());
     revisionNumber++;
     evalRevision.str("");
     evalRevision.clear();
     evalRevision << std::setfill('0') << std::setw(revisionWidth) << to_string(revisionNumber);
     evalDir += evalRevision.str(); 
-printf("After appending: %s\n", evalDir.c_str());
   }
 
   std::string makeDirectory = "mkdir -p " + evalDir;
