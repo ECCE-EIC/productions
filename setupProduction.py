@@ -20,7 +20,7 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-  productionTopDir = '/work/eic/users/davidl/2021.06.17.test_campaign'
+  productionTopDir = '/work/eic/users/billlee/2021.06.17.test_campaign'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"

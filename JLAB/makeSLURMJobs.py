@@ -71,6 +71,8 @@ def makeSLURMJob():
     #Get the current working directory to write submissions and logs to
     #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
     slurmDir = "{}/slurmJobs".format(pars.submitPath)
+	# This is to creat the slurmJobs directory, which otherwise won't be created.
+    os.makedirs(slurmDir, exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(slurmDir)
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
