@@ -86,6 +86,14 @@ int Fun4All_runEvaluators(
   evaluatorNames["fhcal"] = "_g4fhcal_eval.root";
   evaluatorNames["eemc"] = "_g4eemc_eval.root";
 
+  Enable::TRACKING = true;
+  Enable::CEMC_CLUSTER = true;
+  Enable::EEMC_CLUSTER = true;
+  Enable::FEMC_CLUSTER = true;
+  Enable::HCALIN_CLUSTER = true;
+  Enable::HCALOUT_CLUSTER = true;
+  Enable::FHCAL_CLUSTER = true;
+
   //-----
   // Output file headers and path
   //-----
