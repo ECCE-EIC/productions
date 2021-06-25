@@ -119,7 +119,7 @@ def makeCondorJob():
             condorFile.write("Log             = {}.log\n".format(condorOutputInfo))
             condorFile.write("Initialdir      = {}\n".format(pars.macrosPath))
             condorFile.write("PeriodicHold    = (NumJobStarts>=1 && JobStatus == 1)\n")
-            condorFile.write("request_memory  = 4GB\n")
+            condorFile.write("request_memory  = 2GB\n")
             condorFile.write("Priority        = 20\n")
             condorFile.write("job_lease_duration = 3600\n")
             condorFile.write("Queue 1\n")

@@ -32,15 +32,18 @@ EOF
 
 echo "Disabling evaluators and enabling DST readout"
 ./setupFun4All_G4_EICDetector.sh
+./setupFun4All_G4_EICDetector.sh
 
 if [ "${11}" = "singlePion" ]
 then
   echo "Setting up pion gun"
   ./setupPionGun.sh
+  ./setupPionGun.sh
 fi
 if [ "${11}" = "singleElectron" ]
 then
   echo "Setting up electron gun"
+  ./setupElectronGun.sh
   ./setupElectronGun.sh
 fi
 

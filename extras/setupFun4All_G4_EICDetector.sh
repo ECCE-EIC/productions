@@ -14,4 +14,9 @@ myStrings["Enable::EHCAL_EVAL = Enable::EHCAL_CLUSTER && true;"]="Enable::EHCAL_
 myStrings["Enable::FWDJETS_EVAL = Enable::FWDJETS && true;"]="Enable::FWDJETS_EVAL = false;"
 myStrings["Enable::EVENT_EVAL = true;"]="Enable::EVENT_EVAL = false;"
 
-for i in "${!myStrings[@]}"; do changeStrings.sh Fun4All_G4_EICDetector.C "${i}" "${myStrings[$i]}"; done
+for i in "${!myStrings[@]}"; 
+do 
+  changeStrings.sh Fun4All_G4_EICDetector.C "${i}" "${myStrings[$i]}"; 
+done
+
+echo "setupFun4All_G4_EICDetector.sh complete"
