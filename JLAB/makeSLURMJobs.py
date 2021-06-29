@@ -23,7 +23,7 @@ generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'/work/osgpool/eic'}
 
 nArgs = len(sys.argv)
 if nArgs != 13:
-    print("Usage: python makeSLURMJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
+    print("Usage: python makeSLURMJobs.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
 myShell='/bin/bash'
@@ -71,6 +71,7 @@ def makeSLURMJob():
     #Get the current working directory to write submissions and logs to
     #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
     slurmDir = "{}/slurmJobs".format(pars.submitPath)
+    os.makedirs(slurmDir, exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(slurmDir)
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
@@ -92,6 +93,7 @@ def makeSLURMJob():
     nJobs = 0
     fileNumber = 0
     while line:
+       for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
        inputFile = line.replace("\n", "")
        nEventsInFile = getNumEvtsInFile(inputFile)
        nJobsFromFile = math.ceil(nEventsInFile/pars.nEventsPerJob)
@@ -135,7 +137,7 @@ def makeSLURMJob():
             slurmFile.write("#SBATCH --ntasks=1\n")
             slurmFile.write("#SBATCH --mem-per-cpu=2000\n")
             slurmFile.write("#SBATCH --job-name=slurm-{0}\n".format(fileTag))
-            slurmFile.write("#SBATCH --time=05:30:00\n")
+            slurmFile.write("#SBATCH --time=03:15:00\n")
             slurmFile.write("#SBATCH --gres=disk:10000\n")
             slurmFile.write("#SBATCH --output=" + slurmOutputInfo + ".out\n")
             slurmFile.write("#SBATCH --error=" + slurmOutputInfo + ".err\n")
