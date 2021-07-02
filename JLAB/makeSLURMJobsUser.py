@@ -31,43 +31,10 @@ class pars:
     nTotalEvents=2
     
 
-
-# This is used to map the full path file names in the list of
-# generated files that are on the BNL system to paths on the
-# JLab system.
-#generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'/work/osgpool/eic'}
-
 nArgs = len(sys.argv)
 if nArgs != 1:
     print("Usage: python3 makeSLURMJob.py")
     sys.exit()
-
-#myShell='/bin/bash'
-
-# Path variable descriptions
-#
-# simulationsTopDir : Directory where output DST files should go
-# submitPath        : Directory where the SLURM batch scripts are written
-# macrosPath        : Directory where the Fun4All_G4_EICDetector.C lives (e.g. .../macros/detector/EICDetector)
-# macrosTopDir      : Directory "macros". (This is just <macrosPath>/../..)
-# prodTopDir        : Directory where setProduction.py is being run from (typically "productions")
-
-#class pars:
-#  simulationsTopDir = '/work/eic2/ECCE/MC'
-#  nEventsPerJob = int(sys.argv[1])
-#  thisWorkingGroup = sys.argv[2]
-#  thisGenerator = sys.argv[3]
-#  thisCollision = sys.argv[4]
-#  build = sys.argv[5]
-#  submitPath = sys.argv[6]
-#  macrosPath = sys.argv[7]
-#  macrosTopDir = os.path.abspath( macrosPath + '/../..')
-#  prodTopDir = sys.argv[8]
-#  macrosHash = sys.argv[9]
-#  prodSite = sys.argv[10]
-#  macrosBranch = sys.argv[11]
-#  nTotalEvents = int(sys.argv[12])
-
 
 def getNumEvtsInFile(theFile):
     inputFile = TFile(theFile)
