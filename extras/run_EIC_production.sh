@@ -63,8 +63,8 @@ echo md5sum: >> ${metaDataFile}
 md5sum ${5}/${3} | awk '{print $1}' >> ${metaDataFile}
 
 echo "DST has been created"
-echo "Now producing evaluators"
+#echo "Now producing evaluators"
 
-root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
+#root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
 
 echo "script done"

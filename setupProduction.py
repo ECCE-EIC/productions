@@ -23,8 +23,10 @@ class steering():
   productionTopDir = '/work/eic/users/billlee/2021.06.17.test_campaign'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
-  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
-  macrosBranch = "master"
+#  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
+#  macrosBranch = "master"
+  macrosRepo = "https://github.com/billlee77/macros.git" #"git@github.com:billlee77/macros.git"
+  macrosBranch = "diff_tagg_physics_IP6_June_16_2021"
   nEventsPerJob = 1000
   nTotalEvents = 0
   site = sys.argv[1]
@@ -137,7 +139,7 @@ def setupJob():
   elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
   elif steering.site == "OSG@BNL": submitScript = "makeOSGJobs.py"
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
-  os.system("python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
+  os.system("python3 {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
 
 
 def createSubmissionFiles():
@@ -176,5 +178,12 @@ def runProduction():
   print("Creating production scripts")
   createSubmissionFiles()
   printSimulation()
+
+
+print("================")
+print("================")
+print("================")
+print(sys.version)
+
 
 runProduction()

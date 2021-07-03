@@ -13,7 +13,8 @@ macrosVersion = {
   "latest_master" : "463a3bb", #from 2021/06/11
   "latest" : "9daf451", #from 2021/05/11
   "20210618" : "db6dd0c",
-  "20210624" : "5f210c7"
+  "20210624" : "5f210c7",
+  "diff_tagg_physics_IP6_June_16_2021" : "9266a35" 
 }
 
 #PWGs
@@ -23,4 +24,5 @@ ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'Exclusiv
 ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro']
 
 #Collision type
-ecceCollision = ['singlePion', 'singleElectron', 'ep_5x100', 'ep_10x100', 'ep_18x100', 'ep_18x100lowq2', 'ep_18x100highq2']
+#ecceCollision = ['singlePion', 'singleElectron', 'ep_5x100', 'ep_10x100', 'ep_18x100', 'ep_18x100lowq2', 'ep_18x100highq2']
+ecceCollision = ['singlePion', 'singleElectron', 'ep_5x100', 'ep_10x100', 'ep_18x100', 'ep_18x100lowq2', 'ep_18x100highq2', 'pionFF']
