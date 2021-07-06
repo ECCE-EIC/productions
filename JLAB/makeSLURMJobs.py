@@ -23,7 +23,7 @@ generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'/work/osgpool/eic'}
 
 nArgs = len(sys.argv)
 if nArgs != 13:
-    print("Usage: python makeSLURMJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
+    print("Usage: python makeSLURMJobs.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
 myShell='/bin/bash'
@@ -38,6 +38,7 @@ myShell='/bin/bash'
 
 class pars:
   simulationsTopDir = '/work/eic2/ECCE/MC'
+  randomTimeDelay   = '180'        # set to 0 for no random delay. Otherwise it will be between 0 and this many seconds
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -71,6 +72,7 @@ def makeSLURMJob():
     #Get the current working directory to write submissions and logs to
     #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
     slurmDir = "{}/slurmJobs".format(pars.submitPath)
+    os.makedirs(slurmDir, exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(slurmDir)
     submitScript = open("{}".format(submitScriptName), "w")
     os.chmod(submitScriptName, 0o744)
@@ -92,6 +94,7 @@ def makeSLURMJob():
     nJobs = 0
     fileNumber = 0
     while line:
+       for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
        inputFile = line.replace("\n", "")
        nEventsInFile = getNumEvtsInFile(inputFile)
        nJobsFromFile = math.ceil(nEventsInFile/pars.nEventsPerJob)
@@ -135,12 +138,18 @@ def makeSLURMJob():
             slurmFile.write("#SBATCH --ntasks=1\n")
             slurmFile.write("#SBATCH --mem-per-cpu=2000\n")
             slurmFile.write("#SBATCH --job-name=slurm-{0}\n".format(fileTag))
-            slurmFile.write("#SBATCH --time=05:30:00\n")
+            slurmFile.write("#SBATCH --time=06:00:00\n")
             slurmFile.write("#SBATCH --gres=disk:10000\n")
             slurmFile.write("#SBATCH --output=" + slurmOutputInfo + ".out\n")
             slurmFile.write("#SBATCH --error=" + slurmOutputInfo + ".err\n")
             slurmFile.write("#SBATCH --chdir=/u/scratch/" + getpass.getuser() + "\n")
             slurmFile.write("#\n")
+            slurmFile.write("\n")
+            slurmFile.write("# Sleep a random amount of time from 0-{0}s\n".format(pars.randomTimeDelay))
+            slurmFile.write("# This avoids conflicts when lots of jobs start simultaneously.\n")
+            slurmFile.write("TSLEEP=$[ ( $RANDOM % ({0}+1) ) ]s\n".format(pars.randomTimeDelay))
+            slurmFile.write("echo \"Sleeping for ${TSLEEP} ...\"\n")
+            slurmFile.write("sleep $TSLEEP\n".format(pars.randomTimeDelay))
             slurmFile.write("\n")
             slurmFile.write("printf \"Start time: \"; /bin/date\n")
             slurmFile.write("printf \"host: \"; /bin/hostname -A\n")
@@ -175,7 +184,7 @@ def makeSLURMJob():
             slurmFile.write("printf \"End time: \"; /bin/date\n")
             slurmFile.close()
 
-            submitScript.write("sbatch {}\n".format(slurmFileName))
+            submitScript.write("sbatch {0}/{1}\n".format(slurmDir,slurmFileName))
 
             nJobs += 1
        if nEvents >= pars.nTotalEvents: 
