@@ -1,6 +1,0 @@
-nightly new
-tag June-2021-Concept-v0.1
-PWG SIDIS 
-generator pythia6
-collision ep_18x100lowq2
-nTotalEvents 10000

@@ -1,0 +1,6 @@
+nightly prop1
+tag prop1
+PWG Electroweak 
+generator Djangoh
+collision ep_10x100nc_q2_2
+nTotalEvents 1000000
