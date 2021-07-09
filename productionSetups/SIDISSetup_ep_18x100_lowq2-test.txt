@@ -1,0 +1,6 @@
+nightly ana.14
+tag 20210624
+PWG SIDIS 
+generator pythia6
+collision ep_18x100lowq2
+nTotalEvents 10000

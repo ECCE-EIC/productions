@@ -28,7 +28,7 @@ generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpo
 
 nArgs = len(sys.argv)
 if nArgs != 13:
-    print("Usage: python makeOSGJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
+    print("Usage: python makeOSGJobs.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
 myShell='/bin/bash'
@@ -43,8 +43,8 @@ myShell='/bin/bash'
 
 class pars:
   #simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
-  #simulationsTopDir = 'S3://eictest/ECCE/MC'
-  simulationsTopDir = '/work/eic2/ECCE/MC'
+  simulationsTopDir = 'S3://eictest/ECCE/MC'
+  #simulationsTopDir = '/work/eic2/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -113,6 +113,7 @@ def makeOSGJob():
     nJobs = 0
     fileNumber = 0
     while line:
+       for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
        inputFile = line.replace("\n", "")
        nEventsInFile = getNumEvtsInFile(inputFile)
        nJobsFromFile = math.ceil(nEventsInFile/pars.nEventsPerJob)
