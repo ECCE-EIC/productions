@@ -4,7 +4,7 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-nightlyBuild = ['prop1', 'ana.8', 'ana.13']
+nightlyBuild = ['prop.1', 'ana.8', 'ana.13']
 
 #macros tags
 macrosVersion = {
@@ -14,7 +14,8 @@ macrosVersion = {
   "latest" : "9daf451", #from 2021/05/11
   "20210618" : "db6dd0c",
   "20210624" : "5f210c7",
-  "prop1" : "9cad06f"
+  "20210708" : "4cafa64",
+  "prop.1" : "9cad06f"
 }
 
 #PWGs

@@ -1,5 +1,5 @@
-nightly prop1
-tag prop1
+nightly prop.1
+tag prop.1
 PWG HFandJets 
 generator elSpectro
 collision ep_5x100

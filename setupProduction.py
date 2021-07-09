@@ -35,7 +35,7 @@ if steering.site not in config.sites:
   sys.exit()
 
 if steering.site == "BNL":
-  steering.productionTopDir = '/gpfs02/eic/DATA/ECCE//simulationProductions'
+  steering.productionTopDir = '/gpfs/mnt/gpfs02/eic/DATA/ECCE_Productions/simulationProductions'
   steering.simulationsDir = steering.productionTopDir
 
 if steering.site == "OSG@BNL":
