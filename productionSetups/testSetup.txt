@@ -1,5 +1,0 @@
-nightly new
-tag v0.1
-PWG test
-generator elSpectro
-collision ep_10x100
