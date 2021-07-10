@@ -23,13 +23,6 @@ echo "----------------------------------------------"
 echo " ----> PATH: $PATH"
 echo
 
-# this is where we start our work
-export BASEDIR=`pwd`
-echo "\
-tar fzx penv.tgz"
-tar fzx penv.tgz
-ls -lhrt
-
 export tag="$1"
 export hash="$2"
 export inputFile="$3"
@@ -43,6 +36,13 @@ export coll="$9"
 # derived variables
 export outputFile=DST_${pwg}_${gen}_${coll}_${fid}_${nskip}_${nevts}.root # DST_SIDIS_pythia6_ep_18x100lowq2_009_1998000_02000.root
 export outputPath=${tag}/${hash}/${pwg}/${gen}/${coll}                    # ana.14/5f210c7/SIDIS/pythia6/ep_18x100lowq2
+
+# this is where we start our work
+export BASEDIR=`pwd`
+echo " Untar our software: \
+tar fzx penv_${tag}_${hash}.tgz"
+tar fzx penv_${tag}_${hash}.tgz
+ls -lhrt
 
 # download input file
 ./productions/extras/download.sh $inputFile

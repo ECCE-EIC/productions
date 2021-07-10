@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------------------------------
-# Python Module File to describe a Sample
+# Python Module File to describe out production environment.
 #
 # Author: C.Paus                                                                      (Jul 07, 2021)
 #---------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class Request:
         self.loadQueuedJobs()
 
     #-----------------------------------------------------------------------------------------------
-    # load all jobs that are queued
+    # load all jobs that are queued (this is MIT specific, but can be easily replaced)
     #-----------------------------------------------------------------------------------------------
     def loadCompletedJobs(self):
 
@@ -73,7 +73,7 @@ class Request:
             self.sample.addCompleted(lfn)
 
     #-----------------------------------------------------------------------------------------------
-    # load all jobs that are queued
+    # load all jobs that are queued (again specific but can be easily replaced: condor, slurm, ..)
     #-----------------------------------------------------------------------------------------------
     def loadQueuedJobs(self):
 
@@ -114,7 +114,7 @@ class Sample:
                  physicsGroup = "SIDIS",
                  generator = "pythia6",
                  collisions = "ep_18x100lowq2",
-                 genInput='inputFileLists/eic-smear_SIDIS_pythia6_ep_18x100lowq2.list',
+                 #genInput='inputFileLists/eic-smear_SIDIS_pythia6_ep_18x100_q2_low.list',
                  nEventsPerLfn=2000):
 
         # copy the key parameters
@@ -124,7 +124,8 @@ class Sample:
 
         # derive
         self.dataset = "{}_{}_{}".format(self.physicsGroup,self.generator,self.collisions)
-        self.genInput = genInput
+        #self.genInput = genInput
+        self.genInput = 'inputFileLists/%s_%s_%s.list'%(self.physicsGroup,self.generator,self.collisions)
         self.nEventsPerLfn = nEventsPerLfn
 
         # define the content container
@@ -219,6 +220,7 @@ class Sample:
     # present the current samples
     #-----------------------------------------------------------------------------------------------
     def show(self):
+        print('')
         print(' ====  S a m p l e  ====')
         print(' Dataset       : ' + self.dataset)
         for gf in self.genFiles:
@@ -247,13 +249,15 @@ class Submitter:
 
     def submit(self,request):
         # make the work directory
+        penvTgz = "penv_%s_%s.tgz"%(request.tag,request.hash)
         penvBase = "{}".format(os.getenv('PENV_BASE'))
-        penvLog = "{}/{}_{}/{}".format(os.getenv('PENV_LOG'),request.tag,request.hash,request.sample.dataset)
+        penvLog = "{}/{}_{}/{}"\
+            .format(os.getenv('PENV_LOG'),request.tag,request.hash,request.sample.dataset)
         if not os.path.exists(penvLog):
             os.makedirs(penvLog)
         # move the relevant files if they are not already there
-        if not os.path.exists("%s/penv.tgz"%penvLog):
-            os.system("cp %s/../penv.tgz %s"%(penvBase,penvLog))
+        if not os.path.exists("%s/%s"%(penvLog,penvTgz)):
+            os.system("cp %s/../%s %s"%(penvBase,penvTgz,penvLog))
         if not os.path.exists("%s/ecce_simulate.sh"%penvLog):
             os.system("cp %s/extras/ecce_simulate.sh %s"%(penvBase,penvLog))
         self.submitFile = "{}/{}_{}.sub".format(penvLog,request.sample.dataset,self.id)
@@ -261,7 +265,8 @@ class Submitter:
 
         if (nMissing > 0):
             # now push it into condor
-            cmd = "cd %s; condor_submit %s"%("/".join(self.submitFile.split('/')[:-1]),self.submitFile.split('/')[-1])
+            cmd = "cd %s; condor_submit %s"\
+                  %("/".join(self.submitFile.split('/')[:-1]),self.submitFile.split('/')[-1])
             print(" --> %s"%(cmd))
             #os.system(cmd)
         else:
@@ -302,6 +307,7 @@ class Submitter:
         return
 
     def _writeSubmitFile(self,request):
+        print('')
         print(" Submit file: %s"%(self.submitFile))
         with open(self.submitFile,'w') as fH:
             self._writeHeader(fH,request.sample.dataset)
@@ -319,7 +325,7 @@ class Submitter:
                     args = "%s %s %s %s %s %s %s %s %s"%\
                            (request.tag,request.hash,inputFile,nskip,nevts,fid, \
                             request.sample.physicsGroup,request.sample.generator,request.sample.collisions)
-#                           from ecce_mit.sh
+#                           from ecce_simulate.sh
 #                           export tag="$1"
 #                           export hash="$2"
 #                           export inputFile="$3"
@@ -336,6 +342,7 @@ class Submitter:
                 elif request.sample.allLfns[lfn] == 2:
                     nDone += 1
 
+        print('')
         print(" ====  J o b   S u m m a r y  ==== ")
         print(" Adding to queue: %d"%(nMissing))
         print(" Queued already:  %d"%(nQueued))
