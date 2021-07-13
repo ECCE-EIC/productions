@@ -19,6 +19,8 @@ parser.add_option("-p","--physics_group",dest="physics_group",default='SIDIS',he
 parser.add_option("-g","--generator",dest="generator",default='pythia6',help="generator used")
 parser.add_option("-c","--collisions",dest="collisions",default='ep_18x100lowq2',help="collision setup")
 parser.add_option("-n","--nEvtsPerJob",dest="nEvtsPerJob",default='2000',help="# of Events per simulation job")
+parser.add_option("-e","--execute",dest="execute",default=False,action="store_true",help="Execute condor_submit.")
+parser.add_option("-t","--timing",dest="timing",default=False,action="store_true",help="Find timing for completed.")
 # read them all
 (options, args) = parser.parse_args()
 
@@ -52,4 +54,10 @@ id = datetime.now().strftime("%Y%m%d_%H%M%S")
 sub = penv.Submitter(id)
 
 # Generate the submission script and submit
-sub.submit(req)
+sub.submit(req,options.execute)
+
+# Logfile analysis
+if options.timing:
+    logA = penv.LogAnalyzer(req)
+    logA.findLogs()
+    logA.show()
