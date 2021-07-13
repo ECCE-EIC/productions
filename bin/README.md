@@ -19,7 +19,7 @@
     git checkout -b $BRANCH
     git branch --set-upstream-to=origin/$BRANCH $BRANCH
     git config --local advice.detachedHead false
-    git checkout $TAG
+    git checkout $HASH
   
     cd $INSTALL_DIR
   
