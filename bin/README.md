@@ -7,9 +7,9 @@ The below given example is designed to install a defined release (ana.14, 5f210c
 production where a test sample is submitted for processing. There will be 10 jobs each producing 10
 events. It should finish from beginning to start in about 10 minutes and is testing the entire
 setup, including the retrieval of files from S3, processing the DST and the eval files and finally
-copying all received output back to S3. IT can also perfrom a rudimentary timing analysis based on
+copying all received output back to S3. It can also perform a rudimentary timing analysis based on
 tags placed in the log file. Ideally a summary file with those numbers would be produced but having
-a hook for logfile analysis is very useful and can be easily extedned to cover a variety of tests.
+a hook for logfile analysis is very useful and can be easily extended to cover a variety of tests.
 Plotting could also be included :-)
 
 # Installation of the software
@@ -45,7 +45,7 @@ It is important to run production from the 'productions' directory, where the cu
 installed. This would be $INSTALLDIR/productions. Please, make sure to edit the setup.sh files to
 reflect your site. The PENV_LOG directory is used to store all log files and the corresponding files
 used in the production, which are the tar ball and the executable (ecce_simulate.sh). Make sure
-there is enough space, and the path is not to long so you can get there quick.
+there is enough space, and the path is not too long so you can get there quick.
 
     # get setup
     cd $INSTALLDIR/productions
@@ -58,15 +58,15 @@ The work horses for input and output are captured in the shell scripts:
 
 For now the download will download the generator input file to the /tmp directory of the worker
 which could potentially overflow. It might be better to download to the work directory. For tests at
-MIT this scheme worked well. The first job arriving on a given node will perfrom the download, while
+MIT this scheme worked well. The first job arriving on a given node will perform the download, while
 first locking the node to ensure other jobs arriving do not try the download of the same file and
 wait for the completion. This has worked well for me but can lead to problems like stuck locks or
-broken files remainig in the /tmp directory.
+broken files remaining in the /tmp directory.
 
 Job status is during submission checked in the general condor job status logic. It should be easy to
-adjust to slurm. Completion is checked by explicitely checking for the presence of the DST output
+adjust to slurm. Completion is checked by explicitly checking for the presence of the DST output
 file. Again, potential pitfalls are missing metadata files or missing 'eval' files. For now this can
-be checked semi autmatically by hand. Deleting a corresponding problemtic DST file would simple lead
+be checked semi automatically by hand. Deleting a corresponding problematic DST file would simple lead
 to a re-submission of the missing file (including .txt and evals).
 
 To get your job going use the following command, where the parameters should be self explanatory:
