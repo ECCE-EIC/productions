@@ -11,14 +11,13 @@ import penv as penv
 
 # define and get all command line arguments
 parser = OptionParser()
-### production tags/hash - should be deduced from the installation
-##parser.add_option("-t","--tag",dest="tag",default='ana.14',help="production tag")
-##parser.add_option("-a","--hash",dest="hash",default='5f210c7',help="production hash")
-# samples
-parser.add_option("-p","--physics_group",dest="physics_group",default='SIDIS',help="physics group")
+# define what we want to do
+parser.add_option("-i","--inputDir",dest="inputDir",default='inputFileLists',help="input list dir")
+parser.add_option("-p","--physicsGroup",dest="physicsGroup",default='SIDIS',help="physics group")
 parser.add_option("-g","--generator",dest="generator",default='pythia6',help="generator used")
 parser.add_option("-c","--collisions",dest="collisions",default='ep_18x100lowq2',help="collision setup")
-parser.add_option("-n","--nEvtsPerJob",dest="nEvtsPerJob",default='2000',help="# of Events per simulation job")
+parser.add_option("-n","--nEvtsPerJob",dest="nEvtsPerJob",default=2000,help="# of Events per simulation job")
+# technical parameters
 parser.add_option("-e","--execute",dest="execute",default=False,action="store_true",help="Execute condor_submit.")
 parser.add_option("-t","--timing",dest="timing",default=False,action="store_true",help="Find timing for completed.")
 # read them all
@@ -43,11 +42,12 @@ def findConfig():
 (tag,hash) = findConfig()
 
 # Setting up the sample and related request
-sample = penv.Sample(options.physics_group,options.generator,options.collisions,int(options.nEvtsPerJob))
+sample = penv.Sample(options.inputDir,options.physicsGroup,options.generator,options.collisions,int(options.nEvtsPerJob))
 req = penv.Request(tag,hash,sample)
 req.sample.show()
 
-# Create a submit engine
+# Create a submit engine (can be used for many submissions)
+
 # - make an id for the submitter
 id = datetime.now().strftime("%Y%m%d_%H%M%S")
 # - instantiate the submitter

@@ -42,13 +42,14 @@ tar fzx penv_${tag}_${hash}.tgz
 ls -lhrt
 
 # download input file (make sure to rename the input)
-./productions/extras/download.sh $inputFile
+./productions/bin/download.sh $inputFile
 inputFile=/tmp/`basename $inputFile`
 
 # Run the simulation
 mv productions/extras/* macros/detectors/EICDetector
 cd macros/detectors/EICDetector
 mkdir -p ${outputPath}/eval
+
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $tag
 export ROOT_INCLUDE_PATH=$(pwd)/../../common:$ROOT_INCLUDE_PATH
 metaDataFile=${outputPath}/${outputFile}.txt
@@ -154,20 +155,19 @@ echo ":::::::::::::::::::::::::::::::::::::::::::::"
 ls -lhrt
 mv `echo ${outputPath} | cut -d/ -f1` ../../../
 pwd
-chmod 750 copy_to_T2.sh
-cp copy_to_T2.sh ../../../
+echo " 'cd' back to base"
 cd ../../../
 pwd
 
-
 # Copy files to final storage destination.
 
-# Write outputs to MIT T2
+# Write outputs to MIT S3
 echo "----------------------------------------------"
 echo "files:"
 ls -ltr 
 outputRelPathTopDirName=$(echo "${outputPath}" | cut -d "/" -f1)
-./copy_to_T2.sh ${outputRelPathTopDirName} ""
+chmod 750 ./productions/bin/copy_to_S3.sh
+./productions/bin/copy_to_S3.sh ${outputRelPathTopDirName} ""
 
 echo "----------------------------------------------"
 echo "removing all files created"

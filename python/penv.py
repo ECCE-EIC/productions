@@ -1,4 +1,3 @@
-
 #---------------------------------------------------------------------------------------------------
 # Python Module File to describe out production environment.
 #
@@ -201,7 +200,7 @@ class Request:
 
 #---------------------------------------------------------------------------------------------------
 """
-Class:  Sample(genInput='undefined', dataset='undefined', nEventsPerJob=2000)
+Class:  Sample(inputDir, physicsGroup, generator, collisions, nEventsPerLfn=2000)
 
 Each sample we are producing can be described by this class.
 """
@@ -212,28 +211,23 @@ class Sample:
     #-----------------------------------------------------------------------------------------------
     # constructor
     #-----------------------------------------------------------------------------------------------
-    def __init__(self,
-                 physicsGroup = "SIDIS",
-                 generator = "pythia6",
-                 collisions = "ep_18x100lowq2",
-                 #genInput='inputFileLists/eic-smear_SIDIS_pythia6_ep_18x100_q2_low.list',
-                 nEventsPerLfn=2000):
+    def __init__(self, inputDir, physicsGroup, generator, collisions, nEventsPerLfn):
 
         # copy the key parameters
+        self.inputDir = inputDir
         self.physicsGroup = physicsGroup
         self.generator = generator
         self.collisions = collisions
 
         # derive
         self.dataset = "{}_{}_{}".format(self.physicsGroup,self.generator,self.collisions)
-        #self.genInput = genInput
-        self.genInput = 'inputFileLists/%s_%s_%s.list'%(self.physicsGroup,self.generator,self.collisions)
+        self.genInput = '%s/%s_%s_%s.list'%(self.inputDir,self.physicsGroup,self.generator,self.collisions)
         self.nEventsPerLfn = nEventsPerLfn
 
         # define the content container
         self.genFiles = []
         self.nEventsTotal = 0
-        self.allLfns = {}      # 0-missing, 1-queued, 2-running, 3-removed, 4-completed, 5-held
+        self.allLfns = {}           # 0-missing, 1-queued, 2-running, 3-removed, 4-completed, 5-held
 
         # read the generator input files
         self.loadGenInput()
@@ -291,8 +285,10 @@ class Sample:
     #-----------------------------------------------------------------------------------------------
     # generate the file ids that we need to produce
     #
-    # - IMPORTANT: if there are not enough events in the last job the events are not used
-    #-----------------------------------------------------------------------------------------------
+    # IMPORTANT: if there are not enough events for a last job the events are not used, jobs with
+    #            number of events smaller than requested are not made, this could be problematic
+    #            if the *generated* luminosity is counted.
+    # -----------------------------------------------------------------------------------------------
     def makeLfns(self):
 
         i = 0
@@ -317,16 +313,19 @@ class Sample:
         print(' Dataset       : ' + self.dataset)
         for gf in self.genFiles:
             gf.show()
-
-        #for lfn in self.allLfns:
-        #    if self.allLfns[lfn] == 0:
-        #        print(" -Missing-> %s (%d)"%(lfn,self.allLfns[lfn]))
+        if DEBUG > 1:
+            for lfn in self.allLfns:
+                if self.allLfns[lfn] == 0:
+                    print(" -Missing-> %s (%d)"%(lfn,self.allLfns[lfn]))
 
 #---------------------------------------------------------------------------------------------------
 """
 Class:  Submitter()
 
-Each sample we are producing can be described by this class.
+This is the engine that will allow us to submit requests which are based on a particular release
+and specific samples. It is important to note that the release (defined by hash and tag) could be
+changed on the fly but it requires at this point some acrobatics to do this. So, in essence it is
+recommended to use only one release with a given installation.
 """
 #---------------------------------------------------------------------------------------------------
 class Submitter:
@@ -351,7 +350,7 @@ class Submitter:
         if not os.path.exists("%s/%s"%(penvLog,penvTgz)):
             os.system("cp %s/../%s %s"%(penvBase,penvTgz,penvLog))
         if not os.path.exists("%s/ecce_simulate.sh"%penvLog):
-            os.system("cp %s/extras/ecce_simulate.sh %s"%(penvBase,penvLog))
+            os.system("cp %s/bin/ecce_simulate.sh %s"%(penvBase,penvLog))
         self.submitFile = "{}/{}_{}.sub".format(penvLog,request.sample.dataset,self.id)
         (nMissing,nQueued,nRunning,nRemoved,nCompleted,nHeld) = self._writeSubmitFile(request)
 
