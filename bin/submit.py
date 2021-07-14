@@ -61,3 +61,40 @@ if options.timing:
     logA = penv.LogAnalyzer(req)
     logA.findLogs()
     logA.show()
+
+    #import numpy as np
+    import matplotlib.pyplot as plt
+    import matplotlib as mlp
+
+    ts = []
+    dstTs = []
+    evalTs = []
+    for key in logA.timings:
+        ts.append(logA.timings[key])
+        dstTs.append(logA.dstTimings[key])
+        evalTs.append(logA.evalTimings[key])
+
+    # define the figure
+    plt.figure('Job timing')
+    n, bins, patches = plt.hist(ts, 20, label="Total", histtype='step', linewidth=2.0)
+    n, bins, patches = plt.hist(dstTs, 20, label="DST only", histtype='step', linewidth=2.0)
+    n, bins, patches = plt.hist(evalTs, 20, label="EVAL only", histtype='step', linewidth=2.0)
+    plt.legend(loc='upper right')
+    plt.legend(frameon=False)
+
+    # make plot nicer
+    plt.xlabel('Wall Clock Time for completion [s]', fontsize=22)
+    plt.ylabel('Number of Jobs', fontsize=22)
+
+    # make axis tick numbers larger
+    plt.xticks(fontsize=18)
+    plt.yticks(fontsize=18)
+
+    # make sure to noe have too much white space around the plot
+    plt.subplots_adjust(top=0.99, right=0.99, bottom=0.13, left=0.12)
+
+    # save plot for later viewing
+    plt.savefig("timing.png",bbox_inches='tight',dpi=400)
+
+    # show the plot for interactive use
+    plt.show()
