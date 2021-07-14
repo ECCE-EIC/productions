@@ -14,7 +14,7 @@ Plotting could also be included :-)
 
 # Installation of the software
 
-    INSTALL_DIR=$HOME/ecce/000   # suggested to increment the 000 counter for each new production
+    INSTALL_DIR=$HOME/ecce/000   # option: increment the 000 counter for each new production release
     TAG=ana.14
     HASH=5f210c7
   
