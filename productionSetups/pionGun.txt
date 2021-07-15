@@ -1,5 +1,5 @@
-nightly new
-tag 20210624
+nightly prop1
+tag prop1
 PWG General
 generator particleGun
 collision singlePion

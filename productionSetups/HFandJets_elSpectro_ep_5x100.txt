@@ -1,6 +1,6 @@
-nightly ana.13
-tag June-2021-Concept-v0.1
-PWG SIDIS 
+nightly prop1
+tag prop1
+PWG HFandJets 
 generator elSpectro
 collision ep_5x100
 nTotalEvents 100000
