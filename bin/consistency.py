@@ -135,7 +135,9 @@ if len(badIds) > 0:
         print("# NOT Executing:")
     
     for key in badIds:
-        cmd = "mc rm S3/eictest/ECCE/MC/ana.14/5f210c7/SIDIS/pythia6/ep_18x100lowq2/%s%s.root"%(common,key)
+        #cmd = "mc rm S3/eictest/ECCE/MC/ana.14/5f210c7/SIDIS/pythia6/ep_18x100lowq2/%s%s.root"%(common,key)
+        cmd = "mc rm S3/eictest/ECCE/MC/%s/%s/%s/%s/%s/%s%s.root"\
+              %(tag,hash,opts.physicsGroup,opts.generator,opts.collisions,common,key)
         if opts.execute:
             print(" %s"%(cmd))
             proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
