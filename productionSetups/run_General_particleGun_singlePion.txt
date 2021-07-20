@@ -1,5 +1,5 @@
-nightly prop1
-tag prop1
+nightly prop.2
+tag prop.2.1-production-singlePion-0-20GeV
 PWG General
 generator particleGun
 collision singlePion

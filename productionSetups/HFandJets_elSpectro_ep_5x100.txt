@@ -1,6 +1,0 @@
-nightly prop1
-tag prop1
-PWG HFandJets 
-generator elSpectro
-collision ep_5x100
-nTotalEvents 100000
