@@ -42,8 +42,8 @@ import os, sys
 import subprocess
 
 # Authentication info (edit to use your write-privileged username/access key)
-user      = 'paus'              #'eicS3read'
-accesskey = 'xppahmdxnfgrhvut'  #'eicS3read'
+user      = 'eicS3read'
+accesskey = 'eicS3read'
 
 # Full path to minio "mc" executable to use
 mc = '/cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/utils/bin/mcs3'
