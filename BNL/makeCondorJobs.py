@@ -49,12 +49,6 @@ def makeCondorJob():
     line = infile.readline()
     #Get the current working directory to write submissions and logs to
     myOutputPath = pars.submitPath #os.getcwd()
-    condorDir = "{}/condorJobs".format(myOutputPath)
-    os.makedirs("{}/log".format(condorDir), exist_ok=True)
-    submitScriptName = "{}/submitJobs.sh".format(condorDir)
-    submitScript = open("{}".format(submitScriptName), "w")
-    os.chmod(submitScriptName, 0o744)
-    submitScript.write("#!{}\n".format(myShell))
     #Now make output directory
     outputPath = "{}/{}/{}/{}/{}/{}".format(pars.simulationsTopDir, 
                                             pars.build,
@@ -63,6 +57,13 @@ def makeCondorJob():
                                             pars.thisGenerator, 
                                             pars.thisCollision)
     os.makedirs(outputPath, exist_ok=True)
+    #condorDir = "{}/condorJobs".format(myOutputPath)
+    condorDir = "{}/condorJobs".format(outputPath)
+    os.makedirs("{}/log".format(condorDir), exist_ok=True)
+    submitScriptName = "{}/submitJobs.sh".format(condorDir)
+    submitScript = open("{}".format(submitScriptName), "w")
+    os.chmod(submitScriptName, 0o744)
+    submitScript.write("#!{}\n".format(myShell))
     #Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
@@ -134,7 +135,7 @@ def makeCondorJob():
        fileNumber += 1
        line = infile.readline()
 
-    print("Condor submission files have been written to:\n{}/condorJobs".format(myOutputPath))
+    print("Condor submission files have been written to:\n{}".format(condorDir))
     print("This setup will submit {} jobs".format(nJobs))
     print("You can submit your jobs with the script:\n{}".format(submitScriptName))
 

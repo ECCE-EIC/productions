@@ -24,11 +24,10 @@ class steering():
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
-  macrosBranch = "master"
+  macrosBranch = "production"
   nEventsPerJob = 1000
   nTotalEvents = 0
   site = sys.argv[1]
-
 
 if steering.site not in config.sites:
   print("Your submission site, {}, was not recognised".format(steering.site))
@@ -41,6 +40,10 @@ if steering.site == "BNL":
 if steering.site == "OSG@BNL":
   steering.productionTopDir = 'N/A'
   steering.simulationsDir = steering.productionTopDir
+
+if steering.collisionType == "singlePion": steering.macrosBranch = "production_singlePion_0-20GeV"
+if steering.collisionType == "singleElectron": steering.macrosBranch = "production_singleElectron_0-20GeV"
+if steering.generator == "pythia8": steering.macrosBranch = "production_pythia8"
 
 def getParameter(parameter):
   configFile = open(steering.fileName, "r")
