@@ -83,17 +83,6 @@ def getProductionRequirements():
   checkRequirements(steering.collisionType, config.ecceCollision)
 
 def getMacrosRepo():
-
-  if steering.generator == "particleGun":
-    steering.simulationsDir += "/particleGun"
-    if steering.collisionType == "singlePion":
-      steering.simulationsDir += "/singlePion"
-    elif steering.collisionType == "singleElectron":
-      steering.simulationsDir += "/singleElectron"
-    else:
-      print("You cannot have beam condition {} with a particle gun".format(steering.collisionType))
-      sys.exit()
-
   steering.simulationsDir += "/ECCE_build_{}/macros_tag_{}".format(steering.nightly,
                                                                    steering.macrosTag)
   if not os.path.isdir(steering.simulationsDir):
