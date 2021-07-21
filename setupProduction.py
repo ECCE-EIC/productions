@@ -20,7 +20,7 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-  productionTopDir = '/work/eic/users/davidl/2021.06.17.test_campaign'
+  productionTopDir = '.'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
@@ -32,6 +32,14 @@ class steering():
 if steering.site not in config.sites:
   print("Your submission site, {}, was not recognised".format(steering.site))
   sys.exit()
+
+if steering.site == "JLAB":
+  steering.productionTopDir = '/work/eic2/ECCE/PRODUCTION/MACROS'
+  steering.simulationsDir = steering.productionTopDir
+
+if steering.site == "OSG":
+  steering.productionTopDir = '/work/eic2/ECCE/PRODUCTION/MACROS'
+  steering.simulationsDir = steering.productionTopDir
 
 if steering.site == "BNL":
   steering.productionTopDir = '/gpfs/mnt/gpfs02/eic/DATA/ECCE_Productions/simulationProductions'
