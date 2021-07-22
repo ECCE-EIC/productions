@@ -62,10 +62,11 @@ def getNumEvtsInFile(theFile):
 def makeSLURMJob():
     print("Creating SLURM submission files for {} production".format(pars.thisWorkingGroup))
     #Find and open the PWG list of input event files
-    inputFileList = "{}/inputFileLists/eic-smear_{}_{}_{}.list".format(pars.prodTopDir,
-                                                                       pars.thisWorkingGroup,
-                                                                       pars.thisGenerator,
-                                                                       pars.thisCollision)
+    inputFileList = "{}/{}/inputFileLists/{}_{}_{}.list".format(pars.prodTopDir, 
+                                                                pars.prodSite,
+                                                                pars.thisWorkingGroup, 
+                                                                pars.thisGenerator, 
+                                                                pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
     for key,val in generatedDirNameMap.items(): line = line.replace(key, val)

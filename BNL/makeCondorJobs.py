@@ -41,10 +41,11 @@ def getNumEvtsInFile(theFile):
 def makeCondorJob():
     print("Creating condor submission files for {} production".format(pars.thisWorkingGroup))
     #Find and open the pars.thisWorkingGroup list of input event files
-    inputFileList = "{}/inputFileLists/eic-smear_{}_{}_{}.list".format(pars.prodTopDir, 
-                                                                       pars.thisWorkingGroup, 
-                                                                       pars.thisGenerator, 
-                                                                       pars.thisCollision)
+    inputFileList = "{}/{}/inputFileLists/{}_{}_{}.list".format(pars.prodTopDir, 
+                                                                pars.prodSite,
+                                                                pars.thisWorkingGroup, 
+                                                                pars.thisGenerator, 
+                                                                pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
     #Get the current working directory to write submissions and logs to
@@ -73,7 +74,8 @@ def makeCondorJob():
     nEvents = 0
     while line:
        inputFile = line.replace("\n", "")
-       if pars.thisGenerator != "particleGun":
+       fun4allGenerators = ['particleGun', 'pythia8']
+       if pars.thisGenerator not in fun4allGenerators:
          nEventsInFile = getNumEvtsInFile(inputFile)
        else:
          nEventsInFile = pars.nTotalEvents

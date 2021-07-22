@@ -36,4 +36,5 @@ do
   echo " Copy file: $f"
   echo " --> gfal-copy -f $LBASE/$f $RBASE/$f"
   gfal-copy -f $LBASE/$f $RBASE/$f
+  rc=$?
 done

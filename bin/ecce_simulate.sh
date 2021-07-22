@@ -1,11 +1,8 @@
 #!/bin/bash
 #
-export PATH="/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:"
-echo " PATH: $PATH"
-
-echo " START -- "; date +%s
+echo " START -- "`date +%s`
 echo "args: $@"
-echo "host: $HOSTNAME"; hostname
+echo "host: $HOSTNAME"
 echo "user: "`id`
 echo "cwd:  "`pwd`
 echo "os:   "`lsb_release -a`
@@ -20,15 +17,6 @@ echo "----------------------------------------------"
 echo "env"
 env | sort -u
 echo "----------------------------------------------"
-echo " ----> PATH: $PATH"
-echo
-
-# this is where we start our work
-export BASEDIR=`pwd`
-echo "\
-tar fzx penv.tgz"
-tar fzx penv.tgz
-ls -lhrt
 
 export tag="$1"
 export hash="$2"
@@ -41,16 +29,27 @@ export gen="$8"
 export coll="$9"
 
 # derived variables
-export outputFile=DST_${pwg}_${gen}_${coll}_${fid}_${nskip}_${nevts}.root # DST_SIDIS_pythia6_ep_18x100lowq2_009_1998000_02000.root
-export outputPath=${tag}/${hash}/${pwg}/${gen}/${coll}                    # ana.14/5f210c7/SIDIS/pythia6/ep_18x100lowq2
+export outputFile=DST_${pwg}_${gen}_${coll}_${fid}_${nskip}_${nevts}.root
+#                 DST_SIDIS_pythia6_ep_18x100lowq2_009_1998000_02000.root
+export outputPath=${tag}/${hash}/${pwg}/${gen}/${coll}
+#                 ana.14/5f210c7/SIDIS/pythia6/ep_18x100lowq2
 
-# download input file
-./productions/extras/download.sh $inputFile
+# this is where we start our work
+export BASEDIR=`pwd`
+echo " Untar our software: \
+tar fzx penv_${tag}_${hash}.tgz"
+tar fzx penv_${tag}_${hash}.tgz
+ls -lhrt
+
+# download input file (make sure to rename the input)
+./productions/bin/download.sh $inputFile
+inputFile=/tmp/`basename $inputFile`
 
 # Run the simulation
 mv productions/extras/* macros/detectors/EICDetector
 cd macros/detectors/EICDetector
 mkdir -p ${outputPath}/eval
+
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $tag
 export ROOT_INCLUDE_PATH=$(pwd)/../../common:$ROOT_INCLUDE_PATH
 metaDataFile=${outputPath}/${outputFile}.txt
@@ -100,15 +99,18 @@ echo " START DST -- "`date +%s`
 echo " #### running \
 root.exe -q -b Fun4All_G4_EICDetector.C\($((10#$nevts)),\"$inputFile\",\"$outputFile\",\"\",$((10#$nskip)),\"$outputPath\"\)"
 root.exe -q -b Fun4All_G4_EICDetector.C\($((10#$nevts)),\"$inputFile\",\"$outputFile\",\"\",$((10#$nskip)),\"$outputPath\"\) | tee ${tmpLogFile}
-$((10#$machinenumber))
 rc_dst=$?
 echo " rc for dst: $rc_dst"
 echo " END DST -- "`date +%s`
 
+echo " Directory content after DST run:"
+ls -lhrt $outputPath
+
 # Do some basic error handling here: is this failed we need to abort! Continuing might cause broken files on all levels.
-if [ ".$rc_dst" != ".0" ]
+if [ ".$rc_dst" != ".0" ] || ! [ -e "$outputPath/$outputFile" ] 
 then
   echo " DST production failed. EXIT here, no file copy will be initiated!"
+  ls -lhrt $outputPath
   exit $rc_dst
 fi
 
@@ -128,8 +130,12 @@ echo " #### running \
 root.exe -q -b Fun4All_runEvaluators.C\(0,\"$outputFile\",\"$outputPath\",0,\"$outputPath\"\)"
 root.exe -q -b Fun4All_runEvaluators.C\(0,\"$outputFile\",\"$outputPath\",0,\"$outputPath\"\)
 rc_eval=$?
+
 echo " rc for eval: $rc_eval"
-echo" END EVAL -- "`date +%s`
+echo " END EVAL -- "`date +%s`
+
+echo " Directory content after EVAL run:"
+ls -lhrt
 
 # Do some more error handling here.
 if [ ".$rc_eval" != ".0" ]
@@ -146,23 +152,22 @@ find ${outputPath}
 echo ":::::::::::::::::::::::::::::::::::::::::::::"
 
 # Moving the output to the base directory
+ls -lhrt
 mv `echo ${outputPath} | cut -d/ -f1` ../../../
 pwd
-chmod 750 copy_to_T2.sh
-cp copy_to_T2.sh ../../../
+echo " 'cd' back to base"
 cd ../../../
 pwd
 
-
 # Copy files to final storage destination.
 
-# Write outputs to MIT T2
+# Write outputs to MIT S3
 echo "----------------------------------------------"
 echo "files:"
 ls -ltr 
-
 outputRelPathTopDirName=$(echo "${outputPath}" | cut -d "/" -f1)
-./copy_to_T2.sh ${outputRelPathTopDirName} ""
+chmod 750 ./productions/bin/copy_to_S3.sh
+./productions/bin/copy_to_S3.sh ${outputRelPathTopDirName} ""
 
 echo "----------------------------------------------"
 echo "removing all files created"
