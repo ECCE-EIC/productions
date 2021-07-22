@@ -117,6 +117,11 @@ def getMacrosRepo():
     print(cmd)
     os.system(cmd)
 
+  # Create tarball of macros directory
+  os.chdir(steering.simulationsDir)
+  cmd = 'tar czf %s.tgz macros' % os.path.basename(steering.simulationsDir)
+  print(cmd)
+  os.system(cmd)
 
 def setupJob():
   arguments = "{} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
