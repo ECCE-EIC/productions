@@ -1,5 +1,5 @@
 import configurations as config
-import sys, os
+import sys, os, glob, shutil
 
 
 nArgs = len(sys.argv)
@@ -106,16 +106,23 @@ def getMacrosRepo():
   os.system("git checkout {}".format(config.macrosVersion[steering.macrosTag]))
   
   # Copy all files from productions/extras into the macros directory
+  # Take care not to overwrite any files. In particular the Fun4All_runEvaluators.C
+  # file exists in both places. We always keep the on in macros.
   extrasDir = steering.submissionTopDir + '/extras'
   os.chmod("{}/changeStrings.sh".format(extrasDir), 0o744)
   os.chmod("{}/setupFun4All_G4_EICDetector.sh".format(extrasDir), 0o744)
   os.chmod("{}/setupPionGun.sh".format(extrasDir), 0o744)
   os.chmod("{}/run_EIC_production.sh".format(extrasDir), 0o744)
   os.chmod("{}/setupElectronGun.sh".format(extrasDir), 0o744)
+  destDir = os.getcwd() + '/detectors/EICDetector'
   if os.path.isdir(extrasDir):
-    cmd = 'cp %s/* %s' % (extrasDir, os.getcwd() + '/detectors/EICDetector')
-    print(cmd)
-    os.system(cmd)
+    for f in glob.glob( '%s/*' % extrasDir ):
+      destFile = os.path.join(destDir, os.path.basename(f))
+      if not os.path.exists( destFile ):
+        print('copying %s  ->  %s' % (f,destFile))
+        shutil.copy( f, destFile )
+      else:
+        print('skipping copy of %s since it would overwrite file already in macros directory' % os.path.basename(f) )
 
   # Create tarball of macros directory
   os.chdir(steering.simulationsDir)
