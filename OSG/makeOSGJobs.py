@@ -24,7 +24,8 @@ from ROOT import TFile, TObjString
 # This is used to map the full path file names in the list of
 # generated files that are on the BNL system to paths on the
 # JLab system.
-generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpool/eic'}
+generatedDirNameMap = {	'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpool/eic',
+								'/work/osgpool/eic'   :'root://sci-xrootd.jlab.org//osgpool/eic'}
 
 nArgs = len(sys.argv)
 if nArgs != 13:
