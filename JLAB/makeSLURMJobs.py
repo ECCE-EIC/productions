@@ -12,7 +12,7 @@
 #
 
 import math
-import sys, os, getpass
+import sys, os, getpass, glob
 from os import environ
 from ROOT import TFile, TObjString
 
@@ -47,6 +47,7 @@ class pars:
   submitPath = sys.argv[6]
   macrosPath = sys.argv[7]
   macrosTopDir = os.path.abspath( macrosPath + '/../..')
+  macrosTarBall = glob.glob(macrosTopDir + '*.tgz')[0]  # assume setupProduction.py made one (and only one) tarball
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
@@ -174,7 +175,8 @@ def makeSLURMJob():
             slurmFile.write("printf \"cwd: \"; /bin/pwd\n")
             slurmFile.write("\n")
             slurmFile.write("# Copy entire macros directory to local disk\n")
-            slurmFile.write("cp -rp " + pars.macrosTopDir + " .\n")
+            slurmFile.write("cp -rp " + pars.macrosTarBall + " .\n")
+            slurmFile.write("tar xzf macros*.tgz\n")
             slurmFile.write("cd macros/detectors/EICDetector\n")
             slurmFile.write("\n")
             slurmFile.write("singularity exec --no-home -B /cvmfs:/cvmfs ${SIMG} ${SCRIPT} " + argument + "\n")

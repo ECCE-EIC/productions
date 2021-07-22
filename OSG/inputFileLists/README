@@ -1,0 +1,23 @@
+
+The files listed in these files have been changed to point
+to copies that were placed on the xrootd server at JLab. 
+This allows access from OSG jobs and also insulates them
+from accidental changes in individual user working directories.
+
+A map of the original locations and new locations is given
+here.
+
+
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_10_100_q2_100_evt.root  -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-10x100/Djangoh/erhic-nc-yesradiation_ep_10_100_q2_100_evt.root
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_10_100_q2_10_evt.root   -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-10x100/Djangoh/erhic-nc-yesradiation_ep_10_100_q2_10_evt.root
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_10_100_q2_2_evt.root    -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-10x100/Djangoh/erhic-nc-yesradiation_ep_10_100_q2_2_evt.root
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_10_100_q2_500_evt.root  -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-10x100/Djangoh/erhic-nc-yesradiation_ep_10_100_q2_500_evt.root
+/work/eic/users/xiaochao/June2021_production/erhic-cc-yesradiation_ep_18_275_m80_evt.root    -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/Djangoh/erhic-cc-yesradiation_ep_18_275_m80_evt.root
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_18_275_q2_1000_evt.root -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/Djangoh/erhic-nc-yesradiation_ep_18_275_q2_1000_evt.root
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_18_275_q2_100_evt.root  -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/Djangoh/erhic-nc-yesradiation_ep_18_275_q2_100_evt.root
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_18_275_q2_10_evt.root   -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/Djangoh/erhic-nc-yesradiation_ep_18_275_q2_10_evt.root
+/work/eic/users/shimizu/djangoh/June2021Sim/erhic-nc-yesradiation_ep_18_275_q2_2_evt.root    -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/Djangoh/erhic-nc-yesradiation_ep_18_275_q2_2_evt.root
+/sphenix/u/zhangjl2/user/eic_output/LQGENEP/LQGENEP_output_18x275_Qsq1000_x0.001_1M.root     -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/LQGENEP/LQGENEP_output_18x275_Qsq1000_x0.001_1M.root
+/sphenix/u/zhangjl2/user/eic_output/LQGENEP/LQGENEP_output_18x275_Qsq100_x0.001_1M.root      -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/LQGENEP/LQGENEP_output_18x275_Qsq100_x0.001_1M.root
+/sphenix/u/zhangjl2/user/eic_output/LQGENEP/LQGENEP_output_18x275_Qsq10_x0.001_1M.root       -> /work/osgpool/eic/ECCE/ProductionInputs/Electroweak/ep-18x275/LQGENEP/LQGENEP_output_18x275_Qsq10_x0.001_1M.root
+
