@@ -61,8 +61,12 @@ export outputPath=${5}
 #source /cvmfs/eic.opensciencegrid.org/ecce/default/opt/fun4all/core/bin/ecce_setup.sh -n new.2
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n new.3
 
+# Unpack the macros tarball.
+# This will be named something like macros_tag_prop.2.1-production.tgz 
+# but will unpack to just "macros".
+tar xzf macros*.tgz
+
 # Run the specified script (e.g. run_EIC_production.sh)
-mv productions/extras/* macros/detectors/EICDetector  # mv run_EIC_production.sh, writeMetaData.C into the macros working directory
 cd macros/detectors/EICDetector
 mkdir -p ${outputPath}/eval
 echo ./${script_name} "$@"
