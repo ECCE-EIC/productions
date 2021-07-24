@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#
+#
+#  python3 plot_Njobs_vs_time.py > Njobs_vs_time.C
+#
 
 import os, sys, math
 import pytz
@@ -6,8 +10,8 @@ from dateutil import parser
 
 #logdir = '/w/eic-sciwork18/users/davidl/2021.06.17.test_campaign/productions/submissionFiles/SIDIS/pythia6/ep_18x100/osgJobs/log'
 #logdir = '/work/eic2/ECCE/MC/new/9daf451/SIDIS/pythia6+ep_18x100/log'
-logdir = '/work/eic2/ECCE/MC/ana.14/5f210c7/SIDIS/pythia6/ep_18x100highq2/log'
-#logdir = '/w/eic-sciwork18/users/davidl/2021.06.29.ecce_SIDIS_sample_campaign/productions/submissionFiles/SIDIS/pythia6/ep_18x100highq2/osgJobs/log'
+#logdir = '/work/eic2/ECCE/MC/ana.14/5f210c7/SIDIS/pythia6/ep_18x100highq2/log'
+logdir = '/work/eic2/ECCE/MC/prop.2/c131177/Electroweak/Djangoh/ep-10x100nc-q2-100/log'
 
 # Find all files ending in ".out" in the specified directory 
 # tree. Find the "Start time:" and "End time:" strings for each
