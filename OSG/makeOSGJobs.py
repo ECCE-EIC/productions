@@ -199,7 +199,7 @@ def makeOSGJob():
             osgFile.write("queue 1\n")
             osgFile.close()
 
-            submitScript.write("condor_submit {}\n".format(osgFileName))
+            submitScript.write("condor_submit {}/{}\n".format(osgDir, osgFileName))
 
             nJobs += 1
        if nEvents >= pars.nTotalEvents: 
