@@ -44,13 +44,18 @@ submitParametersFile = '/path/to/submitParameters.dat'
 if len(sys.argv) > 1:
 	submitParametersFile = sys.argv[1]
 else:
-	tmp = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
-	if len(tmp) > 1:
+	if os.path.exists('./submissionFiles'):
+		tmp = glob.glob('./submissionFiles/*/*/*/*/submitParameters.dat')
+	else:
+		tmp = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
+	if len(tmp) > 0:
 		submitParametersFile = tmp[0]
 
 if not os.path.exists( submitParametersFile ):
 	print( 'No file: ' + submitParametersFile )
 	sys.exit()
+
+print('Reading campaign parameters from:' + submitParametersFile)
 f = open( submitParametersFile )
 for line in f.readlines():
 	if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
