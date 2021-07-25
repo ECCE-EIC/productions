@@ -9,9 +9,26 @@
 # opened and a "T" tree that has the expected number of 
 # entries.
 #
-# Run this by passing the name of the submitParameters.dat file:
+# For this to work it needs to know the locations of the
+# submit scripts, DST files, logfiles, and the number of
+# events per job. The JLAB/makeSLURMJobs.py and
+# OSG/makeOSGJobs.py automaticaly create a file named
+# submitParameters.dat in the directory where they place
+# the submissions scripts. This file has a format of e.g.:
 #
-#  ./campaignStatus.py ../submissionFiles/*/*/*/*/submitParmaeters.dat
+#  SUBMITDIR=/work/eic2/ECCE/PRODUCTION/2021.07.21.Electroweak_Djangoh_ep-10x100nc-q2-10/productions/submissionFiles/Electroweak/Djangoh/ep-10x100nc-q2-10/osgJobs
+#  LOGDIR=/work/eic2/ECCE/PRODUCTION/2021.07.21.Electroweak_Djangoh_ep-10x100nc-q2-10/productions/submissionFiles/Electroweak/Djangoh/ep-10x100nc-q2-10/osgJobs/log
+#  DSTDIR=/work/eic2/ECCE/MC/prop.2/c131177/Electroweak/Djangoh/ep-10x100nc-q2-10
+#  EVENTS_PER_JOB=1000
+#
+# Run this with no arguments or by passing the name of the
+# submitParameters.dat file:
+#
+#  ./campaignStatus.py
+#
+#         or
+#
+#  ./campaignStatus.py ../submissionFiles/*/*/*/*/submitParameters.dat
 #
 
 import os, sys, glob
@@ -21,23 +38,25 @@ SUBMITDIR      = ''
 LOGDIR         = ''
 DSTDIR         = ''
 EVENTS_PER_JOB = 1
-#SUBMITDIR = '/work/eic2/ECCE/PRODUCTION/2021.07.21.Electroweak_Djangoh_ep-10x100nc-q2-10/productions/submissionFiles/Electroweak/Djangoh/ep-10x100nc-q2-10/osgJobs'
-#LOGDIR = '/work/eic2/ECCE/PRODUCTION/2021.07.21.Electroweak_Djangoh_ep-10x100nc-q2-10/productions/submissionFiles/Electroweak/Djangoh/ep-10x100nc-q2-10/osgJobs/log'
-#DSTDIR = '/work/eic2/ECCE/MC/prop.2/c131177/Electroweak/Djangoh/ep-10x100nc-q2-10'
-#EVENTS_PER_JOB = 1000
 
-# Read submit parameters from file if given as argument
+# Read submit parameters from file
+submitParametersFile = '/path/to/submitParameters.dat'
 if len(sys.argv) > 1:
 	submitParametersFile = sys.argv[1]
-	if not os.path.exists( submitParametersFile ):
-		print( 'No file: ' + submitParametersFile )
-		sys.exit()
-	f = open( submitParametersFile )
-	for line in f.readlines():
-		if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
-		if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
-		if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
-		if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
+else:
+	tmp = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
+	if len(tmp) > 1:
+		submitParametersFile = tmp[0]
+
+if not os.path.exists( submitParametersFile ):
+	print( 'No file: ' + submitParametersFile )
+	sys.exit()
+f = open( submitParametersFile )
+for line in f.readlines():
+	if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
+	if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
+	if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
+	if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
 
 #----------------------------------------------------------
 
@@ -78,7 +97,7 @@ for i,fsubmit in enumerate(submit_fnames):
         N_DST_SUBMITTED += 1
         try:
             f = uproot.open( froot_fullpath )
-            if f['T'].fEntries == EVENTS_PER_JOB:
+            if f['T'].fEntries == int(EVENTS_PER_JOB):
                 N_DST_GOOD += 1
                 GOOD_DST += [froot_fullpath]
             else:
@@ -136,6 +155,7 @@ status_mess += ['     N_DST_TOTAL: %4d  - Num. DST files found (good or not)' % 
 status_mess += [' N_DST_SUBMITTED: %4d  - Num. DST files found  (good or not) that have submit script' % N_DST_SUBMITTED ]
 status_mess += ['      N_DST_GOOD: %4d  - Num. DST files that are good and have submit file' % N_DST_GOOD ]
 status_mess += ['N_DST_BAD_EVENTS: %4d  - Num. DST files that have the wrong number of events' % N_TIMEOUT ]
+status_mess += ['   N_DST_MISSING: %4d  - Num. DST files that are missing' % len(MISSING_DST_SUBMIT) ]
 status_mess += ['       N_TIMEOUT: %4d  - Num. log files showing timeout (bad or missing DST files only)' % N_TIMEOUT ]
 
 N_DST_BAD_EVENTS
