@@ -1,0 +1,6 @@
+nightly prop.2
+tag prop.2.1-production
+PWG Electroweak 
+generator LQGENEP 
+collision ep-18x275-q2-100 
+nTotalEvents 1000000

@@ -1,6 +1,0 @@
-nightly prop1
-tag prop1
-PWG General
-generator particleGun
-collision singlePion
-nTotalEvents 5000000
