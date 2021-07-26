@@ -4,7 +4,6 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-
 nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13']
 
 #macros tags
