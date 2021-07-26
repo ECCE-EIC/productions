@@ -4,11 +4,8 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-<<<<<<< HEAD
-nightlyBuild = ['prop1', 'ana.8', 'ana.13', 'prop2']
-=======
+
 nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13']
->>>>>>> master
 
 #macros tags
 macrosVersion = {
