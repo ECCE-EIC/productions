@@ -1,4 +1,16 @@
 #!/bin/bash
+#
+# This ia a variant of the run_EIC_production.sh script
+# that can be run by users for non-production level
+# simulation campaigns.
+#
+# This is currently used by jobs created using the
+# JLab/makeSLURMJobsUser.py script.
+#
+# usage:
+#
+#  run_EIC_user.sh Nevents inputFile outputFile Nskip outputDir
+#
 
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $6
 
@@ -14,14 +26,7 @@ t=`date +%H:%M`
 cat << EOF | tee ${metaDataFile}
 ====== Your production details ======
 Production started: ${d} ${t}
-Production site: $9
 Production Host: ${HOSTNAME}
-ECCE build: $6
-ECCE macros branch: ${12}
-ECCE macros hash: $8
-PWG: $7
-Generator: ${10} 
-Collision type: ${11}
 Input file: $2
 Output file: $3
 Output dir: $5
@@ -34,18 +39,6 @@ echo "Disabling evaluators and enabling DST readout"
 ./setupFun4All_G4_EICDetector.sh
 ./setupFun4All_G4_EICDetector.sh
 
-if [ "${11}" = "singlePion" ]
-then
-  echo "Setting up pion gun"
-  ./setupPionGun.sh
-  ./setupPionGun.sh
-fi
-if [ "${11}" = "singleElectron" ]
-then
-  echo "Setting up electron gun"
-  ./setupElectronGun.sh
-  ./setupElectronGun.sh
-fi
 
 # Run Fun4all. Send output to stdout but also capture to temporary local file
 echo running root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
@@ -63,7 +56,7 @@ echo md5sum: >> ${metaDataFile}
 md5sum ${5}/${3} | awk '{print $1}' >> ${metaDataFile}
 
 echo "DST has been created"
-#echo "Now producing evaluators"
+echo "Now producing evaluators"
 
 root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
 

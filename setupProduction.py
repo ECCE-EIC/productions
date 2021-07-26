@@ -20,7 +20,8 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-  productionTopDir = '/work/eic/users/billlee/2021.06.17.test_campaign'
+#  productionTopDir = '/work/eic/users/billlee/2021.06.17.test_campaign'
+  productionTopDir = '/work/eic/users/billlee/2021.07.21.test_campaign'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
 #  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
@@ -37,7 +38,7 @@ if steering.site not in config.sites:
   sys.exit()
 
 if steering.site == "BNL":
-  steering.productionTopDir = '/eic/data/ctdean/ECCE/simulationProductions'
+  steering.productionTopDir = '/gpfs02/eic/DATA/ECCE//simulationProductions'
   steering.simulationsDir = steering.productionTopDir
 
 if steering.site == "OSG@BNL":
@@ -101,7 +102,8 @@ def getMacrosRepo():
   if not os.path.isdir("{}/macros".format(steering.simulationsDir)):
     os.system("git clone {}".format(steering.macrosRepo))
   os.chdir("macros")
-  os.system("git checkout -b {}".format(steering.macrosBranch))
+  if steering.macrosBranch != "master":
+    os.system("git checkout -b {}".format(steering.macrosBranch))
   os.system("git branch --set-upstream-to=origin/{0} {0}".format(steering.macrosBranch))
   os.system("git config --local advice.detachedHead false")
   os.system("git checkout {}".format(config.macrosVersion[steering.macrosTag]))
