@@ -1,0 +1,6 @@
+nightly new
+tag Diff_Tagg_Sim_July_03_2021
+PWG DiffractiveAndTagging
+generator DEMP
+collision u_channel_pi0
+nTotalEvents 20000

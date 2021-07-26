@@ -1,0 +1,6 @@
+nightly new
+tag Diff_Tagg_Sim_July_03_2021_eA_110GeV_IP8
+PWG DiffractiveAndTagging
+generator BeAGLE
+collision ePb_diffractive
+nTotalEvents 20000

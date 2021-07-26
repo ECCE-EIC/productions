@@ -1,0 +1,6 @@
+nightly prop2
+tag Diff_Tagg_Sim_July_14_2021_41GeV
+PWG DiffractiveAndTagging
+generator DEMP
+collision KSigma
+nTotalEvents 20000
