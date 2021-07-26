@@ -17,14 +17,15 @@
 #
 
 import math
-import sys, os, subprocess
+import sys, os, subprocess, glob
 from os import environ
 from ROOT import TFile, TObjString
 
 # This is used to map the full path file names in the list of
 # generated files that are on the BNL system to paths on the
 # JLab system.
-generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpool/eic'}
+generatedDirNameMap = {	'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgpool/eic',
+								'/work/osgpool/eic'   :'root://sci-xrootd.jlab.org//osgpool/eic'}
 
 nArgs = len(sys.argv)
 if nArgs != 13:
@@ -43,8 +44,8 @@ myShell='/bin/bash'
 
 class pars:
   #simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
-  simulationsTopDir = 'S3://eictest/ECCE/MC'
-  #simulationsTopDir = '/work/eic2/ECCE/MC'
+  #simulationsTopDir = 'S3://eictest/ECCE/MC'
+  simulationsTopDir = '/work/eic2/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -53,6 +54,7 @@ class pars:
   submitPath = sys.argv[6]
   macrosPath = sys.argv[7]
   macrosTopDir = os.path.abspath( macrosPath + '/../..')
+  macrosTarball = glob.glob(macrosTopDir + '*.tgz')[0]  # assume setupProduction.py made one (and only one) tarball
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
@@ -71,11 +73,23 @@ def getNumEvtsInFile(theFile):
 def makeOSGJob():
     print("Creating OSG condor submission files for {} production".format(pars.thisWorkingGroup))
 
+    # If writing to S3 then make sure the copy_to_s3.py script exists
+    if pars.simulationsTopDir.startswith('S3://'):
+        if not os.path.exists('copy_to_S3.py'):
+            print('\nERROR: ==========================================================')
+            print('pars.simulationsTopDir specifies writing to S3 but the')
+            print('copy_to_S3.py script does not exist in the current directory!')
+            print('Make sure the file exists here and has been modified to')
+            print('include an accessKey and secretKey with write privileges.')
+            print('==================================================================\n')
+            sys.exit()
+
     #Find and open the pars.thisWorkingGroup list of input event files
-    inputFileList = "{}/inputFileLists/eic-smear_{}_{}_{}.list".format(pars.prodTopDir,
-                                                                       pars.thisWorkingGroup,
-                                                                       pars.thisGenerator,
-                                                                       pars.thisCollision)
+    inputFileList = "{}/{}/inputFileLists/{}_{}_{}.list".format(pars.prodTopDir, 
+                                                                pars.prodSite,
+                                                                pars.thisWorkingGroup, 
+                                                                pars.thisGenerator, 
+                                                                pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
     for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
@@ -102,7 +116,7 @@ def makeOSGJob():
     outputPath = "{}/{}".format(pars.simulationsTopDir, outputRelPath)
 
     # Log files must always be local
-    outputLogPath  = osgDir + "/log"
+    outputLogPath  = outputPath + "/log"
     os.makedirs(outputLogPath, exist_ok=True)
 
     # Print input/output info
@@ -151,6 +165,10 @@ def makeOSGJob():
             osgFileName = "osgJob_{}.job".format(fileTag)
 
             osgFile = open("{0}/{1}".format(osgDir, osgFileName), "w")
+            
+            transfer_input_files = pars.macrosTarball + "," + pars.prodTopDir
+            if pars.simulationsTopDir.startswith('S3://'):
+                transfer_input_files += ',copy_to_S3.py'
 
             osgFile.write("\n")
             osgFile.write("executable     = " + pars.prodTopDir + "/OSG/ecce_osg.sh\n")
@@ -160,7 +178,7 @@ def makeOSGJob():
             osgFile.write("request_disk   = 3 GB\n")
             osgFile.write("\n")
             osgFile.write("should_transfer_files  = YES\n")
-            osgFile.write("transfer_input_files   = copy_to_S3.py," + pars.macrosTopDir + "," + pars.prodTopDir + "\n")
+            osgFile.write("transfer_input_files   = " + transfer_input_files + "\n")
             if outputPath.startswith('/'):
                 osgFile.write("transfer_output_files  = %s\n" % outputRelPathTopDirName)
                 osgFile.write("transfer_output_remaps = \"%s=%s\"\n" % (outputRelPathTopDirName, os.path.join(pars.simulationsTopDir,outputRelPathTopDirName)))
@@ -181,7 +199,7 @@ def makeOSGJob():
             osgFile.write("queue 1\n")
             osgFile.close()
 
-            submitScript.write("condor_submit {}\n".format(osgFileName))
+            submitScript.write("condor_submit {}/{}\n".format(osgDir, osgFileName))
 
             nJobs += 1
        if nEvents >= pars.nTotalEvents: 

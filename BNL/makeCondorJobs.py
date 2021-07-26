@@ -18,7 +18,7 @@ if myShell not in goodShells:
 
 
 class pars:
-  simulationsTopDir = '/gpfs02/eic/DATA/ECCE/MC'
+  simulationsTopDir = '/gpfs/mnt/gpfs02/eic/DATA/ECCE_Productions/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -41,20 +41,15 @@ def getNumEvtsInFile(theFile):
 def makeCondorJob():
     print("Creating condor submission files for {} production".format(pars.thisWorkingGroup))
     #Find and open the pars.thisWorkingGroup list of input event files
-    inputFileList = "{}/inputFileLists/eic-smear_{}_{}_{}.list".format(pars.prodTopDir, 
-                                                                       pars.thisWorkingGroup, 
-                                                                       pars.thisGenerator, 
-                                                                       pars.thisCollision)
+    inputFileList = "{}/{}/inputFileLists/{}_{}_{}.list".format(pars.prodTopDir, 
+                                                                pars.prodSite,
+                                                                pars.thisWorkingGroup, 
+                                                                pars.thisGenerator, 
+                                                                pars.thisCollision)
     infile = open(inputFileList, "r")
     line = infile.readline()
     #Get the current working directory to write submissions and logs to
     myOutputPath = pars.submitPath #os.getcwd()
-    condorDir = "{}/condorJobs".format(myOutputPath)
-    os.makedirs("{}/log".format(condorDir), exist_ok=True)
-    submitScriptName = "{}/submitJobs.sh".format(condorDir)
-    submitScript = open("{}".format(submitScriptName), "w")
-    os.chmod(submitScriptName, 0o744)
-    submitScript.write("#!{}\n".format(myShell))
     #Now make output directory
     outputPath = "{}/{}/{}/{}/{}/{}".format(pars.simulationsTopDir, 
                                             pars.build,
@@ -63,6 +58,13 @@ def makeCondorJob():
                                             pars.thisGenerator, 
                                             pars.thisCollision)
     os.makedirs(outputPath, exist_ok=True)
+    #condorDir = "{}/condorJobs".format(myOutputPath)
+    condorDir = "{}/condorJobs".format(outputPath)
+    os.makedirs("{}/log".format(condorDir), exist_ok=True)
+    submitScriptName = "{}/submitJobs.sh".format(condorDir)
+    submitScript = open("{}".format(submitScriptName), "w")
+    os.chmod(submitScriptName, 0o744)
+    submitScript.write("#!{}\n".format(myShell))
     #Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
@@ -72,7 +74,8 @@ def makeCondorJob():
     nEvents = 0
     while line:
        inputFile = line.replace("\n", "")
-       if pars.thisGenerator != "particleGun":
+       fun4allGenerators = ['particleGun', 'pythia8']
+       if pars.thisGenerator not in fun4allGenerators:
          nEventsInFile = getNumEvtsInFile(inputFile)
        else:
          nEventsInFile = pars.nTotalEvents
@@ -134,7 +137,7 @@ def makeCondorJob():
        fileNumber += 1
        line = infile.readline()
 
-    print("Condor submission files have been written to:\n{}/condorJobs".format(myOutputPath))
+    print("Condor submission files have been written to:\n{}".format(condorDir))
     print("This setup will submit {} jobs".format(nJobs))
     print("You can submit your jobs with the script:\n{}".format(submitScriptName))
 

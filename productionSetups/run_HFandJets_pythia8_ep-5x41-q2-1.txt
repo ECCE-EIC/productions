@@ -1,0 +1,6 @@
+nightly prop.2
+tag prop.2.1-production-pythia8
+PWG HFandJets 
+generator pythia8
+collision ep-5x41-q2-1
+nTotalEvents 5000000

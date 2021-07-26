@@ -30,26 +30,20 @@ Skip: $4
 =====================================
 EOF
 
-echo "Disabling evaluators and enabling DST readout"
-./setupFun4All_G4_EICDetector.sh
-./setupFun4All_G4_EICDetector.sh
-
-if [ "${11}" = "singlePion" ]
-then
-  echo "Setting up pion gun"
-  ./setupPionGun.sh
-  ./setupPionGun.sh
-fi
-if [ "${11}" = "singleElectron" ]
-then
-  echo "Setting up electron gun"
-  ./setupElectronGun.sh
-  ./setupElectronGun.sh
-fi
-
 # Run Fun4all. Send output to stdout but also capture to temporary local file
 echo running root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
 root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\) | tee ${tmpLogFile}
+
+rc_dst=$?
+echo " rc for dst: $rc_dst"
+
+# Do some basic error handling here: is this failed we need to abort! Continuing might cause broken files on all levels.
+if [ ".$rc_dst" != ".0" ] || ! [ -e "$outputPath/$outputFile" ] 
+then
+  echo " DST production failed. EXIT here, no file copy will be initiated!"
+  ls -lhrt $outputPath
+  exit $rc_dst
+fi
 
 # Scan stdout of Fun4all for random number seeds and add to metadata file
 echo production script finished, writing metadata
@@ -66,5 +60,16 @@ echo "DST has been created"
 #echo "Now producing evaluators"
 
 #root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
+
+rc_eval=$?
+echo " rc for eval: $rc_eval"
+# Do some more error handling here.
+if [ ".$rc_eval" != ".0" ]
+then
+  echo " EVAL production failed. Delete the potentially broken or incomplete EVAL files."
+  echo " --> but keeping the DST and continue to copy."
+  evalFileHeader=$(echo $3 | sed 's/.root//')
+  rm -rf ${outputPath}/eval_*/${evalFileHeader}*
+fi
 
 echo "script done"
