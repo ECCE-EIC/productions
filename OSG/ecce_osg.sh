@@ -68,7 +68,6 @@ tar xzf macros*.tgz
 
 # Run the specified script (e.g. run_EIC_production.sh)
 cd macros/detectors/EICDetector
-mkdir -p ${outputPath}/eval
 echo ./${script_name} "$@"
 ./${script_name} "$@"
 
