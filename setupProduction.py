@@ -20,13 +20,11 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-<<<<<<< HEAD
-#  productionTopDir = '/work/eic/users/billlee/2021.06.17.test_campaign'
-  productionTopDir = '/work/eic/users/billlee/2021.07.21.test_campaign'
-=======
 
-  productionTopDir = '/work/eic/users/billlee/2021.06.17.test_campaign'
->>>>>>> master
+#  productionTopDir = '/work_eic/users/billlee/2021.06.17.test_campaign'
+#  productionTopDir = '/work_eic/users/billlee/2021.07.21.test_campaign'
+  productionTopDir = '/work_eic/users/billlee/2021.08.03.test_campaign'
+
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
 #  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
@@ -134,8 +132,11 @@ def getMacrosRepo():
     for f in glob.glob( '%s/*' % extrasDir ):
       destFile = os.path.join(destDir, os.path.basename(f))
       if not os.path.exists( destFile ):
-        print('copying %s  ->  %s' % (f,destFile))
-        shutil.copy( f, destFile )
+        if not os.path.isdir(f):
+        	print('copying %s  ->  %s' % (f,destFile))
+        	shutil.copy( f, destFile )
+        else:
+        	shutil.copytree( f, destFile )
       else:
         print('skipping copy of %s since it would overwrite file already in macros directory' % os.path.basename(f) )
 
