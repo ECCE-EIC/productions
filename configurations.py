@@ -32,23 +32,27 @@ macrosVersion = {
   "prop.2.1-production-DiffractiveAndTagging_IP8-r3" : "Diff_Tagg_IP8_08.03.21",
   "prop.2.1-production-DiffractiveAndTagging-r3" : "Diff_Tagg_IP6_08.03.21",
   "prop.2.1-production-DiffractiveAndTagging-41GeV-r3" : "Diff_Tagg_IP6_41GeV_08.03.21",
-  "prop.2.1-production-DiffractiveAndTagging-100GeV-r3" : "Diff_Tagg_IP6_100GeV_08.03.21"
+  "prop.2.1-production-DiffractiveAndTagging-100GeV-r3" : "Diff_Tagg_IP6_100GeV_08.03.21",
+# r4
+  "prop.2.1-production-DiffractiveAndTagging_IP8-r4" : "Diff_Tagg_IP8_08.14.21",
+  "prop.2.1-production-DiffractiveAndTagging-r4" : "Diff_Tagg_IP6_08.14.21",
+  "prop.2.1-production-DiffractiveAndTagging-41GeV-r4" : "Diff_Tagg_IP6_41GeV_08.14.21",
+  "prop.2.1-production-DiffractiveAndTagging-100GeV-r4" : "Diff_Tagg_IP6_100GeV_08.14.21"
 
 }
-
 
 #PWGs
 ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'ExclusiveReactions', 'HFandJets', 'Inclusive', 'SIDIS', 'Spectroscopy']
 
 #Generators
-ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro', 'LQGENEP', 'DEMP', "EIC_mesonMC"]
+ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro', 'LQGENEP', 'DEMP', "EIC_mesonMC", 'CLASDIS']
 
 #Collision type
 ecceCollision = ['singlePion', 'singleElectron', 'ep-5x100', 'ep-10x100', 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 'ep-18x275cc',
                  'ep-10x100nc-q2-500', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-2', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 
                  'ep-18x275nc-q2-1000', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-2', 'ep-5x41-q2-1', 'ep-10x100-q2-10']
 
-DiffTaggCollision = ['ep-5x100-pionFF', 'ep-5x41-NeutronSS', 'ep-5x100-upi0', 'ep-5x41-SRC', 'ep-5x100-XYZ', 'ep-10x100-PiStruc', 'ep-5x41-KLambda', 'ep-5x41-KSigma', 'ePb-18x110', 'ePb-18x110-tau10', 'ePb-18x108-JPsi-q2-1-10', 'eZr-18x122-JPsi-q2-1-10']
+DiffTaggCollision = ['ep-5x100-pionFF', 'ep-5x41-NeutronSS', 'ep-5x100-upi0', 'ep-5x41-SRC', 'ep-5x100-XYZ', 'ep-10x100-PiStruc', 'ep-5x41-KLambda', 'ep-5x41-KSigma', 'ePb-18x110', 'ePb-18x110-tau10', 'ePb-18x108-JPsi-q2-1-10', 'eZr-18x122-JPsi-q2-1-10', 'ep-5x100-XYZ-twopi']
 
 ecceCollision.extend(DiffTaggCollision)
 
