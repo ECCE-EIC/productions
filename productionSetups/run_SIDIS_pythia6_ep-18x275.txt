@@ -1,0 +1,6 @@
+nightly prop.2
+tag prop.2.1-production
+PWG SIDIS 
+generator pythia6
+collision ep-18x275
+nTotalEvents 20000000
