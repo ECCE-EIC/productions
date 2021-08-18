@@ -26,7 +26,14 @@ export PATH="${PATH}:/cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/uti
 echo " MINIO: "`which mcs3`
 
 # make sure we are authenticated
-mcs3 config host add S3 https://dtn01.sdcc.bnl.gov:9000/ username secret 
+if ! [ -e "s3secret" ]
+then
+  echo " ERROR -- secret file was not found."
+else
+  echo " -->\
+  mcs3 config host add S3 https://dtn01.sdcc.bnl.gov:9000/ USER SECRET"
+  mcs3 config host add S3 https://dtn01.sdcc.bnl.gov:9000/ `cat s3secret`
+fi
 
 PWD=`pwd`
 for f in `find $outputPath -type f | sed "s#$PWD##"`

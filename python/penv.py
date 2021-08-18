@@ -402,10 +402,6 @@ class Submitter:
 
             cmd = "cd %s; sbatch %s"\
                   %("/".join(self.submitFile.split('/')[:-1]),self.submitFile.split('/')[-1])
-        else:
-            print("\n There are no missing jobs. We are all set.\n")
-
-        return
 
     #-----------------------------------------------------------------------------------------------
     # -- internal --
@@ -509,7 +505,6 @@ class Submitter:
         print(" Total counts   : %d"%(len(request.sample.allLfns)))
 
         return (nMissing,nQueued,nRunning,nRemoved,nCompleted,nHeld)
-
 
     def _writeSubmitFilesSlurm(self,request,verbosity=0):
 
