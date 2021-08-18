@@ -19,6 +19,7 @@ parser.add_option("-c","--collisions",dest="collisions",default='ep_18x100lowq2'
 parser.add_option("-n","--nEvtsPerJob",dest="nEvtsPerJob",default=2000,help="# of Events per simulation job")
 # technical parameters
 parser.add_option("-e","--execute",dest="execute",default=False,action="store_true",help="Execute condor_submit.")
+parser.add_option("-v","--verbosity",dest="verbosity",default=0,help="verbosity of actions")
 parser.add_option("-t","--timing",dest="timing",default=False,action="store_true",help="Find timing for completed.")
 # read them all
 (options, args) = parser.parse_args()
@@ -106,7 +107,8 @@ id = datetime.now().strftime("%Y%m%d_%H%M%S")
 sub = penv.Submitter(id)
 
 # Generate the submission script and submit
-sub.submit(req,options.execute)
+##sub.submit(req,options.execute,options.verbosity)
+sub.submitSlurm(req,options.execute,options.verbosity)
 
 # Logfile analysis
 if options.timing:

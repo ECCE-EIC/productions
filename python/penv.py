@@ -338,7 +338,7 @@ class Submitter:
         self.id = id
         self.submitFile = ""
 
-    def submit(self,request,execute):
+    def submit(self,request,execute,verbosity):
         # make the work directory
         penvTgz = "penv_%s_%s.tgz"%(request.tag,request.hash)
         penvBase = "{}".format(os.getenv('PENV_BASE'))
@@ -352,7 +352,7 @@ class Submitter:
         if not os.path.exists("%s/ecce_simulate.sh"%penvLog):
             os.system("cp %s/bin/ecce_simulate.sh %s"%(penvBase,penvLog))
         self.submitFile = "{}/{}_{}.sub".format(penvLog,request.sample.dataset,self.id)
-        (nMissing,nQueued,nRunning,nRemoved,nCompleted,nHeld) = self._writeSubmitFile(request)
+        (nMissing,nQueued,nRunning,nRemoved,nCompleted,nHeld) = self._writeSubmitFile(request,verbosity)
 
         if (nMissing > 0):
             # now push it into condor
@@ -368,6 +368,45 @@ class Submitter:
 
         return
 
+    def submitSlurm(self,request,execute,verbosity):
+        # make the work directory
+        print(" SLURM submission\n")
+        penvTgz = "penv_%s_%s.tgz"%(request.tag,request.hash)
+        penvBase = "{}".format(os.getenv('PENV_BASE'))
+        penvLog = "{}/{}_{}/{}"\
+            .format(os.getenv('PENV_LOG'),request.tag,request.hash,request.sample.dataset)
+        if not os.path.exists(penvLog):
+            os.makedirs(penvLog)
+        # move the relevant files if they are not already there
+        if not os.path.exists("%s/%s"%(penvLog,penvTgz)):
+            os.system("cp %s/../%s %s"%(penvBase,penvTgz,penvLog))
+        if not os.path.exists("%s/ecce_simulate.sh"%penvLog):
+            os.system("cp %s/bin/ecce_simulate.sh %s"%(penvBase,penvLog))
+        self.submitFile = "{}/{}_{}.ssl".format(penvLog,request.sample.dataset,self.id)
+        (nMissing,nQueued,nRunning,nRemoved,nCompleted,nHeld) = self._writeSubmitFilesSlurm(request,verbosity)
+
+        if (nMissing > 0):
+            # now push it into slurm
+            d = "/".join(self.submitFile.split('/')[:-1])
+            for fileName in os.listdir(d):
+                if fileName.endswith(".ssl"):
+                    cmd = "cd %s; sbatch %s"%(d,fileName)
+                    print(" --> %s"%(cmd))
+                    if execute:
+                        os.system(cmd)
+                    else:
+                        print(" This was just a test run, no jobs were submitted.")
+                else:
+                    continue
+
+
+            cmd = "cd %s; sbatch %s"\
+                  %("/".join(self.submitFile.split('/')[:-1]),self.submitFile.split('/')[-1])
+        else:
+            print("\n There are no missing jobs. We are all set.\n")
+
+        return
+
     #-----------------------------------------------------------------------------------------------
     # -- internal --
     #-----------------------------------------------------------------------------------------------
@@ -377,6 +416,14 @@ class Submitter:
         fileHandle.write("error = {}.err\n".format(lfn))
         fileHandle.write("output = {}.out\n".format(lfn))
         fileHandle.write("queue 1\n\n")
+    
+        return
+
+    def _addJobSlurm(self,fileHandle,lfn,argument):
+        fileHandle.write("#SBATCH --job-name=%s\n".format(lfn))
+        fileHandle.write("#SBATCH --error={}.err\n".format(lfn))
+        fileHandle.write("#SBATCH --output={}.out\n".format(lfn))
+        fileHandle.write("srun ecce_simulate.sh %s\n"%(argument))
     
         return
 
@@ -401,7 +448,13 @@ class Submitter:
     
         return
 
-    def _writeSubmitFile(self,request):
+    def _writeHeaderSlurm(self,fileHandle,request):
+        fileHandle.write("#!/bin/bash\n")
+        fileHandle.write("#SBATCH --ntasks=1\n")
+        fileHandle.write("#SBATCH --time=20:00\n")
+        fileHandle.write("#SBATCH --mem-per-cpu=1500\n")
+
+    def _writeSubmitFile(self,request,verbosity=0):
         print('')
         print(" Submit file: %s"%(self.submitFile))
         with open(self.submitFile,'w') as fH:
@@ -428,6 +481,8 @@ class Submitter:
                            (request.tag,request.hash,inputFile,nskip,nevts,fid, \
                             request.sample.physicsGroup,request.sample.generator, \
                             request.sample.collisions)
+                    if verbosity>0:
+                        print(" Missing: %s"%(lfn))
                     self._addJob(fH,lfn,args)
                     nMissing += 1
                 elif request.sample.allLfns[lfn] == 1:
@@ -440,6 +495,64 @@ class Submitter:
                     nCompleted += 1
                 elif request.sample.allLfns[lfn] == 5:
                     nHeld += 1
+
+        print('')
+        print(" ====  J o b   S u m m a r y  ==== ")
+        print(" Adding to queue: %d"%(nMissing))
+        print(" ----------------")
+        print(" Queued         : %d"%(nQueued))
+        print(" Running        : %d"%(nRunning))
+        print(" Removed        : %d"%(nRemoved))
+        print(" Completed      : %d"%(nCompleted))
+        print(" Held           : %d"%(nHeld))
+        print(" ================")
+        print(" Total counts   : %d"%(len(request.sample.allLfns)))
+
+        return (nMissing,nQueued,nRunning,nRemoved,nCompleted,nHeld)
+
+
+    def _writeSubmitFilesSlurm(self,request,verbosity=0):
+
+        submitDir = "/".join(self.submitFile.split('/')[:-1])
+
+        nMissing = 0
+        nQueued = 0
+        nRunning = 0
+        nRemoved = 0
+        nCompleted = 0
+        nHeld = 0
+        for lfn in sorted(request.sample.allLfns.iterkeys()):
+            if request.sample.allLfns[lfn] == 0:
+                # recover pertinent information from the lfn
+                fid = lfn.split("_")[-3]
+                nskip = lfn.split("_")[-2]
+                nevts = lfn.split("_")[-1]
+                nevts.replace(".root","")
+                inputFile = "%s/%s"%(request.sample.genFiles[int(fid)].location,
+                                     request.sample.genFiles[int(fid)].fileName)
+                # from ecce_simulate.sh:
+                # tag="$1" hash="$2" inputFile="$3" nskip="$4" nevts="$5" fid="$6" pwg="$7"
+                # gen="$8" coll="$9"
+                args = "%s %s %s %s %s %s %s %s %s"%\
+                       (request.tag,request.hash,inputFile,nskip,nevts,fid, \
+                        request.sample.physicsGroup,request.sample.generator, \
+                        request.sample.collisions)
+                if verbosity>0:
+                    print(" Missing: %s"%(lfn))
+                with open("%s/%s.ssl"%(submitDir,lfn),'w') as fH:
+                    self._writeHeaderSlurm(fH,request)
+                    self._addJobSlurm(fH,lfn,args)
+                nMissing += 1
+            elif request.sample.allLfns[lfn] == 1:
+                nQueued += 1
+            elif request.sample.allLfns[lfn] == 2:
+                nRunning += 1
+            elif request.sample.allLfns[lfn] == 3:
+                nRemoved += 1
+            elif request.sample.allLfns[lfn] == 4:
+                nCompleted += 1
+            elif request.sample.allLfns[lfn] == 5:
+                nHeld += 1
 
         print('')
         print(" ====  J o b   S u m m a r y  ==== ")

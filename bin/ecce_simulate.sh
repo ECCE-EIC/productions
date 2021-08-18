@@ -1,10 +1,19 @@
 #!/bin/bash
-#
+
+# start the stderr
+echo " ==== Start error file: ecce_simulate.sh" 1>&2
+echo " HOST: $HOSTNAME" 1>&2
+echo " ===============" 1>&2
+
+# just to make sure we have a home
+export HOME=`pwd`
+
 echo " START -- "`date +%s`
 echo "args: $@"
 echo "host: $HOSTNAME"
 echo "user: "`id`
 echo "cwd:  "`pwd`
+echo "home: $HOME"
 echo "os:   "`lsb_release -a`
 echo 
 echo "----------------------------------------------"
@@ -50,8 +59,6 @@ mv productions/extras/* macros/detectors/EICDetector
 cd macros/detectors/EICDetector
 mkdir -p ${outputPath}/eval
 
-source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $tag
-export ROOT_INCLUDE_PATH=$(pwd)/../../common:$ROOT_INCLUDE_PATH
 metaDataFile=${outputPath}/${outputFile}.txt
 tmpLogFile=${outputFile}.out
 d=`date +%Y/%m/%d`
@@ -78,6 +85,9 @@ Skip: $nskip
 EOF
 
 echo "Disabling evaluators and enabling DST readout"
+export PATH=":${PATH}"
+echo " PATH: $PATH"
+echo " PWD: "`/bin/pwd`
 ./setupFun4All_G4_EICDetector.sh
 ./setupFun4All_G4_EICDetector.sh
 
@@ -95,7 +105,15 @@ then
 fi
 
 # Run Fun4all: send output to stdout but also capture to temporary local file
+
+echo " #### init \
+source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $tag"
+source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $tag
+export ROOT_INCLUDE_PATH=$(pwd)/../../common:$ROOT_INCLUDE_PATH
+echo " ENV before root.exe: "
+env | sort -u
 echo " START DST -- "`date +%s`
+echo " which root.exe: "`which root.exe`
 echo " #### running \
 root.exe -q -b Fun4All_G4_EICDetector.C\($((10#$nevts)),\"$inputFile\",\"$outputFile\",\"\",$((10#$nskip)),\"$outputPath\"\)"
 root.exe -q -b Fun4All_G4_EICDetector.C\($((10#$nevts)),\"$inputFile\",\"$outputFile\",\"\",$((10#$nskip)),\"$outputPath\"\) | tee ${tmpLogFile}
