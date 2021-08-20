@@ -1,0 +1,124 @@
+{ decls }
+namespace erhic {  }
+namespace std {  }
+namespace erhic { class EventHepMC; }
+namespace erhic { template <typename T> class EventFromAsciiFactory; }
+namespace erhic { class EventGmcTrans; }
+namespace erhic { class EventBeagle; }
+namespace erhic { class EventDpmjet; }
+namespace erhic { class EventDjangoh; }
+namespace erhic { class EventRapgap; }
+namespace erhic { class EventPepsi; }
+namespace erhic { class EventMilou; }
+namespace erhic { class EventPythia; }
+namespace erhic { class EventSartre; }
+namespace erhic { class EventDEMP; }
+namespace erhic { class EventSimple; }
+namespace erhic { template <typename T> class File; }
+
+[ libeicsmear.so ]
+# List of selected classes
+class BeamParticles
+class EventToDot
+class ParticleIdentifier
+class erhic::DisKinematics
+class erhic::DoubleAngleComputer
+class erhic::EventBeagle
+class erhic::EventDEMP
+class erhic::EventDis
+class erhic::EventDjangoh
+class erhic::EventDpmjet
+class erhic::EventFromAsciiFactory<erhic::EventBeagle>
+class erhic::EventFromAsciiFactory<erhic::EventDEMP>
+class erhic::EventFromAsciiFactory<erhic::EventDjangoh>
+class erhic::EventFromAsciiFactory<erhic::EventDpmjet>
+class erhic::EventFromAsciiFactory<erhic::EventGmcTrans>
+class erhic::EventFromAsciiFactory<erhic::EventHepMC>
+class erhic::EventFromAsciiFactory<erhic::EventMilou>
+class erhic::EventFromAsciiFactory<erhic::EventPepsi>
+class erhic::EventFromAsciiFactory<erhic::EventPythia>
+class erhic::EventFromAsciiFactory<erhic::EventRapgap>
+class erhic::EventFromAsciiFactory<erhic::EventSartre>
+class erhic::EventFromAsciiFactory<erhic::EventSimple>
+class erhic::EventGmcTrans
+class erhic::EventHepMC
+class erhic::EventMC
+class erhic::EventMCFilterABC
+class erhic::EventMilou
+class erhic::EventPepsi
+class erhic::EventPythia
+class erhic::EventRapgap
+class erhic::EventSartre
+class erhic::EventSimple
+class erhic::File<erhic::EventBeagle>
+class erhic::File<erhic::EventDEMP>
+class erhic::File<erhic::EventDjangoh>
+class erhic::File<erhic::EventDpmjet>
+class erhic::File<erhic::EventGmcTrans>
+class erhic::File<erhic::EventHepMC>
+class erhic::File<erhic::EventMilou>
+class erhic::File<erhic::EventPepsi>
+class erhic::File<erhic::EventPythia>
+class erhic::File<erhic::EventRapgap>
+class erhic::File<erhic::EventSartre>
+class erhic::File<erhic::EventSimple>
+class erhic::FileFactory
+class erhic::FileType
+class erhic::Forester
+class erhic::Forester::Status
+class erhic::JacquetBlondelComputer
+class erhic::KinematicsComputer
+class erhic::LeptonKinematicsComputer
+class erhic::LogReader
+class erhic::LogReaderDjangoh
+class erhic::LogReaderFactory
+class erhic::LogReaderGmcTrans
+class erhic::LogReaderMilou
+class erhic::LogReaderPepsi
+class erhic::LogReaderPythia
+class erhic::ParticleMC
+class erhic::ParticleMCbase
+class erhic::ParticleMCeA
+class erhic::Pid
+class erhic::Reader
+class erhic::VirtualEvent
+class erhic::VirtualEventFactory
+class erhic::VirtualParticle
+class vector<Particle*>
+class vector<Particle>
+class vector<const Particle*>
+class vector<const erhic::ParticleMC*>
+class vector<const erhic::VirtualParticle*>
+class vector<erhic::ParticleMC const*>
+class vector<erhic::ParticleMC*>
+class vector<erhic::ParticleMC>
+class vector<erhic::VirtualParticle const*>
+header eicsmear/erhic/BeamParticles.h
+header eicsmear/functions.h
+header eicsmear/erhic/ParticleIdentifier.h
+header eicsmear/erhic/Kinematics.h
+header eicsmear/erhic/EventPythia.h
+header eicsmear/erhic/EventDEMP.h
+header eicsmear/erhic/EventDis.h
+header eicsmear/erhic/EventDjangoh.h
+header eicsmear/erhic/EventDpmjet.h
+header eicsmear/erhic/EventGmcTrans.h
+header eicsmear/erhic/EventHepMC.h
+header eicsmear/erhic/EventMC.h
+header eicsmear/erhic/EventMCFilterABC.h
+header eicsmear/erhic/EventMilou.h
+header eicsmear/erhic/EventPepsi.h
+header eicsmear/erhic/EventRapgap.h
+header eicsmear/erhic/EventSartre.h
+header eicsmear/erhic/EventSimple.h
+header eicsmear/erhic/File.h
+header eicsmear/erhic/Forester.h
+header eicsmear/erhic/ParticleMC.h
+header eicsmear/erhic/Pid.h
+header eicsmear/erhic/VirtualEvent.h
+header eicsmear/erhic/EventFactory.h
+header eicsmear/erhic/VirtualParticle.h
+# List of selected namespaces
+namespace erhic
+# List of selected vars
+var erhic::EicSmearVersionString
