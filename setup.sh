@@ -7,7 +7,8 @@ export PYTHONPATH=${PYTHONPATH}:${PENV_BASE}/python
 
 if   [ "$1" == "T3" ]
 then
-  export PENV_CONDOR_REQ="( GLIDEIN_Site == \"MIT_CampusFactory\" && BOSCOGroup == \"bosco_tier3\" && ( regexp(\"T3B.*\",MACHINE) ) )"
+  export PENV_CONDOR_REQ="( BOSCOGroup == \"bosco_t3\" && ( regexp(\"T3B.*\",MACHINE) ) )"
+  #export PENV_CONDOR_REQ="( BOSCOGroup == \"t3serv008.mit.edu\" && ( regexp(\"T3B.*\",MACHINE) ) )"
 elif [ "$1" == "T2" ]
 then
   export PENV_CONDOR_REQ="( GLIDEIN_Site == \"MIT_CampusFactory\" && BOSCOGroup == \"bosco_lns\" )"

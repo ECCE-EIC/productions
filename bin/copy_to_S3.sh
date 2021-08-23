@@ -7,18 +7,20 @@ LBASE=`pwd`
 if [ $# -lt 2 ]
 then
   echo ""
-  echo " Usage:  copy_to_S3.sh  <outputPath>  <outputDest>"
+  echo " Usage:  copy_to_S3.sh  <outputPath>  <outputDest> [ <pattern='' ]"
   echo ""
   echo "  <outputPath>      local relative directory prefixed with $LBASE"
   echo "  <outputDest>      remote directory prefixed with $RBASE"
+  echo "  <pattern>         only files matching this pattern"
   echo ""
   exit 1
 fi
 
 outputPath=$1
 outputDest=$2
+pattern="$3"
 
-echo " Instruction for copy_to_T2.sh: $LBASE/$outputPath --> $RBASE/$outputDest"
+echo " Instruction for copy_to_S3.sh: $LBASE/$outputPath --> $RBASE/$outputDest"
 echo ""
 
 # load the proper software environment
@@ -29,6 +31,7 @@ echo " MINIO: "`which mcs3`
 if ! [ -e "s3secret" ]
 then
   echo " ERROR -- secret file was not found."
+  exit -1
 else
   echo " -->\
   mcs3 config host add S3 https://dtn01.sdcc.bnl.gov:9000/ USER SECRET"
@@ -36,7 +39,7 @@ else
 fi
 
 PWD=`pwd`
-for f in `find $outputPath -type f | sed "s#$PWD##"`
+for f in `find $outputPath -type f | sed "s#$PWD##" | grep "$pattern"`
 do
 
   rdir=`dirname $RBASE/$f`

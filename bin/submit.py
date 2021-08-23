@@ -19,8 +19,9 @@ parser.add_option("-c","--collisions",dest="collisions",default='ep_18x100lowq2'
 parser.add_option("-n","--nEvtsPerJob",dest="nEvtsPerJob",default=2000,help="# of Events per simulation job")
 # technical parameters
 parser.add_option("-e","--execute",dest="execute",default=False,action="store_true",help="Execute condor_submit.")
-parser.add_option("-v","--verbosity",dest="verbosity",default=0,help="verbosity of actions")
+parser.add_option("-s","--slurm",dest="slurm",default=False,action="store_true",help="Choose slurm as batch submitter.")
 parser.add_option("-t","--timing",dest="timing",default=False,action="store_true",help="Find timing for completed.")
+parser.add_option("-v","--verbosity",dest="verbosity",default=0,help="verbosity of actions")
 # read them all
 (options, args) = parser.parse_args()
 
@@ -94,21 +95,27 @@ def timingAnalysis(req):
 # Depending on what was installed - could be overwritten by hand but not recommended
 (tag,hash) = findConfig()
 
-# Setting up the sample and related request
+# Make an id for the submitter
+id = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+# Setting up the submitter
+if options.slurm:
+    # - instantiate the submitter
+    sub = penv.Submitter(id,'slurm')
+else:
+    # - instantiate the submitter and submit
+    sub = penv.Submitter(id,'condor')
+
+# Setting up the sample and the related request
 sample = penv.Sample(options.inputDir,options.physicsGroup,options.generator,options.collisions,int(options.nEvtsPerJob))
 req = penv.Request(tag,hash,sample)
 req.sample.show()
 
 # Create a submit engine (can be used for many submissions)
 
-# - make an id for the submitter
-id = datetime.now().strftime("%Y%m%d_%H%M%S")
-# - instantiate the submitter
-sub = penv.Submitter(id)
-
-# Generate the submission script and submit
-##sub.submit(req,options.execute,options.verbosity)
-sub.submitSlurm(req,options.execute,options.verbosity)
+# - submission
+req.loadSubmitterStatus(sub.status)               # this is time critical (race condition possible)
+sub.submit(req,options.execute,options.verbosity)
 
 # Logfile analysis
 if options.timing:

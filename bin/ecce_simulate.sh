@@ -38,16 +38,17 @@ export gen="$8"
 export coll="$9"
 
 # derived variables
-export outputFile=DST_${pwg}_${gen}_${coll}_${fid}_${nskip}_${nevts}.root
-#                 DST_SIDIS_pythia6_ep_18x100lowq2_009_1998000_02000.root
+#            DST_SIDIS_pythia6_ep_18x100lowq2_009_1998000_02000
+export trunc=DST_${pwg}_${gen}_${coll}_${fid}_${nskip}_${nevts}
+export outputFile=${trunc}.root
 export outputPath=${tag}/${hash}/${pwg}/${gen}/${coll}
 #                 ana.14/5f210c7/SIDIS/pythia6/ep_18x100lowq2
 
-# this is where we start our work
+# this is where we start our work, untar ('k' options prevents overwriting existing files, slurm)
 export BASEDIR=`pwd`
 echo " Untar our software: \
-tar fzx penv_${tag}_${hash}.tgz"
-tar fzx penv_${tag}_${hash}.tgz
+tar fzxk penv_${tag}_${hash}.tgz"
+tar fzxk penv_${tag}_${hash}.tgz
 ls -lhrt
 
 # download input file (make sure to rename the input)
@@ -169,12 +170,12 @@ echo " output directory contents"
 find ${outputPath}
 echo ":::::::::::::::::::::::::::::::::::::::::::::"
 
-# Moving the output to the base directory
-ls -lhrt
-mv `echo ${outputPath} | cut -d/ -f1` ../../../
-pwd
-echo " 'cd' back to base"
-cd ../../../
+# # Moving the output to the base directory
+# ls -lhrt
+# mv `echo ${outputPath} | cut -d/ -f1` ../../../
+# pwd
+# echo " 'cd' back to base"
+# cd ../../../
 pwd
 
 # Copy files to final storage destination.
@@ -184,13 +185,14 @@ echo "----------------------------------------------"
 echo "files:"
 ls -ltr 
 outputRelPathTopDirName=$(echo "${outputPath}" | cut -d "/" -f1)
-chmod 750 ./productions/bin/copy_to_S3.sh
-./productions/bin/copy_to_S3.sh ${outputRelPathTopDirName} ""
+chmod 750 $HOME/productions/bin/copy_to_S3.sh
+cp $HOME/s3secret ./
+$HOME/productions/bin/copy_to_S3.sh ${outputRelPathTopDirName} "" $trunc
 
-echo "----------------------------------------------"
-echo "removing all files created"
-echo "\
-rm -rf ${outputRelPathTopDirName}"
-rm -rf ${outputRelPathTopDirName}
+#echo "----------------------------------------------"
+#echo "removing all files created"
+#echo "\
+#rm -rf ${outputRelPathTopDirName}"
+#rm -rf ${outputRelPathTopDirName}
 
 echo " END -- "`date +%s`
