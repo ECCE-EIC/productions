@@ -2,5 +2,5 @@ nightly prop.2
 tag prop.2.1-production
 PWG SIDIS 
 generator pythia6
-collision ep_18x100lowq2
-nTotalEvents 20000000
+collision ep-18x275-q2-high
+nTotalEvents 4000000

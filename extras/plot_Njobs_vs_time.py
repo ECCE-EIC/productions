@@ -18,7 +18,6 @@ DSTDIR         = ''
 EVENTS_PER_JOB = 1
 #LOGDIR = '/work/eic2/ECCE/MC/prop.2/c131177/Electroweak/Djangoh/ep-10x100nc-q2-100/log'
 
-
 # Read submit parameters from file
 submitParametersFile = '/path/to/submitParameters.dat'
 if len(sys.argv) > 1:
