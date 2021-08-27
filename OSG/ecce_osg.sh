@@ -75,6 +75,12 @@ cd macros/detectors/EICDetector
 mkdir -p ${outputPath}
 
 # Run the specified script (e.g. run_EIC_production.sh)
+echo "----------------------------------------------"
+printf "cwd: "; /bin/pwd
+echo "ls -ltr"
+ls -ltr
+echo "----------------------------------------------"
+echo
 echo ./${script_name} "$@"
 ./${script_name} "$@"
 
