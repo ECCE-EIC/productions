@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-r5
+PWG DiffractiveAndTagging
+generator Sartre
+collision ePb-18x108-mu-IP6
+nTotalEvents 300000

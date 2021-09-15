@@ -1,6 +1,6 @@
 nightly ana.24
 tag prop.2.1-production-DiffractiveAndTagging-100GeV-r5
 PWG DiffractiveAndTagging
-generator EIC_mesonMC
-collision ep-10x100-PiStruc
-nTotalEvents 740000
+generator elSpectro
+collision ep-10x100-XYZ-twopi
+nTotalEvents 430000

@@ -1,6 +1,6 @@
-nightly ana.23
+nightly ana.24
 tag prop.2.1-production-DiffractiveAndTagging-41GeV-r5
 PWG DiffractiveAndTagging
-generator BeAGLE
-collision ep-5x41-SRC
-nTotalEvents 20000
+generator DEMP
+collision ep-5x41-pionFF
+nTotalEvents 3000000
