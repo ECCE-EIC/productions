@@ -4,7 +4,9 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13']
+nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13', 'ana.23']
+
+# ana.23: August 22, 2022
 
 #macros tags
 macrosVersion = {
@@ -37,22 +39,45 @@ macrosVersion = {
   "prop.2.1-production-DiffractiveAndTagging_IP8-r4" : "Diff_Tagg_IP8_08.14.21",
   "prop.2.1-production-DiffractiveAndTagging-r4" : "Diff_Tagg_IP6_08.14.21",
   "prop.2.1-production-DiffractiveAndTagging-41GeV-r4" : "Diff_Tagg_IP6_41GeV_08.14.21",
-  "prop.2.1-production-DiffractiveAndTagging-100GeV-r4" : "Diff_Tagg_IP6_100GeV_08.14.21"
-
+  "prop.2.1-production-DiffractiveAndTagging-100GeV-r4" : "Diff_Tagg_IP6_100GeV_08.14.21",
+# r5
+  "prop.2.1-production-DiffractiveAndTagging-IP8-r5" : "Diff_Tagg_IP8_08.26.21",
+  "prop.2.1-production-DiffractiveAndTagging-IP8-41GeV-r5" : "Diff_Tagg_IP8_41GeV_08.26.21",
+  "prop.2.1-production-DiffractiveAndTagging-IP8-100GeV-r5" : "Diff_Tagg_IP8_100GeV_08.26.21",
+  "prop.2.1-production-DiffractiveAndTagging-IP8-110GeV-r5" : "Diff_Tagg_IP8_110GeV_08.26.21",
+  "prop.2.1-production-DiffractiveAndTagging-r5" : "Diff_Tagg_IP6_08.26.21",
+  "prop.2.1-production-DiffractiveAndTagging-41GeV-r5" : "Diff_Tagg_IP6_41GeV_08.26.21",
+  "prop.2.1-production-DiffractiveAndTagging-100GeV-r5" : "Diff_Tagg_IP6_100GeV_08.26.21",
+  "prop.2.1-production-DiffractiveAndTagging-110GeV-r5" : "Diff_Tagg_IP6_110GeV_08.26.21"
 }
 
 #PWGs
 ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'ExclusiveReactions', 'HFandJets', 'Inclusive', 'SIDIS', 'Spectroscopy']
 
 #Generators
-ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro', 'LQGENEP', 'DEMP', "EIC_mesonMC", 'CLASDIS']
+ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro', 'LQGENEP', 'DEMP', "EIC_mesonMC", 'CLASDIS', 'eSTARlight', 'Sartre', 'EpIC']
 
 #Collision type
 ecceCollision = ['singlePion', 'singleElectron', 'ep-5x100', 'ep-10x100', 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 'ep-18x275cc',
                  'ep-10x100nc-q2-500', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-2', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 
                  'ep-18x275nc-q2-1000', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-2', 'ep-5x41-q2-1', 'ep-10x100-q2-10']
 
-DiffTaggCollision = ['ep-5x100-pionFF', 'ep-5x41-NeutronSS', 'ep-5x100-upi0', 'ep-5x41-SRC', 'ep-5x100-XYZ', 'ep-10x100-PiStruc', 'ep-5x41-KLambda', 'ep-5x41-KSigma', 'ePb-18x110', 'ePb-18x110-tau10', 'ePb-18x108-JPsi-q2-1-10', 'eZr-18x122-JPsi-q2-1-10', 'ep-5x100-XYZ-twopi']
+DiffTaggCollision = ['ep-5x41-pionFF', 'ep-5x100-pionFF', 'ep-10x100-pionFF', 
+'ep-5x41-NeutronSS', 'ep-5x100-upi0', 'ep-5x41-SRC', 'ep-5x100-XYZ', 'ep-10x100-PiStruc', 'ep-5x41-KLambda', 'ep-5x41-KSigma', 'ePb-18x110', 'ePb-18x110-tau10', 'ePb-18x108-JPsi-q2-1-10', 'eZr-18x122-JPsi-q2-1-10', 
+'ep-5x41-XYZ-twopi', 'ep-5x100-XYZ-twopi', 'ep-10x100-XYZ-twopi', 'ep-18x275-XYZ-twopi', 'ep-5x100-XYZ-pi4',
+'eZr-18x122-JPsi-e-IP6', 'eZr-18x122-JPsi-e-IP8', 'ePb-18x108-JPsi-e-IP6', 'ePb-18x108-JPsi-e-IP8',
+'eZr-18x122-JPsi-mu-IP6', 'eZr-18x122-JPsi-mu-IP8', 'ePb-18x108-JPsi-mu-IP6', 'ePb-18x108-JPsi-mu-IP8', 'ep-5x41-uomega-Q2-0-1','ep-5x41-uomega-Q2-1-5', 'ePb-18x108-e-IP6', 'ePb-18x108-e-IP8', 'ePb-18x108-mu-IP6', 'ePb-18x108-mu-IP8',
+'ep-5x41-PiStruc', 'ep-5x100-PiStruc', 'ep-10x100-PiStruc', 'ep-18x275-PiStruc']
+
+ExclusiveCollision = ['ep-10x100IPRO4_GK-DVCS', 'ep-10x100BH_GK-DVCS', 'ep-5x41IPRO4_GK-DVCS', 'ep-5x41BH_GK-DVCS', 'ep-18x275IPRO4_GK-DVCS', 'ep-18x275BH_GK-DVCS', 
+'ep-5x41-DVCS-pi0','ep-10x100-DVCS-pi0', 'ep-18x275-DVCS-pi0',
+'eA-5x41_Ph-DVCS', 'eA-5x41_Nh-DVCS', 'eA-10x110_Ph-DVCS', 'eA-10x110_Nh-DVCS', 'eA-18x110_Ph-DVCS', 'eA-18x110_Nh-DVCS',
+'eA-5x41_Ph-DVCS-IP8', 'eA-5x41_Nh-DVCS-IP8', 'eA-10x110_Ph-DVCS-IP8', 'eA-10x110_Nh-DVCS-IP8', 'eA-18x110_Ph-DVCS-IP8', 'eA-18x110_Nh-DVCS-IP8',
+'ep-5x41-TCS-hel_plus', 'ep-5x41-TCS-hel_minus', 'ep-10x100-TCS-hel_plus', 'ep-10x100-TCS-hel_minus', 'ep-18x275-TCS-hel_plus', 'ep-18x275-TCS-hel_minus', 
+'ep-18x275-JPsi-e', 'ep-18x275-JPsi-e-IP8',
+'ep-10x100-JPsi', 'ep-10x100-JPsi-IP8'
+]
 
 ecceCollision.extend(DiffTaggCollision)
 
+ecceCollision.extend(ExclusiveCollision)

@@ -1,6 +1,0 @@
-nightly new
-tag prop.2.1-production-DiffractiveAndTagging_IP8-r4
-PWG DiffractiveAndTagging
-generator BeAGLE
-collision eZr-18x122-JPsi-q2-1-10
-nTotalEvents 20000
