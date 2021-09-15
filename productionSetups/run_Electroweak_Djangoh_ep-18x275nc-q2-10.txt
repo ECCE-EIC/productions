@@ -1,0 +1,6 @@
+nightly prop.2
+tag prop.2.1-production
+PWG Electroweak 
+generator Djangoh
+collision ep-18x275nc-q2-10
+nTotalEvents 1000000

@@ -58,9 +58,14 @@ ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'Exclusiv
 ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro', 'LQGENEP', 'DEMP', "EIC_mesonMC", 'CLASDIS', 'eSTARlight', 'Sartre', 'EpIC']
 
 #Collision type
-ecceCollision = ['singlePion', 'singleElectron', 'ep-5x100', 'ep-10x100', 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 'ep-18x275cc',
-                 'ep-10x100nc-q2-500', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-2', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 
-                 'ep-18x275nc-q2-1000', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-2', 'ep-5x41-q2-1', 'ep-10x100-q2-10']
+
+ecceCollision = ['singlePion', 'singleElectron', 'ep_18x100lowq2', 
+                 'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1',
+                 'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500'
+                 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 
+                 'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275cc',
+                 'ep-18x275nc-q2-2', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-1000',
+
 
 DiffTaggCollision = ['ep-5x41-pionFF', 'ep-5x100-pionFF', 'ep-10x100-pionFF', 
 'ep-5x41-NeutronSS', 'ep-5x100-upi0', 'ep-5x41-SRC', 'ep-5x100-XYZ', 'ep-10x100-PiStruc', 'ep-5x41-KLambda', 'ep-5x41-KSigma', 'ePb-18x110', 'ePb-18x110-tau10', 'ePb-18x108-JPsi-q2-1-10', 'eZr-18x122-JPsi-q2-1-10', 
@@ -81,3 +86,4 @@ ExclusiveCollision = ['ep-10x100IPRO4_GK-DVCS', 'ep-10x100BH_GK-DVCS', 'ep-5x41I
 ecceCollision.extend(DiffTaggCollision)
 
 ecceCollision.extend(ExclusiveCollision)
+

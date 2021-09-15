@@ -97,10 +97,21 @@ def makeSLURMJob():
     outputLogPath  = outputPath + "/log"
     os.makedirs(outputPath, exist_ok=True)
     os.makedirs(outputLogPath, exist_ok=True)
-    #Print input/output info
+
+    # Write key campaign parameters to submitParameters.dat file
+    parmsFile = os.path.join( slurmDir, 'submitParameters.dat' )
+    with open( parmsFile, 'w' ) as fparms:
+        fparms.write( 'SUBMITDIR=%s\n' % slurmDir )
+        fparms.write( 'LOGDIR=%s\n' % outputLogPath)
+        fparms.write( 'DSTDIR=%s\n' % outputPath)
+        fparms.write( 'EVENTS_PER_JOB=%d\n' % pars.nEventsPerJob )
+        fparms.close()
+
+    # Print input/output info
     print("Input file list: {}".format(inputFileList))
     print("Output directory: {}".format(outputPath))
-    #Now loop over all input trees and make a submission script that fits the request
+
+    # Now loop over all input trees and make a submission script that fits the request
     nJobs = 0
     fileNumber = 0
     while line:
