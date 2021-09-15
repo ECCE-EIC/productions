@@ -7,7 +7,7 @@
 #  python3 extras/plot_Njobs_vs_time.py submissionFiles/*/*/*/*/submitParmaeters.dat
 #
 
-import os, sys, math
+import os, sys, math, glob
 import pytz
 from dateutil import parser
 from datetime import datetime
@@ -18,18 +18,31 @@ DSTDIR         = ''
 EVENTS_PER_JOB = 1
 #LOGDIR = '/work/eic2/ECCE/MC/prop.2/c131177/Electroweak/Djangoh/ep-10x100nc-q2-100/log'
 
-# Read submit parameters from file if given as argument
+# Read submit parameters from file
+submitParametersFile = '/path/to/submitParameters.dat'
 if len(sys.argv) > 1:
 	submitParametersFile = sys.argv[1]
-	if not os.path.exists( submitParametersFile ):
-		print( 'No file: ' + submitParametersFile )
-		sys.exit()
-	f = open( submitParametersFile )
-	for line in f.readlines():
-		if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
-		if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
-		if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
-		if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
+else:
+	if os.path.exists('./submissionFiles'):
+		tmp = glob.glob('./submissionFiles/*/*/*/*/submitParameters.dat')
+	else:
+		tmp = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
+	if len(tmp) > 0:
+		submitParametersFile = tmp[0]
+
+if not os.path.exists( submitParametersFile ):
+	print( 'No file: ' + submitParametersFile )
+	sys.exit()
+
+print('Reading campaign parameters from:' + submitParametersFile)
+f = open( submitParametersFile )
+for line in f.readlines():
+	if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
+	if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
+	if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
+	if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
+
+print( 'Using log files found in: ' + LOGDIR )
 
 # Determine site where campaign was run from SUBMITDIR
 SITE = ''
