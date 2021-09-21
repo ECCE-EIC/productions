@@ -14,6 +14,7 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
+  productionVersion = "prop.3.2"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
@@ -25,7 +26,7 @@ class steering():
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
   macrosBranch = "production"
-  nEventsPerJob = 2000
+  nEventsPerJob = 1
   nTotalEvents = 0
   site = sys.argv[1]
 
@@ -48,10 +49,6 @@ if steering.site == "BNL":
 if steering.site == "OSG@BNL":
   steering.productionTopDir = 'N/A'
   steering.simulationsDir = steering.productionTopDir
-
-if steering.collisionType == "singlePion": steering.macrosBranch = "production_singlePion_0-20GeV"
-if steering.collisionType == "singleElectron": steering.macrosBranch = "production_singleElectron_0-20GeV"
-if steering.generator == "pythia8": steering.macrosBranch = "production_pythia8"
 
 def getParameter(parameter):
   configFile = open(steering.fileName, "r")
@@ -85,6 +82,9 @@ def getProductionRequirements():
   steering.generator = getParameter("generator")
   steering.collisionType = getParameter("collision")
   steering.nTotalEvents = getParameter("nTotalEvents")
+  if steering.collisionType == "singlePion": steering.macrosBranch = "production_singlePion_0-20GeV"
+  if steering.collisionType == "singleElectron": steering.macrosBranch = "production_singleElectron_0-20GeV"
+  if steering.generator == "pythia8": steering.macrosBranch = "production_pythia8"
 
   checkRequirements(steering.PWG, config.ecceWorkingGroup)
   checkRequirements(steering.generator, config.ecceGenerator)
@@ -125,24 +125,25 @@ def getMacrosRepo():
         print('skipping copy of %s since it would overwrite file already in macros directory' % os.path.basename(f) )
 
   # Create tarball of macros directory
-  os.chdir(steering.simulationsDir)
-  cmd = 'tar czf %s.tgz macros' % os.path.basename(steering.simulationsDir)
-  print(cmd)
-  os.system(cmd)
+  #os.chdir(steering.simulationsDir)
+  #cmd = 'tar czf %s.tgz macros' % os.path.basename(steering.simulationsDir)
+  #print(cmd)
+  #os.system(cmd)
 
 def setupJob():
-  arguments = "{} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
-                                                           steering.PWG, 
-                                                           steering.generator, 
-                                                           steering.collisionType, 
-                                                           steering.nightly, 
-                                                           submissionProdDir, 
-                                                           detectorMacroLocation, 
-                                                           steering.submissionTopDir,
-                                                           config.macrosVersion[steering.macrosTag],
-                                                           steering.site, 
-                                                           steering.macrosBranch,
-                                                           steering.nTotalEvents)
+  arguments = "{} {} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
+                                                              steering.PWG, 
+                                                              steering.generator, 
+                                                              steering.collisionType, 
+                                                              steering.nightly, 
+                                                              submissionProdDir, 
+                                                              detectorMacroLocation, 
+                                                              steering.submissionTopDir,
+                                                              config.macrosVersion[steering.macrosTag],
+                                                              steering.site, 
+                                                              steering.macrosBranch,
+                                                              steering.nTotalEvents,
+                                                              steering.productionVersion)
 
   submitScript = ""
   if steering.site == "BNL": submitScript = "makeCondorJobs.py"

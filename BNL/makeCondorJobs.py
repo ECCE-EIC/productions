@@ -5,7 +5,7 @@ from ROOT import TFile, TObjString
 
 
 nArgs = len(sys.argv)
-if nArgs != 13:
+if nArgs != 14:
     print("Usage: python makeCondorJob.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
@@ -31,6 +31,7 @@ class pars:
   prodSite = sys.argv[10]  
   macrosBranch = sys.argv[11]
   nTotalEvents = int(sys.argv[12])
+  prodVer = sys.argv[13]
 
 
 def getNumEvtsInFile(theFile):
@@ -53,7 +54,7 @@ def makeCondorJob():
     #Now make output directory
     outputPath = "{}/{}/{}/{}/{}/{}".format(pars.simulationsTopDir, 
                                             pars.build,
-                                            pars.macrosHash,
+                                            pars.prodVer,
                                             pars.thisWorkingGroup, 
                                             pars.thisGenerator, 
                                             pars.thisCollision)
@@ -122,7 +123,7 @@ def makeCondorJob():
             condorFile.write("Log             = {}.log\n".format(condorOutputInfo))
             condorFile.write("Initialdir      = {}\n".format(pars.macrosPath))
             condorFile.write("PeriodicHold    = (NumJobStarts>=1 && JobStatus == 1)\n")
-            condorFile.write("request_memory  = 2GB\n")
+            condorFile.write("request_memory  = 8GB\n")
             condorFile.write("Priority        = 20\n")
             condorFile.write("job_lease_duration = 3600\n")
             condorFile.write("Queue 1\n")
