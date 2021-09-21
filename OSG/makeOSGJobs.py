@@ -28,7 +28,7 @@ generatedDirNameMap = {	'/gpfs/mnt/gpfs02/eic':'root://sci-xrootd.jlab.org//osgp
 								'/work/osgpool/eic'   :'root://sci-xrootd.jlab.org//osgpool/eic'}
 
 nArgs = len(sys.argv)
-if nArgs != 13:
+if nArgs != 14:
     print("Usage: python makeOSGJobs.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
@@ -59,6 +59,7 @@ class pars:
   prodSite = sys.argv[10]
   macrosBranch = sys.argv[11]
   nTotalEvents = int(sys.argv[12])
+  prodVer = sys.argv[13]
 
 def getNumEvtsInFile(theFile):
     # For some reason pyroot is failing when using xrootd so if 
@@ -92,7 +93,7 @@ def makeOSGJob():
 
     # Portion of output directory path relative to top-level simulations output dir
     outputRelPath = "{}/{}/{}/{}/{}".format(pars.build,
-                                            pars.macrosHash,
+                                            pars.prodVer,
                                             pars.thisWorkingGroup,
                                             pars.thisGenerator,
                                             pars.thisCollision)
