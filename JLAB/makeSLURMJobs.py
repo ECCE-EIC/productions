@@ -22,7 +22,7 @@ from ROOT import TFile, TObjString
 generatedDirNameMap = {'/gpfs/mnt/gpfs02/eic':'/work/osgpool/eic'}
 
 nArgs = len(sys.argv)
-if nArgs != 13:
+if nArgs != 14:
     print("Usage: python makeSLURMJobs.py <nEventsPerJob> <physics WG> <generator> <collision> <build> <submitPath> <macrosPath> <prodTopDir> <macrosTag> <prodSite> <macrosBranch> <nTotalEvents>")
     sys.exit()
 
@@ -53,6 +53,7 @@ class pars:
   prodSite = sys.argv[10]
   macrosBranch = sys.argv[11]
   nTotalEvents = int(sys.argv[12])
+  prodVer = sys.argv[13]
 
 
 def getNumEvtsInFile(theFile):
@@ -82,7 +83,7 @@ def makeSLURMJob():
     #Now make output directory
     outputPath = "{}/{}/{}/{}/{}/{}".format(pars.simulationsTopDir,
                                             pars.build,
-                                            pars.macrosHash,
+                                            pars.prodVer,
                                             pars.thisWorkingGroup,
                                             pars.thisGenerator,
                                             pars.thisCollision)
