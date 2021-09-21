@@ -58,13 +58,29 @@ export skip=${4}
 export outputPath=${5}
 
 # Setup ECCE environment
-#source /cvmfs/eic.opensciencegrid.org/ecce/default/opt/fun4all/core/bin/ecce_setup.sh -n new.2
-source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n new.3
+# n.b. This is not really needed since the script_name should be
+# run_EIC_production.sh which will source the ecce_setup.sh
+# script with the correct build as the argument.
+#source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n new.3
+
+# Unpack the macros tarball.
+# This will be named something like macros_tag_prop.2.1-production.tgz 
+# but will unpack to just "macros".
+tar xzf macros*.tgz
+
+# Change to the working directory for the job
+cd macros/detectors/EICDetector
+
+# Create the directories needed for the output
+mkdir -p ${outputPath}
 
 # Run the specified script (e.g. run_EIC_production.sh)
-mv productions/extras/* macros/detectors/EICDetector  # mv run_EIC_production.sh, writeMetaData.C into the macros working directory
-cd macros/detectors/EICDetector
-mkdir -p ${outputPath}/eval
+echo "----------------------------------------------"
+printf "cwd: "; /bin/pwd
+echo "ls -ltr"
+ls -ltr
+echo "----------------------------------------------"
+echo
 echo ./${script_name} "$@"
 ./${script_name} "$@"
 

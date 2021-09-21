@@ -17,7 +17,7 @@
 #
 
 import math
-import sys, os, subprocess
+import sys, os, subprocess, glob
 from os import environ
 from ROOT import TFile, TObjString
 
@@ -44,8 +44,8 @@ myShell='/bin/bash'
 
 class pars:
   #simulationsTopDir = '/sphenix/user/cdean/ECCE/MC'
-  simulationsTopDir = 'S3://eictest/ECCE/MC'
-  #simulationsTopDir = '/work/eic2/ECCE/MC'
+  #simulationsTopDir = 'S3://eictest/ECCE/MC'
+  simulationsTopDir = '/work/eic2/ECCE/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
@@ -54,6 +54,7 @@ class pars:
   submitPath = sys.argv[6]
   macrosPath = sys.argv[7]
   macrosTopDir = os.path.abspath( macrosPath + '/../..')
+  macrosTarball = glob.glob(macrosTopDir + '*.tgz')[0]  # assume setupProduction.py made one (and only one) tarball
   prodTopDir = sys.argv[8]
   macrosHash = sys.argv[9]
   prodSite = sys.argv[10]
@@ -72,6 +73,17 @@ def getNumEvtsInFile(theFile):
 
 def makeOSGJob():
     print("Creating OSG condor submission files for {} production".format(pars.thisWorkingGroup))
+
+    # If writing to S3 then make sure the copy_to_s3.py script exists
+    if pars.simulationsTopDir.startswith('S3://'):
+        if not os.path.exists('copy_to_S3.py'):
+            print('\nERROR: ==========================================================')
+            print('pars.simulationsTopDir specifies writing to S3 but the')
+            print('copy_to_S3.py script does not exist in the current directory!')
+            print('Make sure the file exists here and has been modified to')
+            print('include an accessKey and secretKey with write privileges.')
+            print('==================================================================\n')
+            sys.exit()
 
     #Find and open the pars.thisWorkingGroup list of input event files
     inputFileList = "{}/{}/inputFileLists/{}_{}_{}.list".format(pars.prodTopDir, 
@@ -105,8 +117,17 @@ def makeOSGJob():
     outputPath = "{}/{}".format(pars.simulationsTopDir, outputRelPath)
 
     # Log files must always be local
-    outputLogPath  = osgDir + "/log"
+    outputLogPath  = outputPath + "/log"
     os.makedirs(outputLogPath, exist_ok=True)
+	 
+    # Write key campaign parameters to submitParameters.dat file
+    parmsFile = os.path.join( osgDir, 'submitParameters.dat' )
+    with open( parmsFile, 'w' ) as fparms:
+        fparms.write( 'SUBMITDIR=%s\n' % osgDir )
+        fparms.write( 'LOGDIR=%s\n' % outputLogPath)
+        fparms.write( 'DSTDIR=%s\n' % outputPath)
+        fparms.write( 'EVENTS_PER_JOB=%d\n' % pars.nEventsPerJob )
+        fparms.close()
 
     # Print input/output info
     print("Input file list: {}".format(inputFileList))
@@ -154,6 +175,10 @@ def makeOSGJob():
             osgFileName = "osgJob_{}.job".format(fileTag)
 
             osgFile = open("{0}/{1}".format(osgDir, osgFileName), "w")
+            
+            transfer_input_files = pars.macrosTarball + "," + pars.prodTopDir
+            if pars.simulationsTopDir.startswith('S3://'):
+                transfer_input_files += ',copy_to_S3.py'
 
             osgFile.write("\n")
             osgFile.write("executable     = " + pars.prodTopDir + "/OSG/ecce_osg.sh\n")
@@ -163,7 +188,7 @@ def makeOSGJob():
             osgFile.write("request_disk   = 3 GB\n")
             osgFile.write("\n")
             osgFile.write("should_transfer_files  = YES\n")
-            osgFile.write("transfer_input_files   = copy_to_S3.py," + pars.macrosTopDir + "," + pars.prodTopDir + "\n")
+            osgFile.write("transfer_input_files   = " + transfer_input_files + "\n")
             if outputPath.startswith('/'):
                 osgFile.write("transfer_output_files  = %s\n" % outputRelPathTopDirName)
                 osgFile.write("transfer_output_remaps = \"%s=%s\"\n" % (outputRelPathTopDirName, os.path.join(pars.simulationsTopDir,outputRelPathTopDirName)))
@@ -184,7 +209,7 @@ def makeOSGJob():
             osgFile.write("queue 1\n")
             osgFile.close()
 
-            submitScript.write("condor_submit {}\n".format(osgFileName))
+            submitScript.write("condor_submit {}/{}\n".format(osgDir, osgFileName))
 
             nJobs += 1
        if nEvents >= pars.nTotalEvents: 
