@@ -10,7 +10,7 @@
 #
 #  python3 ./macros/detectors/EICDetector/makeSLURMJobs.py 1000000 SIDIS pythia6 ep_18x100
 #
-
+import pandas as pd
 import math
 import sys, os, getpass, glob
 from os import environ
@@ -75,6 +75,14 @@ def makeSLURMJob():
     #Get the current working directory to write submissions and logs to
     #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
     slurmDir = "{}/slurmJobs".format(pars.submitPath)
+
+    print("================")
+    print("================")
+    print("================")
+    print(pd.__version__)
+    print(sys.version)
+
+	# This is to creat the slurmJobs directory, which otherwise won't be created.
     os.makedirs(slurmDir, exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(slurmDir)
     submitScript = open("{}".format(submitScriptName), "w")
@@ -152,7 +160,7 @@ def makeSLURMJob():
             slurmFile.write("#SBATCH --ntasks=1\n")
             slurmFile.write("#SBATCH --mem-per-cpu=2000\n")
             slurmFile.write("#SBATCH --job-name=slurm-{0}\n".format(fileTag))
-            slurmFile.write("#SBATCH --time=06:00:00\n")
+            slurmFile.write("#SBATCH --time=08:00:00\n")
             slurmFile.write("#SBATCH --gres=disk:10000\n")
             slurmFile.write("#SBATCH --output=" + slurmOutputInfo + ".out\n")
             slurmFile.write("#SBATCH --error=" + slurmOutputInfo + ".err\n")

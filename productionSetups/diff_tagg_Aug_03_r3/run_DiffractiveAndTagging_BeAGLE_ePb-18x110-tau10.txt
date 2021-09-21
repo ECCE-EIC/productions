@@ -1,0 +1,6 @@
+nightly prop.2
+tag Diff_Tagg_IP8_08.03.21
+PWG DiffractiveAndTagging
+generator BeAGLE
+collision ePb-18x110-tau10
+nTotalEvents 20000

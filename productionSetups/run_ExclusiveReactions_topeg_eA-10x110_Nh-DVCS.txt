@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-110GeV-r5
+PWG ExclusiveReactions
+generator topeg
+collision eA-10x110_Nh-DVCS
+nTotalEvents 1000000

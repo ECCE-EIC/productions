@@ -1,0 +1,6 @@
+nightly ana.23
+tag prop.2.1-production-DiffractiveAndTagging-41GeV-r5
+PWG DiffractiveAndTagging
+generator DEMP
+collision ep-5x41-KLambda
+nTotalEvents 300000
