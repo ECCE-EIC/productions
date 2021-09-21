@@ -20,25 +20,12 @@ class steering():
   PWG = ""
   generator = ""
   collisionType = ""
-
-#  productionTopDir = '/work_eic/users/billlee/2021.06.17.test_campaign'
-#  productionTopDir = '/work_eic/users/billlee/2021.07.21.test_campaign'
-  productionTopDir = '/work_eic/users/billlee/2021.08.03.test_campaign'
-
+  productionTopDir = '.'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
-#  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
-#  macrosBranch = "master"
-  macrosRepo = "https://github.com/billlee77/macros.git" #"git@github.com:billlee77/macros.git"
-  macrosBranch = "diff_tagg_physics_IP6_June_16_2021"
-
-#  productionTopDir = '.'
-#  simulationsDir = productionTopDir
-#  submissionTopDir = os.getcwd()
-#  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
-#  macrosBranch = "production"
-
-  nEventsPerJob = 1000
+  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
+  macrosBranch = "production"
+  nEventsPerJob = 2000
   nTotalEvents = 0
   site = sys.argv[1]
 
@@ -132,11 +119,8 @@ def getMacrosRepo():
     for f in glob.glob( '%s/*' % extrasDir ):
       destFile = os.path.join(destDir, os.path.basename(f))
       if not os.path.exists( destFile ):
-        if not os.path.isdir(f):
-        	print('copying %s  ->  %s' % (f,destFile))
-        	shutil.copy( f, destFile )
-        else:
-        	shutil.copytree( f, destFile )
+        print('copying %s  ->  %s' % (f,destFile))
+        shutil.copy( f, destFile )
       else:
         print('skipping copy of %s since it would overwrite file already in macros directory' % os.path.basename(f) )
 
@@ -166,7 +150,7 @@ def setupJob():
   elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
   elif steering.site == "OSG@BNL": submitScript = "makeOSGJobs.py"
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
-  os.system("python3 {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
+  os.system("python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
 
 
 def createSubmissionFiles():
@@ -205,12 +189,5 @@ def runProduction():
   print("Creating production scripts")
   createSubmissionFiles()
   printSimulation()
-
-
-print("================")
-print("================")
-print("================")
-print(sys.version)
-
 
 runProduction()
