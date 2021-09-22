@@ -1,5 +1,5 @@
-nightly new
-tag prop.3.3-production-singleElectron-0-20GeV 
+nightly prop.4
+tag prop.4.0-production-singleElectron-0-20GeV 
 PWG General
 generator particleGun
 collision singleElectron
