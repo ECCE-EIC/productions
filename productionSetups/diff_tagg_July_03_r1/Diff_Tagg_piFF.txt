@@ -1,0 +1,6 @@
+nightly new
+tag Diff_Tagg_Sim_July_03_2021
+PWG DiffractiveAndTagging
+generator DEMP
+collision pionFF
+nTotalEvents 20000

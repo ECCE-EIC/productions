@@ -3,4 +3,4 @@ tag prop.3.3-production-singleElectron-0-20GeV
 PWG General
 generator particleGun
 collision singleElectron
-nTotalEvents 5000000
+nTotalEvents 1000
