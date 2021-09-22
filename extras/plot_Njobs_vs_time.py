@@ -1,13 +1,53 @@
 #!/usr/bin/env python3
+#
+# Generate root macro for plotting job times.
+#
+# Run from the production directory with:
+#
+#  python3 extras/plot_Njobs_vs_time.py submissionFiles/*/*/*/*/submitParmaeters.dat
+#
 
-import os, sys, math
+import os, sys, math, glob
 import pytz
 from dateutil import parser
+from datetime import datetime
 
-#logdir = '/w/eic-sciwork18/users/davidl/2021.06.17.test_campaign/productions/submissionFiles/SIDIS/pythia6/ep_18x100/osgJobs/log'
-#logdir = '/work/eic2/ECCE/MC/new/9daf451/SIDIS/pythia6+ep_18x100/log'
-logdir = '/work/eic2/ECCE/MC/ana.14/5f210c7/SIDIS/pythia6/ep_18x100highq2/log'
-#logdir = '/w/eic-sciwork18/users/davidl/2021.06.29.ecce_SIDIS_sample_campaign/productions/submissionFiles/SIDIS/pythia6/ep_18x100highq2/osgJobs/log'
+SUBMITDIR      = ''
+LOGDIR         = ''
+DSTDIR         = ''
+EVENTS_PER_JOB = 1
+#LOGDIR = '/work/eic2/ECCE/MC/prop.2/c131177/Electroweak/Djangoh/ep-10x100nc-q2-100/log'
+
+# Read submit parameters from file
+submitParametersFile = '/path/to/submitParameters.dat'
+if len(sys.argv) > 1:
+	submitParametersFile = sys.argv[1]
+else:
+	if os.path.exists('./submissionFiles'):
+		tmp = glob.glob('./submissionFiles/*/*/*/*/submitParameters.dat')
+	else:
+		tmp = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
+	if len(tmp) > 0:
+		submitParametersFile = tmp[0]
+
+if not os.path.exists( submitParametersFile ):
+	print( 'No file: ' + submitParametersFile )
+	sys.exit()
+
+print('Reading campaign parameters from:' + submitParametersFile)
+f = open( submitParametersFile )
+for line in f.readlines():
+	if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
+	if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
+	if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
+	if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
+
+print( 'Using log files found in: ' + LOGDIR )
+
+# Determine site where campaign was run from SUBMITDIR
+SITE = ''
+if SUBMITDIR.endswith('osgJobs'  ): SITE = 'OSG'
+if SUBMITDIR.endswith('slurmJobs'): SITE = 'JLAB'
 
 # Find all files ending in ".out" in the specified directory 
 # tree. Find the "Start time:" and "End time:" strings for each
@@ -16,7 +56,7 @@ logdir = '/work/eic2/ECCE/MC/ana.14/5f210c7/SIDIS/pythia6/ep_18x100highq2/log'
 job_times = []
 job_starts = []
 job_ends = []
-for dirname,subdirname,filelist in os.walk(logdir):
+for dirname,subdirname,filelist in os.walk(LOGDIR):
 	for fname in filelist:
 		if not fname.endswith('.out'): continue
 		
@@ -76,39 +116,64 @@ for i in range( len(job_starts) ):
 
 # Print full ROOT macro
 
-print('\nvoid Njobs_vs_time(void){')
+macro = []
+macro += ['\n// Generated from data scraped from log files in:']
+macro += ['// ' + LOGDIR ]
 
-print('	double Njobs_vs_t[] = {', end='')
-for v in Njobs_vs_t: print(v, end=',')
-print('0};')
-print('	auto hNjobs_vs_t = new TH1D("hNjobs_vs_t", ";time since campaign start (hours)", %d, %f, %f);' % (Nbins, xmin, xmax) )
-print('	hNjobs_vs_t->Set(%d, Njobs_vs_t);' % Nbins)
+macro += ['\nvoid Njobs_vs_time(void){']
 
-print('	double Njobs_vs_tdiff[] = {', end='')
-for v in Njobs_vs_tdiff: print(v, end=',')
-print('0};')
-print('	auto hNjobs_vs_tdiff = new TH1D("hNjobs_vs_tdiff", ";total job time (hours)", %d, %f, %f);' % (Nbins_tdiff, xmin_tdiff, xmax_tdiff) )
-print('	hNjobs_vs_tdiff->Set(%d, Njobs_vs_tdiff);' % Nbins_tdiff)
+vals = ','.join([str(x) for x in Njobs_vs_t])
+macro += ['	double Njobs_vs_t[] = {' + vals + '};']
+macro += ['	auto hNjobs_vs_t = new TH1D("hNjobs_vs_t", ";time since campaign start (hours)", %d, %f, %f);' % (Nbins, xmin, xmax) ]
+macro += ['	hNjobs_vs_t->Set(%d, Njobs_vs_t);' % Nbins]
 
-print('	hNjobs_vs_t->SetStats(0);')
-print('	hNjobs_vs_tdiff->SetStats(0);')
-print('	hNjobs_vs_t->SetLineColor(kBlue);')
-print('	hNjobs_vs_tdiff->SetLineColor(kMagenta);\n')
+vals = ','.join([str(x) for x in Njobs_vs_tdiff])
+macro += ['	double Njobs_vs_tdiff[] = {' + vals + '};']
+macro += ['	auto hNjobs_vs_tdiff = new TH1D("hNjobs_vs_tdiff", ";total job time (hours)", %d, %f, %f);' % (Nbins_tdiff, xmin_tdiff, xmax_tdiff) ]
+macro += ['	hNjobs_vs_tdiff->Set(%d, Njobs_vs_tdiff);' % Nbins_tdiff]
 
-print('	auto c1 = new TCanvas("c1","");')
-print('	c1->Divide(1,2);\n')
+macro += ['	hNjobs_vs_t->SetStats(0);']
+macro += ['	hNjobs_vs_tdiff->SetStats(0);']
+macro += ['	hNjobs_vs_t->SetLineColor(kBlue);']
+macro += ['	hNjobs_vs_tdiff->SetLineColor(kMagenta);\n']
 
-print('	c1->cd(1);')
-print('	gPad->SetGrid();')
-print('	hNjobs_vs_t->Draw();')
-print('	c1->cd(2);')
-print('	gPad->SetGrid();')
-print('	hNjobs_vs_tdiff->Draw();\n')
+macro += ['	auto c1 = new TCanvas("c1","",1000, 1000);']
+macro += ['	c1->Divide(1,2);\n']
 
-print('	c1->SaveAs("Njobs_vs_time.png");')
-print('	c1->SaveAs("Njobs_vs_time.pdf");')
-print('}')
+macro += ['	c1->cd(1);']
+macro += ['	gPad->SetGrid();']
+macro += ['	hNjobs_vs_t->Draw();']
+macro += ['	c1->cd(2);']
+macro += ['	gPad->SetGrid();']
+macro += ['	hNjobs_vs_tdiff->Draw();\n']
 
+macro += ['	// Draw job parameters on plot']
+macro += ['	c1->Draw(); // needed for xmid to be correct (why I don\'t know ??)']
+macro += ['	c1->cd(1);']
+macro += ['	auto xmid = (gPad->GetX1()+gPad->GetX2())/2.0;']
+macro += ['	auto ymax = gPad->GetY2();']
+macro += ['	auto latex = new TLatex();']
+macro += ['	latex->SetTextSize(0.040);']
+macro += ['	latex->SetTextAlign(11);']
+macro += ['	latex->DrawLatex(0.0, ymax*0.95, "' + LOGDIR + '");']
 
+macro += ['	latex->SetTextSize(0.060);']
+macro += ['\n	latex->DrawLatex( 1.5*xmid, 0.75*ymax, "' + SITE + '");']
 
+date_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+macro += ['\n	c1->cd(1);']
+macro += ['	auto xmax = gPad->GetX2();']
+macro += ['	latex->SetTextSize(0.030);']
+macro += ['	latex->SetTextAlign(33);']
+macro += ['	latex->DrawLatex( xmax, ymax, "' + date_time + '");']
+
+macro += ['\n	// Save to files']
+macro += ['	c1->SaveAs("Njobs_vs_time.png");']
+macro += ['	c1->SaveAs("Njobs_vs_time.pdf");']
+macro += ['}']
+
+with open('Njobs_vs_time.C', 'w') as fil:
+    fil.write( '\n'.join(macro) )
+print('\nWrote macro to file: Njobs_vs_time.C')
+print('Run with: \n\troot -l Njobs_vs_time.C\n')
 

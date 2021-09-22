@@ -16,8 +16,9 @@ macrosVersion = {
   "prop.3.1-production-pythia8" : "247ac01",
   "prop.3.1-production-singlePion-0-20GeV" : "408060a",
   "prop.3.1-production-singleElectron-0-20GeV" : "79e1691",
-  "prop.3.2-production-singleElectron-0-20GeV" : "6a878fe"
-  #"prop.3.2-production-singleElectron-0-20GeV" : "2795137"
+  "prop.3.2-production-singleElectron-0-20GeV" : "485db0e",
+  "prop.3.3-production-singlePion-0-20GeV" : "7527712",
+  "prop.3.3-production-singleElectron-0-20GeV" : "485db0e"
 }
 
 #PWGs
@@ -28,8 +29,9 @@ ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILO
 
 #Collision type
 ecceCollision = ['singlePion', 'singleElectron', 'ep_18x100lowq2', 
-                 'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1', 'ep-5x100-q2-very-low',
+                 'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1',
                  'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500'
                  'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 
-                 'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-1000', 'ep-18x275cc',
+                 'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275cc',
+                 'ep-18x275nc-q2-2', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-1000',
                 ]
