@@ -4,7 +4,7 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13', 'ana.23', 'ana.26', 'ana.27', 'new']
+nightlyBuild = ['prop.4', 'prop.2', 'prop.1']
 
 #macros tags
 macrosVersion = {
@@ -20,6 +20,10 @@ macrosVersion = {
   "prop.3.2-production-singleElectron-0-20GeV" : "485db0e",
   "prop.3.3-production-singlePion-0-20GeV" : "7527712",
   "prop.3.3-production-singleElectron-0-20GeV" : "485db0e",
+  "prop.4.0-production" : "7e3088e",
+  "prop.4.0-production-pythia8" : "d1a4d8e",
+  "prop.4.0-production-singlePion-0-20GeV" : "2bfe6d0",
+  "prop.4.0-production-singleElectron-0-20GeV" : "216438e",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
@@ -65,6 +69,7 @@ ecceCollision = ['singlePion', 'singleElectron', 'ep_18x100lowq2',
                  'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500'
                  'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 
                  'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-1000', 'ep-18x275cc',
+                 'eAu-10x100-q2-1'
                 ]
 
 DiffTaggCollision = ['ep-5x41-pionFF', 'ep-5x100-pionFF', 'ep-10x100-pionFF', 

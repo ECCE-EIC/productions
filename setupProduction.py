@@ -14,7 +14,7 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
-  productionVersion = "prop.3.2"
+  productionVersion = "prop.4.0"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
@@ -26,7 +26,7 @@ class steering():
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
   macrosBranch = "production"
-  nEventsPerJob = 1
+  nEventsPerJob = 1000
   nTotalEvents = 0
   site = sys.argv[1]
 
