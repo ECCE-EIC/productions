@@ -17,7 +17,9 @@ macrosVersion = {
   "prop.3.1-production-pythia8" : "247ac01",
   "prop.3.1-production-singlePion-0-20GeV" : "408060a",
   "prop.3.1-production-singleElectron-0-20GeV" : "79e1691",
-  "prop.3.2-production-singleElectron-0-20GeV" : "6a878fe",
+  "prop.3.2-production-singleElectron-0-20GeV" : "485db0e",
+  "prop.3.3-production-singlePion-0-20GeV" : "7527712",
+  "prop.3.3-production-singleElectron-0-20GeV" : "485db0e",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
