@@ -1,0 +1,6 @@
+nightly ana.23
+tag prop.2.1-production-DiffractiveAndTagging-100GeV-r5
+PWG DiffractiveAndTagging
+generator DEMP
+collision ep-10x100-pionFF
+nTotalEvents 3000000

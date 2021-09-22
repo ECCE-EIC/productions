@@ -1,0 +1,6 @@
+nightly new
+tag prop.2.1-production-DiffractiveAndTagging-41GeV-r4
+PWG DiffractiveAndTagging
+generator CLASDIS
+collision ep-5x41-NeutronSS
+nTotalEvents 20000

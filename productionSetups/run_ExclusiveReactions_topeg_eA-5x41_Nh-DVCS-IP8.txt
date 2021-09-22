@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-IP8-41GeV-r5
+PWG ExclusiveReactions
+generator topeg
+collision eA-5x41_Nh-DVCS-IP8
+nTotalEvents 1000000
