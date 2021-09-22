@@ -19,11 +19,11 @@ macrosVersion = {
   "prop.3.1-production-singleElectron-0-20GeV" : "79e1691",
   "prop.3.2-production-singleElectron-0-20GeV" : "485db0e",
   "prop.3.3-production-singlePion-0-20GeV" : "7527712",
-  "prop.3.3-production-singleElectron-0-20GeV" : "485db0e"
-  "prop.4.0-production" : "df8db21",
-  "prop.4.0-production-pythia8" : "247ac01",
-  "prop.4.0-production-singlePion-0-20GeV" : "408060a",
-  "prop.4.0-production-singleElectron-0-20GeV" : "79e1691",
+  "prop.3.3-production-singleElectron-0-20GeV" : "485db0e",
+  "prop.4.0-production" : "7e3088e",
+  "prop.4.0-production-pythia8" : "d1a4d8e",
+  "prop.4.0-production-singlePion-0-20GeV" : "2bfe6d0",
+  "prop.4.0-production-singleElectron-0-20GeV" : "216438e",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
