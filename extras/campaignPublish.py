@@ -4,8 +4,10 @@
 # run at JLAB or on the OSG (with files brought back to JLab).
 #
 # Here publishing means copying from the standard directory on
-# the /work/eic2 disk to the xrootd directory AND to the BNL
-# S3 storage. This makes the files available to everyone without
+# the /work/eic2 disk to S3 storage at BNL. Note that we no
+# longer need to publish to xrootd in /work/osgpool because
+# the entire /work/eic2 disk is available via xrootd already.
+# Copying to S2 makes the files available to everyone without
 # an account at either JLab or BNL.
 #
 # NOTE: This relies on the extras/campaignStatus.py script to have
@@ -26,14 +28,14 @@
 #  DSTDIR=/work/eic2/ECCE/MC/prop.2/c131177/Electroweak/Djangoh/ep-10x100nc-q2-10
 #  EVENTS_PER_JOB=1000
 #
-# Run this with no arguments or by passing the name of the
-# submitParameters.dat file:
+# Run this with no arguments from the productions directory or
+# by passing the name of the submitParameters.dat file:
 #
-#  ./campaignPublish.py
+#  ./extras/campaignPublish.py
 #
 #         or
 #
-#  ./campaignPublish.py ../submissionFiles/*/*/*/*/submitParameters.dat
+#  ./extras/campaignPublish.py ../submissionFiles/*/*/*/*/submitParameters.dat
 #
 
 import os, sys, glob, shutil
@@ -129,31 +131,36 @@ print( 'Num. evaluator files: %d' % Nevalfiles )
 print( '   ratio Neval/N_DST: %f' % ratio )
 print( '')
 
+#-----------------------------------------------------------------
+# Copying to xrootd is no longer needed as the entire
+# /work/eic2 disk is available there now.
+#
 # Determine directory on xrootd server
-XROOTD_DIR = EVALDIR.replace('/work/eic2/ECCE/MC', '/work/osgpool/eic/ECCE/MC')
-if not os.path.exists( XROOTD_DIR ):
-    print('Making directory: ' + XROOTD_DIR )
-    os.makedirs(XROOTD_DIR, exist_ok=True)
-
+# XROOTD_DIR = EVALDIR.replace('/work/eic2/ECCE/MC', '/work/osgpool/eic/ECCE/MC')
+#if not os.path.exists( XROOTD_DIR ):
+#    print('Making directory: ' + XROOTD_DIR )
+#    os.makedirs(XROOTD_DIR, exist_ok=True)
+#
 # Copy all evaluator files to destination
-print( 'Copying evaluator files to ' + XROOTD_DIR )
-Ncopied   = 0
-Nexisting = 0
-for dst,evals in eval_files.items():
-    for feval in evals:
-        if not os.path.exists( os.path.join(XROOTD_DIR, os.path.basename(feval) ) ):
-            shutil.copy2( feval, XROOTD_DIR )
-            Ncopied += 1
-        else:
-            Nexisting += 1
-
-print('Copied %d files to xrootd server (%d already were there)' % (Ncopied, Nexisting))
+#print( 'Copying evaluator files to ' + XROOTD_DIR )
+#Ncopied   = 0
+#Nexisting = 0
+#for dst,evals in eval_files.items():
+#    for feval in evals:
+#        if not os.path.exists( os.path.join(XROOTD_DIR, os.path.basename(feval) ) ):
+#            shutil.copy2( feval, XROOTD_DIR )
+#            Ncopied += 1
+#        else:
+#            Nexisting += 1
+#
+#print('Copied %d files to xrootd server (%d already were there)' % (Ncopied, Nexisting))
+#-----------------------------------------------------------------
 
 # Mirror all files in xrootd directory on S3
 if COPY_TO_S3:
     print( '\nMirroring evaluator files from xrootd to S3 ...' )
-    S3DIR = XROOTD_DIR.replace('/work/osgpool/eic/ECCE/MC', 'S3/eictest/ECCE/MC')
-    cmd = [mcs3, 'mirror', '--preserve', XROOTD_DIR, S3DIR]
+    S3DIR = EVALDIR.replace('/work/eic2/ECCE/MC', 'S3/eictest/ECCE/MC')
+    cmd = [mcs3, 'mirror', '--preserve', EVALDIR, S3DIR]
     print( ' '.join(cmd) )
     subprocess.call( cmd )  # must use call() instead of run() since were using python 3.4.3 sometimes
 
