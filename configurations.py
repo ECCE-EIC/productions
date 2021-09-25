@@ -4,9 +4,7 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13', 'ana.23']
-
-# ana.23: August 22, 2022
+nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13', 'ana.23', 'ana.26', 'ana.27', 'new']
 
 #macros tags
 macrosVersion = {
@@ -15,11 +13,12 @@ macrosVersion = {
   "prop.2.1-production-pythia8" : "228d5b5",
   "prop.2.1-production-singlePion-0-20GeV" : "f6b93ca",
   "prop.2.1-production-singleElectron-0-20GeV" : "af4c3a2",
-#}
-
+  "prop.3.1-production" : "df8db21",
+  "prop.3.1-production-pythia8" : "247ac01",
+  "prop.3.1-production-singlePion-0-20GeV" : "408060a",
+  "prop.3.1-production-singleElectron-0-20GeV" : "79e1691",
+  "prop.3.2-production-singleElectron-0-20GeV" : "6a878fe",
 #Diff and Tagg
-
-#DiffTagg_macrosVersion = {
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
   "Diff_Tagg_Sim_July_03_2021" : "8fa40c8",
@@ -73,7 +72,7 @@ ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILO
 #Collision type
 
 ecceCollision = ['singlePion', 'singleElectron', 'ep_18x100lowq2', 
-                 'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1',
+                 'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1', 'ep-5x100-q2-very-low',
                  'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500'
                  'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 
                  'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275cc',
@@ -100,6 +99,4 @@ ExclusiveCollision = ['ep-10x100IPRO4_GK-DVCS', 'ep-10x100BH_GK-DVCS', 'ep-5x41I
 'ePb-18x110-phiKK-IP6']
 
 ecceCollision.extend(DiffTaggCollision)
-
 ecceCollision.extend(ExclusiveCollision)
-
