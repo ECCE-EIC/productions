@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-r5
+PWG ExclusiveReactions
+generator EpIC
+collision ep-18x275-TCS-hel_plus
+nTotalEvents 500000

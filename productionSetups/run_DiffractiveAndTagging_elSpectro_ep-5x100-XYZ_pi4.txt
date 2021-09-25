@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-100GeV-r5
+PWG DiffractiveAndTagging
+generator elSpectro
+collision ep-5x100-XYZ-pi4
+nTotalEvents 2000000

@@ -14,6 +14,7 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
+  productionVersion = "prop.4.0"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
@@ -59,10 +60,6 @@ if steering.site == "OSG@BNL":
   steering.productionTopDir = 'N/A'
   steering.simulationsDir = steering.productionTopDir
 
-if steering.collisionType == "singlePion": steering.macrosBranch = "production_singlePion_0-20GeV"
-if steering.collisionType == "singleElectron": steering.macrosBranch = "production_singleElectron_0-20GeV"
-if steering.generator == "pythia8": steering.macrosBranch = "production_pythia8"
-
 def getParameter(parameter):
   configFile = open(steering.fileName, "r")
   line = configFile.readline()
@@ -95,6 +92,9 @@ def getProductionRequirements():
   steering.generator = getParameter("generator")
   steering.collisionType = getParameter("collision")
   steering.nTotalEvents = getParameter("nTotalEvents")
+  if steering.collisionType == "singlePion": steering.macrosBranch = "production_singlePion_0-20GeV"
+  if steering.collisionType == "singleElectron": steering.macrosBranch = "production_singleElectron_0-20GeV"
+  if steering.generator == "pythia8": steering.macrosBranch = "production_pythia8"
 
   checkRequirements(steering.PWG, config.ecceWorkingGroup)
   checkRequirements(steering.generator, config.ecceGenerator)
@@ -129,8 +129,11 @@ def getMacrosRepo():
     for f in glob.glob( '%s/*' % extrasDir ):
       destFile = os.path.join(destDir, os.path.basename(f))
       if not os.path.exists( destFile ):
-        print('copying %s  ->  %s' % (f,destFile))
-        shutil.copy( f, destFile )
+        if not os.path.isdir(f) :
+            print('copying %s  ->  %s' % (f,destFile))
+            shutil.copy( f, destFile )
+        else:
+             print('skipping copy of directory: %s  from extras' % os.path.basename(f) )
       else:
         print('skipping copy of %s since it would overwrite file already in macros directory' % os.path.basename(f) )
 
@@ -141,18 +144,19 @@ def getMacrosRepo():
   os.system(cmd)
 
 def setupJob():
-  arguments = "{} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
-                                                           steering.PWG, 
-                                                           steering.generator, 
-                                                           steering.collisionType, 
-                                                           steering.nightly, 
-                                                           submissionProdDir, 
-                                                           detectorMacroLocation, 
-                                                           steering.submissionTopDir,
-                                                           config.macrosVersion[steering.macrosTag],
-                                                           steering.site, 
-                                                           steering.macrosBranch,
-                                                           steering.nTotalEvents)
+  arguments = "{} {} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
+                                                              steering.PWG, 
+                                                              steering.generator, 
+                                                              steering.collisionType, 
+                                                              steering.nightly, 
+                                                              submissionProdDir, 
+                                                              detectorMacroLocation, 
+                                                              steering.submissionTopDir,
+                                                              config.macrosVersion[steering.macrosTag],
+                                                              steering.site, 
+                                                              steering.macrosBranch,
+                                                              steering.nTotalEvents,
+                                                              steering.productionVersion)
 
   submitScript = ""
   if steering.site == "BNL": submitScript = "makeCondorJobs.py"
@@ -160,7 +164,13 @@ def setupJob():
   elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
   elif steering.site == "OSG@BNL": submitScript = "makeOSGJobs.py"
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
+<<<<<<< HEAD
   os.system("python3 {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
+=======
+  cmd = "python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments)
+  print(cmd)
+  os.system(cmd)
+>>>>>>> e6e022181ed5f51de18589494be0b10948f03339
 
 
 def createSubmissionFiles():
