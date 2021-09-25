@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-62GeV-r5
+PWG DiffractiveAndTagging
+generator Djangoh
+collision eHe3-5x41-NeutronSS-highx
+nTotalEvents 1990000

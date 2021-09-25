@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-IP8-r5
+PWG ExclusiveReactions
+generator BeAGLE
+collision eAu-18x110-Phi-IP8
+nTotalEvents 300000

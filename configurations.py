@@ -4,11 +4,30 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
+<<<<<<< HEAD
 nightlyBuild = ['prop.2', 'prop.1', 'ana.8', 'ana.13', 'ana.23', 'ana.26', 'ana.27', 'new']
 
 #macros tags
 macrosVersion = {
   "prop1" : "9cad06f",
+=======
+nightlyBuild = ['prop.4', 'prop.2', 'prop.1']
+
+#macros tags
+macrosVersion = {
+<<<<<<< HEAD
+  "June-2021-Concept-v0.1" : "38efad6",
+  "v0.1" : "74c9a85",
+  "latest_master" : "463a3bb", #from 2021/06/11
+  "latest" : "9daf451", #from 2021/05/11
+  "20210618" : "db6dd0c",
+  "20210624" : "5f210c7",
+  "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
+  "prop1" : "9cad06f"
+=======
+  "prop1" : "9cad06f",
+>>>>>>> e6e022181ed5f51de18589494be0b10948f03339
+>>>>>>> master
   "prop.2.1-production" : "c131177",
   "prop.2.1-production-pythia8" : "228d5b5",
   "prop.2.1-production-singlePion-0-20GeV" : "f6b93ca",
@@ -17,7 +36,17 @@ macrosVersion = {
   "prop.3.1-production-pythia8" : "247ac01",
   "prop.3.1-production-singlePion-0-20GeV" : "408060a",
   "prop.3.1-production-singleElectron-0-20GeV" : "79e1691",
+<<<<<<< HEAD
   "prop.3.2-production-singleElectron-0-20GeV" : "6a878fe",
+=======
+  "prop.3.2-production-singleElectron-0-20GeV" : "485db0e",
+  "prop.3.3-production-singlePion-0-20GeV" : "7527712",
+  "prop.3.3-production-singleElectron-0-20GeV" : "485db0e",
+  "prop.4.0-production" : "7e3088e",
+  "prop.4.0-production-pythia8" : "d1a4d8e",
+  "prop.4.0-production-singlePion-0-20GeV" : "2bfe6d0",
+  "prop.4.0-production-singleElectron-0-20GeV" : "216438e",
+>>>>>>> master
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",

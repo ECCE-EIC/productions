@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-r5
+PWG ExclusiveReactions
+generator Sartre
+collision ePb-18x110-phiKK-IP6
+nTotalEvents 700000

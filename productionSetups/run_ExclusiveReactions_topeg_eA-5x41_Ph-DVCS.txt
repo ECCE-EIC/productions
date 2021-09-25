@@ -1,5 +1,9 @@
 nightly ana.24
+<<<<<<< HEAD
 tag prop.2.1-production-DiffractiveAndTagging-82GeV-r5
+=======
+tag prop.2.1-production-DiffractiveAndTagging-41GeV-r5
+>>>>>>> master
 PWG ExclusiveReactions
 generator topeg
 collision eA-5x41_Ph-DVCS
