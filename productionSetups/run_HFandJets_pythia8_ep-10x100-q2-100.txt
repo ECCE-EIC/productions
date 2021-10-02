@@ -2,5 +2,5 @@ nightly prop.4
 tag prop.4.0-production-pythia8
 PWG HFandJets 
 generator pythia8
-collision eAu-10x100-q2-1-to-100
-nTotalEvents 20000000
+collision ep-10x100-q2-100
+nTotalEvents 2000000

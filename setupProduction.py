@@ -26,7 +26,7 @@ class steering():
   submissionTopDir = os.getcwd()
   macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
   macrosBranch = "production"
-  nEventsPerJob = 1000
+  nEventsPerJob = 2000
   nTotalEvents = 0
   site = sys.argv[1]
 
