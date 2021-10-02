@@ -24,7 +24,7 @@ macrosVersion = {
   "prop.4.0-production-pythia8" : "d1a4d8e",
   "prop.4.0-production-singlePion-0-20GeV" : "2bfe6d0",
   "prop.4.0-production-singleElectron-0-20GeV" : "216438e",
-  "prop.4.1-production : 97b6760",
+  "prop.4.1-production" : "97b6760",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
@@ -96,16 +96,3 @@ ExclusiveCollision = ['ep-10x100IPRO4_GK-DVCS', 'ep-10x100BH_GK-DVCS', 'ep-5x41I
 ecceCollision.extend(DiffTaggCollision)
 ecceCollision.extend(ExclusiveCollision)
 
-Inclusive_Djangoh_ep-10x100nc-q2-100.list
-Inclusive_Djangoh_ep-10x100nc-q2-10.list
-Inclusive_Djangoh_ep-10x100nc-q2-2.list
-Inclusive_Djangoh_ep-10x100nc-q2-500.list
-Inclusive_Djangoh_ep-18x275nc-q2-1000.list
-Inclusive_Djangoh_ep-18x275nc-q2-100.list
-Inclusive_Djangoh_ep-18x275nc-q2-10.list
-Inclusive_Djangoh_ep-18x275nc-q2-2.list
-Inclusive_Djangoh_ep-18x275nc-q2-50.list
-Inclusive_Djangoh_ep-5x41cc-q2-1.list
-Inclusive_Djangoh_ep-5x41nc-q2-10.list
-Inclusive_Djangoh_ep-5x41nc-q2-2.list
-Inclusive_Djangoh_ep-5x41nc-q2-50.list
