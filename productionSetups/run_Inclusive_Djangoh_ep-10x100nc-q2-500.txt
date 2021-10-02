@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4.1-production
+PWG Inclusive 
+generator Djangoh
+collision ep-10x100nc-q2-500
+nTotalEvents 100000
