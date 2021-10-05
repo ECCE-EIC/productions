@@ -159,7 +159,7 @@ status_mess += ['        N_SUBMIT: %4d  - Num. submit scripts found' % N_SUBMIT 
 status_mess += ['     N_DST_TOTAL: %4d  - Num. DST files found (good or not)' % N_DST_TOTAL ]
 status_mess += [' N_DST_SUBMITTED: %4d  - Num. DST files found  (good or not) that have submit script' % N_DST_SUBMITTED ]
 status_mess += ['      N_DST_GOOD: %4d  - Num. DST files that are good and have submit file' % N_DST_GOOD ]
-status_mess += ['N_DST_BAD_EVENTS: %4d  - Num. DST files that have the wrong number of events' % N_TIMEOUT ]
+status_mess += ['N_DST_BAD_EVENTS: %4d  - Num. DST files that have the wrong number of events' % N_DST_BAD_EVENTS ]
 status_mess += ['   N_DST_MISSING: %4d  - Num. DST files that are missing' % len(MISSING_DST_SUBMIT) ]
 status_mess += ['       N_TIMEOUT: %4d  - Num. log files showing timeout (bad or missing DST files only)' % N_TIMEOUT ]
 
