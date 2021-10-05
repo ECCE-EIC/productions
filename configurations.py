@@ -90,7 +90,10 @@ ExclusiveCollision = ['ep-10x100IPRO4_GK-DVCS', 'ep-10x100BH_GK-DVCS', 'ep-5x41I
                       'ep-10x100-JPsi', 'ep-10x100-JPsi-IP8',
                       'ep-10x100nc-q2-500', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-2',
                       'ep-18x275nc-q2-1000', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-50', 'ep-18x275nc-q2-2',
-                      'ep-5x41nc-q2-50', 'ep-5x41nc-q2-10', 'ep-5x41nc-q2-2', 'ep-5x41cc-q2-1'
+                      'ep-5x41nc-q2-50', 'ep-5x41nc-q2-10', 'ep-5x41nc-q2-2', 'ep-5x41cc-q2-1',
+                      'eD-10x100nc-q2-500', 'eD-10x100nc-q2-100', 'eD-10x100nc-q2-10', 'eD-10x100nc-q2-2',
+                      'eD-18x137nc-q2-1000', 'eD-18x137nc-q2-100', 'eD-18x137nc-q2-10', 'eD-18x137nc-q2-2', 'eD-18x137cc-q2-1',
+                      'eD-5x41nc-q2-50', 'eD-5x41nc-q2-10', 'eD-5x41nc-q2-2', 'eD-5x41cc-q2-1'
                      ]
 
 ecceCollision.extend(DiffTaggCollision)
