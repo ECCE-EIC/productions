@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4-production-DiffractiveAndTagging-100GeV-r6
+PWG ExclusiveReactions
+generator LAger
+collision ep-10x100-JPsi
+nTotalEvents 230000

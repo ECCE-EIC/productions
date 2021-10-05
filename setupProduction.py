@@ -24,11 +24,6 @@ class steering():
   productionTopDir = '.'
   simulationsDir = productionTopDir
   submissionTopDir = os.getcwd()
-<<<<<<< HEAD
-  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
-  macrosBranch = "production"
-  nEventsPerJob = 1
-=======
 #  macrosRepo = "https://github.com/ECCE-EIC/macros.git" #"git@github.com:ECCE-EIC/macros.git"
 #  macrosBranch = "master"
   macrosRepo = "https://github.com/billlee77/macros.git" #"git@github.com:billlee77/macros.git"
@@ -41,7 +36,6 @@ class steering():
 #  macrosBranch = "production"
 
   nEventsPerJob = 1000
->>>>>>> master
   nTotalEvents = 0
   site = sys.argv[1]
 
@@ -169,18 +163,10 @@ def setupJob():
   elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
   elif steering.site == "OSG@BNL": submitScript = "makeOSGJobs.py"
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
-<<<<<<< HEAD
-  os.system("python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
-=======
-<<<<<<< HEAD
-  os.system("python3 {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
-=======
-  cmd = "python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments)
+
+  cmd = "python3 {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments)
   print(cmd)
   os.system(cmd)
->>>>>>> e6e022181ed5f51de18589494be0b10948f03339
->>>>>>> master
-
 
 def createSubmissionFiles():
   global submissionProdDir

@@ -1,5 +1,5 @@
-nightly ana.24
-tag prop.2.1-production-DiffractiveAndTagging-IP8-r5
+nightly prop.4
+tag prop.4-production-DiffractiveAndTagging-IP8-r6
 PWG DiffractiveAndTagging
 generator BeAGLE
 collision ePb-18x108-JPsi-mu-IP8

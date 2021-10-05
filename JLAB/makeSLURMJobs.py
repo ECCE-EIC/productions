@@ -75,6 +75,7 @@ def makeSLURMJob():
         for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
     else:
         # This gets executed for single particle events using built-in particle gun
+        print("File list doesn't exist!\nList name : {}".format(inputFileList))
         inputFileList = "<N/A>"
         line = "dummy"
         infile = None

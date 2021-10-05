@@ -1,0 +1,6 @@
+nightly ana.24
+tag prop.2.1-production-DiffractiveAndTagging-r5
+PWG DiffractiveAndTagging
+generator BeAGLE
+collision ePb-18x108-JPsi-mu-IP6
+nTotalEvents 500000
