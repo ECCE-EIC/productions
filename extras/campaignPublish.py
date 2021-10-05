@@ -11,7 +11,7 @@
 # an account at either JLab or BNL.
 #
 # NOTE: This relies on the extras/campaignStatus.py script to have
-# already been run so that the Status_reports/good_DST_files.txt
+# already been run so that the Status_reports/*/good_DST_files.txt
 # file exists. ONLY files in the MOST RECENT eval_xxx folder that
 # correspond to DST files in the "good" list will be published.
 #
@@ -19,7 +19,7 @@
 # good.
 #
 # This uses the DST directory location to find the most recent
-# eval directory and to know where to copy the files to. This
+# eval directory and to know where to copy the files to. This is
 # read from the submitParameters.dat file. This file has a
 # format of e.g.:
 #
@@ -51,118 +51,116 @@ import subprocess
 COPY_TO_S3 = True
 mcs3 = '/cvmfs/eic.opensciencegrid.org/gcc-8.3/opt/fun4all/utils/bin/mcs3'
 
-
-SUBMITDIR      = ''
-LOGDIR         = ''
-DSTDIR         = ''
-EVENTS_PER_JOB = 1
-
-# Read submit parameters from file
-submitParametersFile = '/path/to/submitParameters.dat'
+# Get list of submitParameters.dat files from command
+# line. If not given, search for them.
 if len(sys.argv) > 1:
-	submitParametersFile = sys.argv[1]
+    submitParametersFiles = sys.argv[1:]
 else:
 	if os.path.exists('./submissionFiles'):
-		tmp = glob.glob('./submissionFiles/*/*/*/*/submitParameters.dat')
+		submitParametersFiles = glob.glob('./submissionFiles/*/*/*/*/submitParameters.dat')
 	else:
-		tmp = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
-	if len(tmp) > 0:
-		submitParametersFile = tmp[0]
+		submitParametersFiles = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
+   
+if len(submitParametersFiles) == 0:
+    print('No submitParameters.dat files specified or found!')
+    sys.exit(-1)
 
-if not os.path.exists( submitParametersFile ):
-	print( 'No file: ' + submitParametersFile )
-	sys.exit()
+print('='*100)
+print('Generating reports for the following configurations:')
+for f in submitParametersFiles: print('\t'+f)
+print('='*100)
 
-print('Reading campaign parameters from:' + submitParametersFile)
-f = open( submitParametersFile )
-for line in f.readlines():
-	if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
-	if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
-	if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
-	if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
 
-#----------------------------------------------------------
+# Loop over submitParameters.dat files
+for submitParametersFile in submitParametersFiles:
 
-# Get name of most recent evaluator directory
-tmp = sorted( glob.glob( DSTDIR + '/eval_*' ) )
-if not tmp :
-    print('NO eval_* directory in ' + DSTDIR + '/eval_*' )
-    sys.exit()
-EVALDIR = tmp[-1]  # should be ordered by name. take last one
-if not EVALDIR.startswith('/work/eic2/ECCE/MC'):
-    print('ERROR: Expecting the evaluator directory to start with "/work/eic2/ECCE/MC"')
-    print('       EVALDIR = ' + EVALDIR)
+    SUBMITDIR      = ''
+    LOGDIR         = ''
+    DSTDIR         = ''
+    EVENTS_PER_JOB = 1
 
-# Open good_DST_files.txt file and read in list of good DSTs
-good_fname = 'Status_Reports/good_DST_files.txt'
-if not os.path.exists( good_fname ):
-    print( 'No file: ' + good_fname + ' ! Please make sure extras/campaignStatus.py has been run!' )
-    sys.exit()
+    print('- '*45)
+    print(submitParametersFile + '\n')
 
-# Look for eval files with names corresponding to a good DST file.
-# Use the DST file name as the key and the list of corresponding
-# eval files as the value.
-eval_files = {}
+    if not os.path.exists( submitParametersFile ):
+	    print( 'No file: ' + submitParametersFile )
+	    continue
 
-# Loop over good DST files
-print('Scanning good DST files for evaluators ...')
-f = open( good_fname )
-for line in f.readlines():
-    if line.startswith('#'): continue
-    if not line.startswith( DSTDIR ):
-        print( 'ERROR: A DST file in ' + good_fname + ' does not start with the DSTDIR (i.e. ' + DSTDIR + ')')
-        print( '\noffending file:\n       ' + line.strip() )
-        print( '(nothing copied)' )
-        sys.exit()
-    fname = os.path.basename( line.strip() )
-    fname_base = fname.replace('.root', '')
-    eval_files[fname] = glob.glob( os.path.join( EVALDIR, fname_base+'*.root' ) )
-    
-# Report what we found
-Nevalfiles = sum([len(v) for k,v in eval_files.items()] )
-ratio = float(Nevalfiles)/float(len(eval_files))
+    print('Reading campaign parameters from:' + submitParametersFile)
+    f = open( submitParametersFile )
+    for line in f.readlines():
+	    if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
+	    if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
+	    if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
+	    if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
 
-print( '\nFOUND')
-print( '--------------------------------------')
-print( '              DSTDIR: %s' % DSTDIR )
-print( '             EVALDIR: %s' % EVALDIR )
-print( ' Num. good DST files: %d' % len(eval_files) )
-print( 'Num. evaluator files: %d' % Nevalfiles )
-print( '   ratio Neval/N_DST: %f' % ratio )
-print( '')
+    reaction = '_'.join(DSTDIR.split('/')[-3:])
+    statusReportsDir = 'Status_Reports/'+reaction
+    print( 'Reading status reports from "%s" directory.' % statusReportsDir )
 
-#-----------------------------------------------------------------
-# Copying to xrootd is no longer needed as the entire
-# /work/eic2 disk is available there now.
-#
-# Determine directory on xrootd server
-# XROOTD_DIR = EVALDIR.replace('/work/eic2/ECCE/MC', '/work/osgpool/eic/ECCE/MC')
-#if not os.path.exists( XROOTD_DIR ):
-#    print('Making directory: ' + XROOTD_DIR )
-#    os.makedirs(XROOTD_DIR, exist_ok=True)
-#
-# Copy all evaluator files to destination
-#print( 'Copying evaluator files to ' + XROOTD_DIR )
-#Ncopied   = 0
-#Nexisting = 0
-#for dst,evals in eval_files.items():
-#    for feval in evals:
-#        if not os.path.exists( os.path.join(XROOTD_DIR, os.path.basename(feval) ) ):
-#            shutil.copy2( feval, XROOTD_DIR )
-#            Ncopied += 1
-#        else:
-#            Nexisting += 1
-#
-#print('Copied %d files to xrootd server (%d already were there)' % (Ncopied, Nexisting))
-#-----------------------------------------------------------------
+    #----------------------------------------------------------
 
-# Mirror all files in xrootd directory on S3
-if COPY_TO_S3:
-    print( '\nMirroring evaluator files from xrootd to S3 ...' )
-    S3DIR = EVALDIR.replace('/work/eic2/ECCE/MC', 'S3/eictest/ECCE/MC')
-    cmd = [mcs3, 'mirror', '--preserve', EVALDIR, S3DIR]
-    print( ' '.join(cmd) )
-    subprocess.call( cmd )  # must use call() instead of run() since were using python 3.4.3 sometimes
+    # Get name of most recent evaluator directory
+    tmp = sorted( glob.glob( DSTDIR + '/eval_*' ) )
+    if not tmp :
+        print('NO eval_* directory in ' + DSTDIR + '/eval_*' )
+        continue
+    EVALDIR = tmp[-1]  # should be ordered by name. take last one
+    if not EVALDIR.startswith('/work/eic2/ECCE/MC'):
+        print('ERROR: Expecting the evaluator directory to start with "/work/eic2/ECCE/MC"')
+        print('       EVALDIR = ' + EVALDIR)
+        continue
 
-print('\nDone.')
+    # Open good_DST_files.txt file and read in list of good DSTs
+    good_fname = statusReportsDir+'/good_DST_files.txt'
+    if not os.path.exists( good_fname ):
+        print( 'No file: ' + good_fname + ' ! Please make sure extras/campaignStatus.py has been run!' )
+        continue
+
+    # Look for eval files with names corresponding to a good DST file.
+    # Use the DST file name as the key and the list of corresponding
+    # eval files as the value.
+    eval_files = {}
+
+    # Loop over good DST files
+    print('Scanning good DST files for evaluators ...')
+    f = open( good_fname )
+    for line in f.readlines():
+        if line.startswith('#'): continue
+        if not line.startswith( DSTDIR ):
+            print( 'ERROR: A DST file in ' + good_fname + ' does not start with the DSTDIR (i.e. ' + DSTDIR + ')')
+            print( '\noffending file:\n       ' + line.strip() )
+            print( '(nothing copied)' )
+            continue
+        fname = os.path.basename( line.strip() )
+        fname_base = fname.replace('.root', '')
+        eval_files[fname] = glob.glob( os.path.join( EVALDIR, fname_base+'*.root' ) )
+
+    # Count how many jobs in this configuration
+    Njobfiles = len(glob.glob( SUBMITDIR + '/*.job'))
+    NgoodDSTs = len(eval_files)
+    frac_good_DST = float(NgoodDSTs)/float(Njobfiles)
+
+    # Report what we found
+    Nevalfiles = sum([len(v) for k,v in eval_files.items()] )
+    ratio = float(Nevalfiles)/float(len(eval_files))
+
+    print( '\nFOUND')
+    print( '--------------------------------------')
+    print( '              DSTDIR: %s' % DSTDIR )
+    print( '             EVALDIR: %s' % EVALDIR )
+    print( ' Num. good DST files: %d  (=%3.1d%% of %d jobs)' % (NgoodDSTs, 100.0*frac_good_DST, Njobfiles) )
+    print( 'Num. evaluator files: %d' % Nevalfiles )
+    print( '   ratio Neval/N_DST: %f' % ratio )
+    print( '')
+
+    # Mirror all files in xrootd directory on S3
+    if COPY_TO_S3:
+        print( '\nMirroring evaluator files from xrootd to S3 ...' )
+        S3DIR = EVALDIR.replace('/work/eic2/ECCE/MC', 'S3/eictest/ECCE/MC')
+        cmd = [mcs3, 'mirror', '--preserve', EVALDIR, S3DIR]
+        print( ' '.join(cmd) )
+        subprocess.call( cmd )  # must use call() instead of run() since were using python 3.4.3 sometimes
+
+    print('\nDone.')
 
