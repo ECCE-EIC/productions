@@ -1,5 +1,5 @@
 nightly prop.4
-tag prop.4-production-DiffractiveAndTagging-275GeV-r6
+tag prop.4-production-DiffractiveAndTagging-IP6-275GeV-r6
 PWG ExclusiveReactions
 generator MILOU3D
 collision ep-18x275BH_GK-DVCS

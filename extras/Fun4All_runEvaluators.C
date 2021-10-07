@@ -64,35 +64,64 @@ int Fun4All_runEvaluators(
   //-----
   
   Enable::DSTREADER = false;
-  Enable::USER = false;
+  Enable::USER = false; // Enable this to run custom code from G4_User.C
 
   Enable::EVENT_EVAL = true;
   Enable::TRACKING_EVAL = true;
-  Enable::CEMC_EVAL = true;
+  Enable::BECAL_EVAL = true;
   Enable::HCALIN_EVAL = true;
   Enable::HCALOUT_EVAL = true;
   Enable::FEMC_EVAL = true;
-  Enable::FHCAL_EVAL = true;
-  Enable::EEMC_EVAL = true;
+  Enable::LFHCAL_EVAL = true;
+  Enable::EEMCH_EVAL = true;
+  Enable::EHCAL_EVAL = true;
   Enable::FWDJETS_EVAL = true;
+  Enable::FFR_EVAL = true;
 
   map<string, string> evaluatorNames;
   evaluatorNames["event"] = "_g4event_eval.root";
   evaluatorNames["tracking"] = "_g4tracking_eval.root";
-  evaluatorNames["cemc"] = "_g4cemc_eval.root";
+  evaluatorNames["becal"] = "_g4becal_eval.root";
   evaluatorNames["hcalin"] = "_g4hcalin_eval.root";
   evaluatorNames["hcalout"] = "_g4hcalout_eval.root";
   evaluatorNames["femc"] = "_g4femc_eval.root";
   evaluatorNames["fhcal"] = "_g4fhcal_eval.root";
-  evaluatorNames["eemc"] = "_g4eemc_eval.root";
+  evaluatorNames["eemch"] = "_g4eemch_eval.root";
+  evaluatorNames["ehcal"] = "_g4ehcal_eval.root";
+  evaluatorNames["farfwd"] = "_g4farfwd_eval.root";
 
+  /*
+   * Enable extra features in the evaluators
+   * WARNING!!! Ensure your DST has the right nodes
+   */
   Enable::TRACKING = true;
-  Enable::CEMC_CLUSTER = true;
-  Enable::EEMC_CLUSTER = true;
-  Enable::FEMC_CLUSTER = true;
+  Enable::BECAL_CLUSTER = true;
   Enable::HCALIN_CLUSTER = true;
   Enable::HCALOUT_CLUSTER = true;
-  Enable::FHCAL_CLUSTER = true;
+  Enable::FEMC_CLUSTER = true;
+  Enable::LFHCAL_CLUSTER = true;
+  Enable::EEMCH_CLUSTER = true;
+  Enable::EHCAL_CLUSTER = true;
+
+  TRACKING::ProjectionNames = {"BECAL"
+                              ,"CTTL_0"
+                              ,"EEMC"
+                              ,"EHCAL"
+                              ,"ETTL_0"
+                              ,"ETTL_1" 
+                              ,"FEMC"
+                              ,"FTTL_0" 
+                              ,"FTTL_1"
+                              ,"HCALOUT"
+                              ,"LFHCAL"
+                              ,"RICH"
+                              ,"hpDIRC"
+                              ,"mRICH"
+                              };
+
+  Enable::DIRC_RECO = true;
+  Enable::mRICH_RECO = true;
+  Enable::RICH_RECO = true;
 
   //-----
   // Output file headers and path
@@ -147,13 +176,15 @@ int Fun4All_runEvaluators(
 
   if (Enable::EVENT_EVAL) Event_Eval(outputroot + evaluatorNames.find("event")->second);
   if (Enable::TRACKING_EVAL) Tracking_Eval(outputroot + evaluatorNames.find("tracking")->second);
-  if (Enable::CEMC_EVAL) CEMC_Eval(outputroot + evaluatorNames.find("cemc")->second);
+  if (Enable::BECAL_EVAL) BECAL_Eval(outputroot + evaluatorNames.find("becal")->second);
   if (Enable::HCALIN_EVAL) HCALInner_Eval(outputroot + evaluatorNames.find("hcalin")->second);
   if (Enable::HCALOUT_EVAL) HCALOuter_Eval(outputroot + evaluatorNames.find("hcalout")->second);
   if (Enable::FEMC_EVAL) FEMC_Eval(outputroot + evaluatorNames.find("femc")->second);
   if (Enable::FHCAL_EVAL) FHCAL_Eval(outputroot + evaluatorNames.find("fhcal")->second);
-  if (Enable::EEMC_EVAL) EEMC_Eval(outputroot + evaluatorNames.find("eemc")->second);
-  //if (Enable::FWDJETS_EVAL) Jet_FwdEval();
+  if (Enable::EEMCH_EVAL) EEMCH_Eval(outputroot + evaluatorNames.find("eemch")->second);
+  if (Enable::EHCAL_EVAL) EHCAL_Eval(outputroot + evaluatorNames.find("ehcal")->second);
+  if (Enable::FWDJETS_EVAL) Jet_FwdEval(outputroot);
+  if (Enable::FFR_EVAL) FFR_Eval(outputroot + evaluatorNames.find("farfwd")->second);
 
   //--------------
   // Set up Input Managers

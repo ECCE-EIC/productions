@@ -1,5 +1,5 @@
 nightly ana.24
-tag prop.2.1-production-DiffractiveAndTagging-IP8-r5
+tag prop.4-production-DiffractiveAndTagging-IP8-275GeV-r6
 PWG ExclusiveReactions
 generator BeAGLE
 collision eAu-18x110-Phi-IP8

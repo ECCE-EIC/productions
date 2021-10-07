@@ -2,6 +2,8 @@
 
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $6
 
+export CALIBRATIONROOT=/work/eic/users/billlee/build/calibrations
+
 export ROOT_INCLUDE_PATH=$(pwd)/../../common:$ROOT_INCLUDE_PATH
 
 metaDataFile=${5}/${3}.txt

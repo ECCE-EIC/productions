@@ -65,6 +65,7 @@ macrosVersion = {
   "prop.4-production-DiffractiveAndTagging-IP6-62GeV-r6" : "Diff_Tagg_IP6_62GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP6-82GeV-r6" : "Diff_Tagg_IP6_82GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP6-100GeV-r6" : "Diff_Tagg_IP6_100GeV_r6",
+  "prop.4-production-DiffractiveAndTagging-IP6-135GeV-r6" : "Diff_Tagg_IP6_135GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP6-165GeV-r6" : "Diff_Tagg_IP6_165GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP6-220GeV-r6" : "Diff_Tagg_IP6_220GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP6-249GeV-r6" : "Diff_Tagg_IP6_249GeV_r6",
@@ -76,8 +77,10 @@ macrosVersion = {
   "prop.4-production-DiffractiveAndTagging-IP8-62GeV-r6" : "Diff_Tagg_IP8_62GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP8-82GeV-r6" : "Diff_Tagg_IP8_82GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP8-100GeV-r6" : "Diff_Tagg_IP8_100GeV_r6",
+  "prop.4-production-DiffractiveAndTagging-IP8-135GeV-r6" : "Diff_Tagg_IP8_135GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP8-165GeV-r6" : "Diff_Tagg_IP8_165GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP8-220GeV-r6" : "Diff_Tagg_IP8_220GeV_r6",
+  "prop.4-production-DiffractiveAndTagging-IP8-249GeV-r6" : "Diff_Tagg_IP8_249GeV_r6",
   "prop.4-production-DiffractiveAndTagging-IP8-275GeV-r6" : "Diff_Tagg_IP8_275GeV_r6",
 
 }
@@ -104,7 +107,7 @@ DiffTaggCollision = [
 # Kaon form factor
 'ep-5x41-KLambda-IP6', 'ep-5x41-KSigma-IP6', 
 # Pion Structure Function Study
-'ep-5x41-PiStruc-IP6', 'ep-5x100-PiStruc-IP6', 'ep-10x100-PiStruc-IP6', 'ep-18x275-PiStruc-IP6',
+'ep-5x41-PiStruc-IP6', 'ep-5x100-PiStruc-IP6', 'ep-10x100-PiStruc-IP6', 'ep-10x135-PiStruc-IP6', 'ep-18x275-PiStruc-IP6',
 # u-Channel Omega
 'ep-5x100-upi0-IP6', 
 # Short range correlation

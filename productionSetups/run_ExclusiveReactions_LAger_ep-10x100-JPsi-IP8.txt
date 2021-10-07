@@ -1,5 +1,5 @@
 nightly ana.24
-tag prop.2.1-production-DiffractiveAndTagging-IP8-100GeV-r5 
+tag prop.4-production-DiffractiveAndTagging-IP8-100GeV-r6 
 PWG ExclusiveReactions
 generator LAger
 collision ep-10x100-JPsi-IP8
