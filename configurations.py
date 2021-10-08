@@ -25,6 +25,7 @@ macrosVersion = {
   "prop.4.0-production-singlePion-0-20GeV" : "2bfe6d0",
   "prop.4.0-production-singleElectron-0-20GeV" : "216438e",
   "prop.4.1-production" : "97b6760",
+  "prop.4.2-production" : "7a017bb",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
