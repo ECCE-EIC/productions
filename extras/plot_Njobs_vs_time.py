@@ -63,17 +63,21 @@ for submitParametersFile in submitParametersFiles:
     SITE = ''
     if SUBMITDIR.endswith('osgJobs'  ): SITE = 'OSG'
     if SUBMITDIR.endswith('slurmJobs'): SITE = 'JLAB'
+    
+    # Get count of submission files
+    Njobs_total = len(glob.glob(SUBMITDIR+'/*.job'))
 
     # Find all files ending in ".out" in the specified directory 
     # tree. Find the "Start time:" and "End time:" strings for each
     # and convert them into a datetime in the local timezone.
 
-    job_times = []
     job_starts = []
     job_ends = []
+    job_files = []
     for dirname,subdirname,filelist in os.walk(LOGDIR):
 	    for fname in filelist:
 		    if not fname.endswith('.out'): continue
+		    #if not fname.endswith('-eval_only.out'): continue
 
 		    with open( os.path.join( dirname, fname) ) as f:
 			    dt_start = None
@@ -91,6 +95,7 @@ for submitParametersFile in submitParametersFiles:
 			    if dt_start and dt_end :
 				    job_starts += [dt_start]
 				    job_ends   += [ dt_end ]
+				    job_files  += [os.path.join( dirname, fname)]
 
     # Find earliest job start and latest job end
     dt_earliest = min(job_starts)
@@ -121,10 +126,12 @@ for submitParametersFile in submitParametersFiles:
 
 	    ibin_start = min(Nbins-1, max(0,int((tstart - xmin)/bin_width)))
 	    ibin_end   = min(Nbins-1, max(0,int((tend - xmin)/bin_width)))
-	    for i in range( ibin_start, ibin_end ): Njobs_vs_t[i] += 1
+	    for j in range( ibin_start, ibin_end ): Njobs_vs_t[j] += 1
 
 	    ibin = min(Nbins-1, max(0,int(tdiff/bin_width_tdiff)))
 	    Njobs_vs_tdiff[ibin] += 1
+        
+	    # if tdiff>9 or tdiff<0.5 : print('tdiff=%3.2f : %s' % (tdiff, job_files[i]))
 
 	    # print('Start: %3.2f  End: %3.2f  diff: %3.2f hours' % (tstart, tend, tdiff) )
 
@@ -174,6 +181,14 @@ for submitParametersFile in submitParametersFiles:
 
     macro += ['	latex->SetTextSize(0.060);']
     macro += ['\n	latex->DrawLatex( 1.5*xmid, 0.75*ymax, "' + SITE + '");']
+    macro += ['\n	c1->cd(2);']
+    macro += ['	auto xmid2 = (gPad->GetX1()+gPad->GetX2())/2.0;']
+    macro += ['	auto ymax2 = gPad->GetY2();']
+    macro += ['\n	latex->DrawLatex( 1.5*xmid2, 0.75*ymax2, "' + SITE + '");']
+    macro += ['\n	char str[256];']
+    macro += ['	sprintf(str, "%d/%d = %3.1f%%%% of jobs");' % (len(job_starts), Njobs_total, 100.0*float(len(job_starts))/float(Njobs_total) )]
+    macro += ['	latex->SetTextSize(0.040);']
+    macro += ['	latex->DrawLatex( 1.25*xmid2, 0.70*ymax2, str);']
 
     date_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     macro += ['\n	c1->cd(1);']
@@ -200,7 +215,7 @@ for submitParametersFile in submitParametersFiles:
     os.chdir(statusReportsDir)
     print('Running macro ...')
     cmd = ['root', '-q', '-b', '-l', 'Njobs_vs_time.C']
-    print(cmd)
+    print(' '.join(cmd))
     subprocess.call(cmd)
     print('cd '+savedir)
     os.chdir(savedir)
