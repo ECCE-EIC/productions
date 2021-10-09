@@ -3,6 +3,22 @@
 # This is a modified version of run_EIC_production.sh that skips
 # DST production and only runs the evaluator files.
 #
+# This also takes a 13th argument to specify the exact revision
+# number to use for the evaluator output instead of using the 
+# automatic mechanism in Fun4All_runEvaluators.C.
+#
+# NOTE: This is done in a VERY HACKY way. We basically tell
+# Fun4All_runEvaluators.C to use a temporary output directory
+# and then move the files it creates into the real directory.
+# The alternative is to modify Fun4All_runEvaluators.C and
+# re-tag it with a different hash. This would affect everyone
+# else's campaigns unecessarily since nothing substantive in
+# the macros was changed.
+#
+# NOTE: If a value of "-1" is passed for the evaluator output revision
+# then the automatic mechanism IS used to determine the evaluators
+# output directory and no temporary directory is used.
+#
 
 unset LD_PRELOAD
 
@@ -28,6 +44,7 @@ ECCE macros hash: $8
 PWG: $7
 Generator: ${10} 
 Collision type: ${11}
+Evaluator output revision: ${13}
 Input file: $2
 Output file: $3
 Output dir: $5
@@ -69,7 +86,16 @@ cat ${tmpLogFile} >> ${metaDataFile}
 echo "Skipped DST production"
 echo "Now producing evaluators"
 
-root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
+if [ ".${13}" == ".-1" ]; then
+  # Use default (i.e. allow Fun4All_runEvaluators.C to choose)
+  outdir=${5}
+else
+  # Use temporary directory for output so values can be moved to user-specified directory
+  tmp_outdir=${5}/eval_tmp/skip_${4}
+  outdir=${tmp_outdir}
+fi
+
+root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"${outdir}\"\)
 
 rc_eval=$?
 echo " rc for eval: $rc_eval"
@@ -77,10 +103,22 @@ echo " rc for eval: $rc_eval"
 if [ ".$rc_eval" != ".0" ]
 then
   echo " EVAL production failed. Delete the potentially broken or incomplete EVAL files."
-  echo " --> but keeping the DST and continue to copy."
-  evalFileHeader=$(echo $3 | sed 's/.root//')
-  # This is dangerous since it potentially removes older eval file versions you may want to keep
-  #rm -rf ${outputPath}/eval_*/${evalFileHeader}*
+else
+  echo " EVAL production succeeded."
 fi
+
+if [ ".${tmp_outdir}" != "." ]; then
+  # Outputs were written to temporary directory. Move them to user-specified one
+  user_specified_evaldir=$(printf "${5}/eval_%05d" ${13})
+  echo "mkdir -p ${user_specified_evaldir}"
+  mkdir -p ${user_specified_evaldir}
+  base=`basename ${3} .root`
+  echo "mv ${outdir}/eval_00000/${base}\*.root ${user_specified_evaldir}"
+  mv ${outdir}/eval_00000/${base}*.root ${user_specified_evaldir}
+  echo "rm -rf ${tmp_outdir}"
+  rm -rf ${tmp_outdir}
+fi
+
+
 
 echo "script done"
