@@ -101,7 +101,7 @@ for submitParametersFile in submitParametersFiles:
     #----------------------------------------------------------
 
     # Get name of most recent evaluator directory
-    tmp = sorted( glob.glob( DSTDIR + '/eval_*' ) )
+    tmp = sorted( glob.glob( DSTDIR + '/eval_00*' ) )
     if not tmp :
         print('NO eval_* directory in ' + DSTDIR + '/eval_*' )
         continue
