@@ -111,6 +111,7 @@ for submitParametersFile in submitParametersFiles:
 
     xmin_tdiff = 0
     xmax_tdiff = 12.0
+    #xmax_tdiff = 0.5
     Nbins_tdiff = 100
     bin_width_tdiff = (xmax_tdiff-xmin_tdiff)/(Nbins_tdiff-1);
     Njobs_vs_tdiff = [0]*Nbins_tdiff
@@ -145,14 +146,14 @@ for submitParametersFile in submitParametersFiles:
     macro += ['\nvoid Njobs_vs_time(void){']
 
     vals = ','.join([str(x) for x in Njobs_vs_t])
-    macro += ['	double Njobs_vs_t[] = {' + vals + '};']
+    macro += ['	double Njobs_vs_t[] = {0,' + vals + ',0};']      # include underflow and overflow bins
     macro += ['	auto hNjobs_vs_t = new TH1D("hNjobs_vs_t", ";time since campaign start (hours)", %d, %f, %f);' % (Nbins, xmin, xmax) ]
-    macro += ['	hNjobs_vs_t->Set(%d, Njobs_vs_t);' % Nbins]
+    macro += ['	hNjobs_vs_t->Set(%d, Njobs_vs_t);' % (Nbins+2)]
 
     vals = ','.join([str(x) for x in Njobs_vs_tdiff])
-    macro += ['	double Njobs_vs_tdiff[] = {' + vals + '};']
+    macro += ['	double Njobs_vs_tdiff[] = {0,' + vals + ',0};']  # include underflow and overflow bins
     macro += ['	auto hNjobs_vs_tdiff = new TH1D("hNjobs_vs_tdiff", ";total job time (hours)", %d, %f, %f);' % (Nbins_tdiff, xmin_tdiff, xmax_tdiff) ]
-    macro += ['	hNjobs_vs_tdiff->Set(%d, Njobs_vs_tdiff);' % Nbins_tdiff]
+    macro += ['	hNjobs_vs_tdiff->Set(%d, Njobs_vs_tdiff);' % (Nbins_tdiff+2)]
 
     macro += ['	hNjobs_vs_t->SetStats(0);']
     macro += ['	hNjobs_vs_tdiff->SetStats(0);']
