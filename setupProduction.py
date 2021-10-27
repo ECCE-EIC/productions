@@ -14,7 +14,7 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
-  productionVersion = "prop.4.0"
+  productionVersion = "prop.4.3"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
@@ -119,16 +119,19 @@ def getMacrosRepo():
     for f in glob.glob( '%s/*' % extrasDir ):
       destFile = os.path.join(destDir, os.path.basename(f))
       if not os.path.exists( destFile ):
-        print('copying %s  ->  %s' % (f,destFile))
-        shutil.copy( f, destFile )
+        if not os.path.isdir(f) :
+            print('copying %s  ->  %s' % (f,destFile))
+            shutil.copy( f, destFile )
+        else:
+             print('skipping copy of directory: %s  from extras' % os.path.basename(f) )
       else:
         print('skipping copy of %s since it would overwrite file already in macros directory' % os.path.basename(f) )
 
   # Create tarball of macros directory
-  #os.chdir(steering.simulationsDir)
-  #cmd = 'tar czf %s.tgz macros' % os.path.basename(steering.simulationsDir)
-  #print(cmd)
-  #os.system(cmd)
+  os.chdir(steering.simulationsDir)
+  cmd = 'tar czf %s.tgz macros' % os.path.basename(steering.simulationsDir)
+  print(cmd)
+  os.system(cmd)
 
 def setupJob():
   arguments = "{} {} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
@@ -151,7 +154,9 @@ def setupJob():
   elif steering.site == "OSG": submitScript = "makeOSGJobs.py"
   elif steering.site == "OSG@BNL": submitScript = "makeOSGJobs.py"
   else:  print("No submission scripts are implemented for the site, {}".format(steering.site))
-  os.system("python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments))
+  cmd = "python {0}/{1}/{2} {3}".format(steering.submissionTopDir, steering.site, submitScript, arguments)
+  print(cmd)
+  os.system(cmd)
 
 
 def createSubmissionFiles():

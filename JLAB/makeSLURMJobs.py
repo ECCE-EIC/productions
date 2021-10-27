@@ -69,9 +69,15 @@ def makeSLURMJob():
                                                                 pars.thisWorkingGroup, 
                                                                 pars.thisGenerator, 
                                                                 pars.thisCollision)
-    infile = open(inputFileList, "r")
-    line = infile.readline()
-    for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
+    if os.path.exists( inputFileList ):
+        infile = open(inputFileList, "r")
+        line = infile.readline()
+        for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
+    else:
+        # This gets executed for single particle events using built-in particle gun
+        inputFileList = "<N/A>"
+        line = "dummy"
+        infile = None
     #Get the current working directory to write submissions and logs to
     #myOutputPath = os.getcwd().replace('/w/eic-sciwork18', '/work/eic')
     slurmDir = "{}/slurmJobs".format(pars.submitPath)
@@ -82,7 +88,7 @@ def makeSLURMJob():
     print(pd.__version__)
     print(sys.version)
 
-	# This is to creat the slurmJobs directory, which otherwise won't be created.
+	# This is to create the slurmJobs directory, which otherwise won't be created.
     os.makedirs(slurmDir, exist_ok=True)
     submitScriptName = "{}/submitJobs.sh".format(slurmDir)
     submitScript = open("{}".format(submitScriptName), "w")
@@ -118,7 +124,10 @@ def makeSLURMJob():
     while line:
        for key,val in generatedDirNameMap.items(): line = line.replace(key, val)
        inputFile = line.replace("\n", "")
-       nEventsInFile = getNumEvtsInFile(inputFile)
+       if line=='dummy':
+           nEventsInFile = pars.nTotalEvents
+       else:
+           nEventsInFile = getNumEvtsInFile(inputFile)
        nJobsFromFile = math.ceil(nEventsInFile/pars.nEventsPerJob)
        for i in range(nJobsFromFile):
 
@@ -158,9 +167,9 @@ def makeSLURMJob():
             slurmFile.write("#SBATCH --account=eic\n")
             slurmFile.write("#SBATCH --nodes=1\n")
             slurmFile.write("#SBATCH --ntasks=1\n")
-            slurmFile.write("#SBATCH --mem-per-cpu=2000\n")
+            slurmFile.write("#SBATCH --mem-per-cpu=2500\n")
             slurmFile.write("#SBATCH --job-name=slurm-{0}\n".format(fileTag))
-            slurmFile.write("#SBATCH --time=08:00:00\n")
+            slurmFile.write("#SBATCH --time=06:00:00\n")
             slurmFile.write("#SBATCH --gres=disk:10000\n")
             slurmFile.write("#SBATCH --output=" + slurmOutputInfo + ".out\n")
             slurmFile.write("#SBATCH --error=" + slurmOutputInfo + ".err\n")
@@ -214,6 +223,7 @@ def makeSLURMJob():
            submitScript.close()
            break
        fileNumber += 1
+       if not infile: break # for single particle events that don't have input file
        line = infile.readline()
 
     print("SLURM submission files have been written to:\n{}".format(slurmDir))
