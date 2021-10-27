@@ -24,6 +24,18 @@ macrosVersion = {
   "prop.4.0-production-pythia8" : "d1a4d8e",
   "prop.4.0-production-singlePion-0-20GeV" : "2bfe6d0",
   "prop.4.0-production-singleElectron-0-20GeV" : "216438e",
+  "prop.4.1-production" : "97b6760",
+  "prop.4.1-production-pythia8" : "d1a4d8e",
+  "prop.4.1-production-singlePion-0-20GeV" : "b9129ff",
+  "prop.4.1-production-singleElectron-0-20GeV" : "279f452",
+  "prop.4.2-production" : "7a017bb",
+  "prop.4.2-production-pythia8" : "b5d5853",
+  "prop.4.2-production-singlePion-0-20GeV" : "40a5992",
+  "prop.4.2-production-singleElectron-0-20GeV" : " 8a2f6d2",
+  "prop.4.3-production" : "389f780",
+  "prop.4.3-production-pythia8" : "499ad21",
+  "prop.4.3-production-singlePion-0-20GeV" : "ebb88b2",
+  "prop.4.3-production-singleElectron-0-20GeV" : " 3ec0ece",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
@@ -65,11 +77,14 @@ ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILO
 #Collision type
 
 ecceCollision = ['singlePion', 'singleElectron', 'ep_18x100lowq2', 
-                 'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1', 'ep-5x100-q2-very-low',
-                 'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500'
-                 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 
-                 'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275nc-q2-2', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-1000', 'ep-18x275cc',
-                 'eAu-10x100-q2-1'
+                 'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1', 'ep-5x100-q2-very-low', 'ep-5x41-wVtxConstraint',
+                 'eHe3-5x41-q2-2', 'eHe3-5x41-q2-10', 'eHe3-5x41-q2-50', 'eHe3-5x41cc',
+                 'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-1-to-100', 'ep-10x100-q2-100','ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500', 'ep-10x100-wVtxConstraint',
+                 'eHe3-10x100-q2-2', 'eHe3-10x100-q2-10', 'eHe3-10x100-q2-100', 'eHe3-10x100-q2-500',
+                 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high',
+                 'eHe3-18x166-q2-2', 'eHe3-18x166-q2-10', 'eHe3-18x166-q2-100', 'eHe3-18x166-q2-1000', 'eHe3-18x166cc',
+                 'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-1000', 'ep-18x275cc', 'ep-18x275-q2-1-to-100', 'ep-18x275-noMagField',
+                 'eAu-10x100-q2-1-to-100', 'eAu-10x100-q2-100', 'eAu-18x275-q2-1-to-100', 'eAu-18x275-q2-100',
                 ]
 
 DiffTaggCollision = ['ep-5x41-pionFF', 'ep-5x100-pionFF', 'ep-10x100-pionFF', 
