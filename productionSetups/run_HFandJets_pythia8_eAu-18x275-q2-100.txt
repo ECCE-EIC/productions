@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4.0-production-pythia8
+PWG HFandJets 
+generator pythia8
+collision eAu-18x275-q2-100
+nTotalEvents 4000000

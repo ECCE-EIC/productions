@@ -1,5 +1,5 @@
 nightly prop.4
-tag prop.4.0-production
+tag prop.4.2-production
 PWG SIDIS 
 generator pythia6
 collision ep-10x100
