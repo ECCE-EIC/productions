@@ -34,184 +34,199 @@
 import os, sys, glob
 import uproot
 
-SUBMITDIR      = ''
-LOGDIR         = ''
-DSTDIR         = ''
-EVENTS_PER_JOB = 1
-
-# Read submit parameters from file
-submitParametersFile = '/path/to/submitParameters.dat'
+# Get list of submitParameters.dat files from command
+# line. If not given, search for them.
 if len(sys.argv) > 1:
-	submitParametersFile = sys.argv[1]
+    submitParametersFiles = sys.argv[1:]
 else:
 	if os.path.exists('./submissionFiles'):
-		tmp = glob.glob('./submissionFiles/*/*/*/*/submitParameters.dat')
+		submitParametersFiles = glob.glob('./submissionFiles/*/*/*/*/submitParameters.dat')
 	else:
-		tmp = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
-	if len(tmp) > 0:
-		submitParametersFile = tmp[0]
+		submitParametersFiles = glob.glob('../submissionFiles/*/*/*/*/submitParameters.dat')
+   
+if len(submitParametersFiles) == 0:
+    print('No submitParameters.dat files specified or found!')
+    sys.exit(-1)
 
-if not os.path.exists( submitParametersFile ):
-	print( 'No file: ' + submitParametersFile )
-	sys.exit()
+print('='*100)
+print('Generating reports for the following configurations:')
+for f in submitParametersFiles: print('\t'+f)
+print('='*100)
 
-print('Reading campaign parameters from:' + submitParametersFile)
-f = open( submitParametersFile )
-for line in f.readlines():
-	if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
-	if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
-	if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
-	if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
+# Loop over submitParameters.dat files
+for submitParametersFile in submitParametersFiles:
 
-#----------------------------------------------------------
+    SUBMITDIR      = ''
+    LOGDIR         = ''
+    DSTDIR         = ''
+    EVENTS_PER_JOB = 1
 
-N_SUBMIT         = 0  # Total number of submit scripts found
-N_DST_TOTAL      = 0  # Total number of DST file found in DSTDIR (possibly includes some that don't correspond to a submit script)
-N_DST_SUBMITTED  = 0  # Total number of DST files with names corresponding to submit scripts
-N_DST_GOOD       = 0  # Total number of DST files corresponding to submit script that could be opened and have the expected number of entries in "T"
-N_TIMEOUT        = 0  # Total number of log files indicating timeout
-N_DST_BAD_EVENTS = 0  # Total number of DST files that have the wrong number of events
+    print('- '*45)
+    print(submitParametersFile + '\n')
 
-GOOD_DST = []           # Good DST files
-MISSING_DST = []        # missing root file names
-MISSING_DST_SUBMIT = [] # submit scripts with missing DST files
-BAD_DST = []            # DST files that exist but are not whole
-BAD_DST_SUBMIT = []     # submit scripts for BAD_DST files
-BAD_DST_NEVENTS = []    # DST files that have a "T" tree but wrong number of events
-TIMEOUT_SUBMIT =[]      # submit scripts for jobs without good DST that timed out according to error log
+    if not os.path.exists( submitParametersFile ):
+	    print( 'No file: ' + submitParametersFile )
+	    continue
 
-# Get list of submit scripts
-submit_fnames = [os.path.basename(x) for x in glob.glob( os.path.join(SUBMITDIR, '*Job_*.job') )]
-N_SUBMIT = len(submit_fnames)
+    print('Reading campaign parameters from:' + submitParametersFile)
+    f = open( submitParametersFile )
+    for line in f.readlines():
+	    if line.startswith('SUBMITDIR'     ): SUBMITDIR      = line.split('=')[1].strip()
+	    if line.startswith('LOGDIR'        ): LOGDIR         = line.split('=')[1].strip()
+	    if line.startswith('DSTDIR'        ): DSTDIR         = line.split('=')[1].strip()
+	    if line.startswith('EVENTS_PER_JOB'): EVENTS_PER_JOB = line.split('=')[1].strip()
 
-# Get list of DST files
-dst_fnames = glob.glob( os.path.join(DSTDIR, 'DST_*.root') )
-N_DST_TOTAL = len(dst_fnames)
+    #----------------------------------------------------------
 
-# Loop over submit files and check corresponding DST file
-print('Checking DST files ...')
-for i,fsubmit in enumerate(submit_fnames):
+    N_SUBMIT         = 0  # Total number of submit scripts found
+    N_DST_TOTAL      = 0  # Total number of DST file found in DSTDIR (possibly includes some that don't correspond to a submit script)
+    N_DST_SUBMITTED  = 0  # Total number of DST files with names corresponding to submit scripts
+    N_DST_GOOD       = 0  # Total number of DST files corresponding to submit script that could be opened and have the expected number of entries in "T"
+    N_TIMEOUT        = 0  # Total number of log files indicating timeout
+    N_DST_BAD_EVENTS = 0  # Total number of DST files that have the wrong number of events
 
-    # Update ticker
-    if i%1 == 0:
-        print(' %d/%d complete ...' % (i, N_SUBMIT), end='\r')
+    GOOD_DST = []           # Good DST files
+    MISSING_DST = []        # missing root file names
+    MISSING_DST_SUBMIT = [] # submit scripts with missing DST files
+    BAD_DST = []            # DST files that exist but are not whole
+    BAD_DST_SUBMIT = []     # submit scripts for BAD_DST files
+    BAD_DST_NEVENTS = []    # DST files that have a "T" tree but wrong number of events
+    TIMEOUT_SUBMIT =[]      # submit scripts for jobs without good DST that timed out according to error log
 
-    froot = 'DST_' + fsubmit.split('_', maxsplit=1)[1].replace('.job', '.root')
-    froot_fullpath = os.path.join(DSTDIR, froot)
-    if os.path.exists( froot_fullpath ):
-        N_DST_SUBMITTED += 1
-        try:
-            f = uproot.open( froot_fullpath )
-            if f['T'].fEntries == int(EVENTS_PER_JOB):
-                N_DST_GOOD += 1
-                GOOD_DST += [froot_fullpath]
-            else:
-                N_DST_BAD_EVENTS += 1  # we only get here if the "T" tree exists but has wrong entries
-                BAD_DST_NEVENTS += [froot_fullpath]
-                raise ValueError
-        except:
-            BAD_DST += [froot_fullpath]
-            BAD_DST_SUBMIT += [os.path.join(SUBMITDIR, fsubmit)]
-    else:
-        MISSING_DST += [froot_fullpath]
-        MISSING_DST_SUBMIT += [os.path.join(SUBMITDIR, fsubmit)]
+    # Get list of submit scripts
+    submit_fnames = [os.path.basename(x) for x in glob.glob( os.path.join(SUBMITDIR, '*Job_*.job') )]
+    N_SUBMIT = len(submit_fnames)
 
-    #if i>=10: break
-    
-print(' %d/%d complete     ' % (N_SUBMIT, N_SUBMIT) )
+    # Get list of DST files
+    dst_fnames = glob.glob( os.path.join(DSTDIR, 'DST_*.root') )
+    N_DST_TOTAL = len(dst_fnames)
 
-# Check log files for either bad or missing DST files to check for timeout
-# n.b. we just check the last line of the stderr file here
-print('Checking log files for jobs without good DST files ...')
-logs_to_check = set( BAD_DST_SUBMIT + MISSING_DST_SUBMIT)
-for i,fsubmit_fullpath in enumerate(logs_to_check):
+    # Loop over submit files and check corresponding DST file
+    print('Checking DST files ...')
+    for i,fsubmit in enumerate(submit_fnames):
 
-    # Update ticker
-    if i%1 == 0:
-        print(' %d/%d complete ...' % (i, len(logs_to_check)), end='\r')
+        # Update ticker
+        if i%1 == 0:
+            print(' %d/%d complete ...' % (i, N_SUBMIT), end='\r')
 
-    fsubmit = os.path.basename(fsubmit_fullpath)
-    ferr = fsubmit.replace('slurmJob_','slurm-').replace('.job', '.err')
-    ferr_fullpath = os.path.join(LOGDIR, ferr)
-    if os.path.exists(ferr_fullpath):
-        with open(ferr_fullpath, 'rb') as fil:
-            fil.seek(-200, 2)
-            last_line = fil.readlines()[-1].decode("utf-8")
-            if 'DUE TO TIME LIMIT' in last_line:
-                N_TIMEOUT += 1
-                TIMEOUT_SUBMIT += [fsubmit_fullpath]
+        froot = 'DST_' + fsubmit.split('_', maxsplit=1)[1].replace('.job', '.root')
+        froot_fullpath = os.path.join(DSTDIR, froot)
+        if os.path.exists( froot_fullpath ):
+            N_DST_SUBMITTED += 1
+            try:
+                f = uproot.open( froot_fullpath )
+                if f['T'].fEntries == int(EVENTS_PER_JOB):
+                    N_DST_GOOD += 1
+                    GOOD_DST += [froot_fullpath]
+                else:
+                    N_DST_BAD_EVENTS += 1  # we only get here if the "T" tree exists but has wrong entries
+                    BAD_DST_NEVENTS += [froot_fullpath]
+                    raise ValueError
+            except:
+                BAD_DST += [froot_fullpath]
+                BAD_DST_SUBMIT += [os.path.join(SUBMITDIR, fsubmit)]
+        else:
+            MISSING_DST += [froot_fullpath]
+            MISSING_DST_SUBMIT += [os.path.join(SUBMITDIR, fsubmit)]
 
-    #if i>=30: break
-print(' %d/%d complete     ' % (len(logs_to_check), len(logs_to_check)) )
+        #if i>=10: break
 
-#==========================================================
+    print(' %d/%d complete     ' % (N_SUBMIT, N_SUBMIT) )
 
-# Print summary
-status_mess  = []
-status_mess += ['\n--- SUMMARY ------------------\n']
+    # Check log files for either bad or missing DST files to check for timeout
+    # n.b. we just check the last line of the stderr file here
+    print('Checking log files for jobs without good DST files ...')
+    logs_to_check = set( BAD_DST_SUBMIT + MISSING_DST_SUBMIT)
+    for i,fsubmit_fullpath in enumerate(logs_to_check):
 
-status_mess += ['     SUBMITDIR : ' + SUBMITDIR ]
-status_mess += ['        LOGDIR : ' + LOGDIR ]
-status_mess += ['        DSTDIR : ' + DSTDIR ]
-status_mess += ['EVENTS_PER_JOB : ' + EVENTS_PER_JOB ]
-status_mess += ['\n']
-status_mess += ['        N_SUBMIT: %4d  - Num. submit scripts found' % N_SUBMIT ]
-status_mess += ['     N_DST_TOTAL: %4d  - Num. DST files found (good or not)' % N_DST_TOTAL ]
-status_mess += [' N_DST_SUBMITTED: %4d  - Num. DST files found  (good or not) that have submit script' % N_DST_SUBMITTED ]
-status_mess += ['      N_DST_GOOD: %4d  - Num. DST files that are good and have submit file' % N_DST_GOOD ]
-status_mess += ['N_DST_BAD_EVENTS: %4d  - Num. DST files that have the wrong number of events' % N_DST_BAD_EVENTS ]
-status_mess += ['   N_DST_MISSING: %4d  - Num. DST files that are missing' % len(MISSING_DST_SUBMIT) ]
-status_mess += ['       N_TIMEOUT: %4d  - Num. log files showing timeout (bad or missing DST files only)' % N_TIMEOUT ]
+        # Update ticker
+        if i%1 == 0:
+            print(' %d/%d complete ...' % (i, len(logs_to_check)), end='\r')
 
-N_DST_BAD_EVENTS
+        fsubmit = os.path.basename(fsubmit_fullpath)
+        ferr = fsubmit.replace('slurmJob_','slurm-').replace('.job', '.err')
+        ferr_fullpath = os.path.join(LOGDIR, ferr)
+        if os.path.exists(ferr_fullpath):
+            with open(ferr_fullpath, 'rb') as fil:
+                fil.seek(-200, 2)
+                last_line = fil.readlines()[-1].decode("utf-8")
+                if 'DUE TO TIME LIMIT' in last_line:
+                    N_TIMEOUT += 1
+                    TIMEOUT_SUBMIT += [fsubmit_fullpath]
 
-status_mess += ['\n------------------------------\n']
+        #if i>=30: break
+    print(' %d/%d complete     ' % (len(logs_to_check), len(logs_to_check)) )
 
-print( '\n'.join(status_mess) )
+    #==========================================================
+
+    # Print summary
+    status_mess  = []
+    status_mess += ['\n--- SUMMARY ------------------\n']
+
+    status_mess += ['     SUBMITDIR : ' + SUBMITDIR ]
+    status_mess += ['        LOGDIR : ' + LOGDIR ]
+    status_mess += ['        DSTDIR : ' + DSTDIR ]
+    status_mess += ['EVENTS_PER_JOB : ' + EVENTS_PER_JOB ]
+    status_mess += ['\n']
+    status_mess += ['        N_SUBMIT: %4d  - Num. submit scripts found' % N_SUBMIT ]
+    status_mess += ['     N_DST_TOTAL: %4d  - Num. DST files found (good or not)' % N_DST_TOTAL ]
+    status_mess += [' N_DST_SUBMITTED: %4d  - Num. DST files found  (good or not) that have submit script' % N_DST_SUBMITTED ]
+    status_mess += ['      N_DST_GOOD: %4d  - Num. DST files that are good and have submit file' % N_DST_GOOD ]
+    status_mess += ['N_DST_BAD_EVENTS: %4d  - Num. DST files that have the wrong number of events' % N_DST_BAD_EVENTS ]
+    status_mess += ['   N_DST_MISSING: %4d  - Num. DST files that are missing' % len(MISSING_DST_SUBMIT) ]
+    status_mess += ['       N_TIMEOUT: %4d  - Num. log files showing timeout (bad or missing DST files only)' % N_TIMEOUT ]
+
+    N_DST_BAD_EVENTS
+
+    status_mess += ['\n------------------------------\n']
+
+    print( '\n'.join(status_mess) )
 
 
-# Make ouput directory to hold status reports
-print( 'Writing status reports to "Status_Reports" directory ...' )
-os.makedirs('Status_Reports', exist_ok=True)
+    # Make ouput directory to hold status reports
+    # Create directory name using last elements of DSTDIR
+    statusReportsDir = 'Status_Reports/'+'_'.join(DSTDIR.split('/')[-3:])
+    print( 'Writing status reports to "%s" directory ...' % statusReportsDir )
+    os.makedirs(statusReportsDir, exist_ok=True)
 
-# Write general summary to file
-with open('Status_Reports/status_report.txt', 'w') as fil:
-    fil.write( '\n'.join(status_mess) )
+    # Write general summary to file
+    with open(statusReportsDir+'/status_report.txt', 'w') as fil:
+        fil.write( '\n'.join(status_mess) )
 
-# Write GOOD_DST to file
-with open('Status_Reports/good_DST_files.txt', 'w') as fil:
-    fil.write( '# Good DST files\n')
-    for f in GOOD_DST: fil.write( f + '\n')
+    # Write GOOD_DST to file
+    with open(statusReportsDir+'/good_DST_files.txt', 'w') as fil:
+        fil.write( '# Good DST files\n')
+        for f in GOOD_DST: fil.write( f + '\n')
 
-# Write BAD_DST to file
-with open('Status_Reports/bad_DST_files.txt', 'w') as fil:
-    fil.write( '# DST files that are either corrupted or don\'t have correct number of entries\n')
-    for f in BAD_DST: fil.write( f + '\n')
+    # Write BAD_DST to file
+    with open(statusReportsDir+'/bad_DST_files.txt', 'w') as fil:
+        fil.write( '# DST files that are either corrupted or don\'t have correct number of entries\n')
+        for f in BAD_DST: fil.write( f + '\n')
 
-# Write BAD_DST_NEVENTS to file
-with open('Status_Reports/bad_DST_nevents_files.txt', 'w') as fil:
-    fil.write( '# DST files that don\'t have correct number of entries\n')
-    for f in BAD_DST_NEVENTS: fil.write( f + '\n')
+    # Write BAD_DST_NEVENTS to file
+    with open(statusReportsDir+'/bad_DST_nevents_files.txt', 'w') as fil:
+        fil.write( '# DST files that don\'t have correct number of entries\n')
+        for f in BAD_DST_NEVENTS: fil.write( f + '\n')
 
-# Write BAD_DST_SUBMIT to file
-with open('Status_Reports/bad_DST_submit_files.txt', 'w') as fil:
-    fil.write( '# Submit scripts that have DST files that are either corrupted or don\'t have correct number of entries\n')
-    for f in BAD_DST_SUBMIT: fil.write( f + '\n')
+    # Write BAD_DST_SUBMIT to file
+    with open(statusReportsDir+'/bad_DST_submit_files.txt', 'w') as fil:
+        fil.write( '# Submit scripts that have DST files that are either corrupted or don\'t have correct number of entries\n')
+        for f in BAD_DST_SUBMIT: fil.write( f + '\n')
 
-# Write MISSING_DST to file
-with open('Status_Reports/missing_DST_files.txt', 'w') as fil:
-    fil.write( '# Missing DST files\n')
-    for f in MISSING_DST: fil.write( f + '\n')
+    # Write MISSING_DST to file
+    with open(statusReportsDir+'/missing_DST_files.txt', 'w') as fil:
+        fil.write( '# Missing DST files\n')
+        for f in MISSING_DST: fil.write( f + '\n')
 
-# Write MISSING_DST_SUBMIT to file
-with open('Status_Reports/missing_DST_submit_files.txt', 'w') as fil:
-    fil.write( '# Submit scripts for which the DST files are missing\n')
-    for f in MISSING_DST_SUBMIT: fil.write( f + '\n')
+    # Write MISSING_DST_SUBMIT to file
+    with open(statusReportsDir+'/missing_DST_submit_files.txt', 'w') as fil:
+        fil.write( '# Submit scripts for which the DST files are missing\n')
+        for f in MISSING_DST_SUBMIT: fil.write( f + '\n')
 
-# Write TIMEOUT_SUBMIT to file
-with open('Status_Reports/timeout_submit_files.txt', 'w') as fil:
-    fil.write( '# Submit scripts that don\'t have a good DST file and whose log indicates the job timed out\n')
-    for f in TIMEOUT_SUBMIT: fil.write( f + '\n')
+    # Write TIMEOUT_SUBMIT to file
+    with open(statusReportsDir+'/timeout_submit_files.txt', 'w') as fil:
+        fil.write( '# Submit scripts that don\'t have a good DST file and whose log indicates the job timed out\n')
+        for f in TIMEOUT_SUBMIT: fil.write( f + '\n')
 
 print('Done.')
 
