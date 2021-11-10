@@ -36,6 +36,10 @@ macrosVersion = {
   "prop.4.3-production-pythia8" : "499ad21",
   "prop.4.3-production-singlePion-0-20GeV" : "ebb88b2",
   "prop.4.3-production-singleElectron-0-20GeV" : " 3ec0ece",
+  "prop.5.0-production" : "d833d31",
+  "prop.5.0-production-pythia8" : "b4cfbdc",
+  "prop.5.0-production-singlePion-0-20GeV" : "ef2da02",
+  "prop.5.0-production-singleElectron-0-20GeV" : "ba98f0d",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
@@ -101,8 +105,15 @@ ExclusiveCollision = ['ep-10x100IPRO4_GK-DVCS', 'ep-10x100BH_GK-DVCS', 'ep-5x41I
                       'eA-5x41_Ph-DVCS-IP8', 'eA-5x41_Nh-DVCS-IP8', 'eA-10x110_Ph-DVCS-IP8', 'eA-10x110_Nh-DVCS-IP8', 'eA-18x110_Ph-DVCS-IP8', 'eA-18x110_Nh-DVCS-IP8',
                       'ep-5x41-TCS-hel_plus', 'ep-5x41-TCS-hel_minus', 'ep-10x100-TCS-hel_plus', 'ep-10x100-TCS-hel_minus', 'ep-18x275-TCS-hel_plus', 'ep-18x275-TCS-hel_minus', 
                       'ep-18x275-JPsi-e', 'ep-18x275-JPsi-e-IP8',
-                      'ep-10x100-JPsi', 'ep-10x100-JPsi-IP8'
+                      'ep-10x100-JPsi', 'ep-10x100-JPsi-IP8',
+                      'ep-10x100nc-q2-500', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-2',
+                      'ep-18x275nc-q2-1000', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-10', 'ep-18x275nc-q2-50', 'ep-18x275nc-q2-2',
+                      'ep-5x41nc-q2-50', 'ep-5x41nc-q2-10', 'ep-5x41nc-q2-2', 'ep-5x41cc-q2-1',
+                      'eD-10x100nc-q2-500', 'eD-10x100nc-q2-100', 'eD-10x100nc-q2-10', 'eD-10x100nc-q2-2',
+                      'eD-18x137nc-q2-1000', 'eD-18x137nc-q2-100', 'eD-18x137nc-q2-10', 'eD-18x137nc-q2-2', 'eD-18x137cc-q2-1',
+                      'eD-5x41nc-q2-50', 'eD-5x41nc-q2-10', 'eD-5x41nc-q2-2', 'eD-5x41cc-q2-1'
                      ]
 
 ecceCollision.extend(DiffTaggCollision)
 ecceCollision.extend(ExclusiveCollision)
+
