@@ -11,7 +11,7 @@ if nArgs != 14:
 
 
 myShell = str(environ['SHELL'])
-goodShells = ['/bin/bash', '/bin/tcsh']
+goodShells = ['/bin/bash']
 if myShell not in goodShells:
     print("Your shell {} was not recognised".format(myShell))
     sys.exit()
@@ -102,7 +102,6 @@ def makeCondorJob():
             condorFile = open("{0}/{1}".format(condorDir, condorFileName), "w")
             condorFile.write("Universe        = vanilla\n")
             if myShell == '/bin/bash': condorFile.write("Executable      = {}/run_EIC_production.sh\n".format(pars.macrosPath))
-            if myShell == '/bin/tcsh': condorFile.write("Executable      = {}/run_EIC_production.csh\n".format(pars.macrosPath))
             outputFile = "DST_{}.root".format(fileTag)
 
             argument = "{} {} {} {} {} {} {} {} {} {} {} {}".format(pars.nEventsPerJob, 
