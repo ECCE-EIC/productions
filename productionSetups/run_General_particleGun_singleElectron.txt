@@ -1,5 +1,5 @@
 nightly prop.5
-tag prop.5.0-production-singleElectron-0-20GeV 
+tag prop.5.1-production-singleElectron-0-20GeV 
 PWG General
 generator particleGun
 collision singleElectron
