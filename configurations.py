@@ -4,7 +4,7 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-nightlyBuild = ['prop.4', 'prop.2', 'prop.1']
+nightlyBuild = ['prop.5', 'prop.4', 'prop.2', 'prop.1']
 
 #macros tags
 macrosVersion = {
@@ -78,7 +78,7 @@ macrosVersion = {
 }
 
 #PWGs
-ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'ExclusiveReactions', 'HFandJets', 'Inclusive', 'SIDIS', 'Spectroscopy']
+ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'ExclusiveReactions', 'HFandJets', 'Inclusive', 'SIDIS', 'Spectroscopy', 'AI']
 
 #Generators
 ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro', 'LQGENEP', 'DEMP', "EIC_mesonMC", 'CLASDIS', 'eSTARlight', 'Sartre', 'EpIC']

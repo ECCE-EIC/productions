@@ -14,7 +14,7 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
-  productionVersion = "prop.5.1_AI"
+  productionVersion = "prop.5.1"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
@@ -85,7 +85,7 @@ def getProductionRequirements():
   if steering.collisionType == "singlePion": steering.macrosBranch = "production_singlePion_0-20GeV"
   if steering.collisionType == "singleElectron": steering.macrosBranch = "production_singleElectron_0-20GeV"
   if steering.generator == "pythia8": steering.macrosBranch = "production_pythia8"
-  if steering.productionVersion[-2] == "AI": steering.macrosBranch = "production_AI_Optimization"
+  if steering.PWG == "AI": steering.macrosBranch = "production_AI_Optimization"
 
   checkRequirements(steering.PWG, config.ecceWorkingGroup)
   checkRequirements(steering.generator, config.ecceGenerator)

@@ -1,6 +1,6 @@
 nightly prop.5
 tag prop.5.1-production-AI-Optimization 
-PWG General
+PWG AI 
 generator particleGun
 collision singlePion
 nTotalEvents 5000000
