@@ -1,6 +1,6 @@
 nightly prop.5
 tag prop.5.1-production-AI-Optimization 
-PWG SIDIS 
+PWG AI 
 generator pythia6
 collision ep-18x275-q2-high
 nTotalEvents 4000000
