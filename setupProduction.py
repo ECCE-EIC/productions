@@ -135,6 +135,7 @@ def getMacrosRepo():
   os.system(cmd)
 
 def setupJob():
+  steering.productionVersion = steering.macrosTag[0:8]
   arguments = "{} {} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
                                                               steering.PWG, 
                                                               steering.generator, 

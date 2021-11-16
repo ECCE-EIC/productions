@@ -1,0 +1,6 @@
+nightly prop.5
+tag prop.5.1-production-AI-Optimization 
+PWG AI 
+generator pythia6
+collision ep-18x275-q2-low
+nTotalEvents 20000000
