@@ -1,5 +1,5 @@
 nightly prop.5
-tag prop.5.1-production
+tag prop.5.1-production-AI-Optimization 
 PWG SIDIS 
 generator pythia6
 collision ep-18x275-q2-high
