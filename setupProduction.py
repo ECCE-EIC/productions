@@ -14,7 +14,7 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
-  productionVersion = "prop.5.1"
+  productionVersion = "prop.5.1_AI"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
