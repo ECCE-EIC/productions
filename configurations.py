@@ -4,7 +4,7 @@
 sites = ['BNL', 'JLAB', 'MIT', 'OSG', 'OSG@BNL']
 
 #ECCE nightlies
-nightlyBuild = ['prop.4', 'prop.2', 'prop.1']
+nightlyBuild = ['prop.5', 'prop.4', 'prop.2', 'prop.1']
 
 #macros tags
 macrosVersion = {
@@ -44,6 +44,7 @@ macrosVersion = {
   "prop.5.1-production-pythia8" : "35c63fb",
   "prop.5.1-production-singlePion-0-20GeV" : "b399f7a",
   "prop.5.1-production-singleElectron-0-20GeV" : "aa63c2a",
+  "prop.5.1-production-AI-Optimization" : "8452f56",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
@@ -77,14 +78,14 @@ macrosVersion = {
 }
 
 #PWGs
-ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'ExclusiveReactions', 'HFandJets', 'Inclusive', 'SIDIS', 'Spectroscopy']
+ecceWorkingGroup = ['General', 'DiffractiveAndTagging', 'Electroweak', 'ExclusiveReactions', 'HFandJets', 'Inclusive', 'SIDIS', 'Spectroscopy', 'AI']
 
 #Generators
 ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILOU3D', 'LAger', 'UVA', 'DPM', 'topeg', 'elSpectro', 'LQGENEP', 'DEMP', "EIC_mesonMC", 'CLASDIS', 'eSTARlight', 'Sartre', 'EpIC']
 
 #Collision type
 
-ecceCollision = ['singlePion', 'singleElectron', 'ep_18x100lowq2', 
+ecceCollision = ['singlePion', 'singlePion-wVtxConstraint', 'singleElectron', 'ep_18x100lowq2', 
                  'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1', 'ep-5x100-q2-very-low', 'ep-5x41-wVtxConstraint',
                  'eHe3-5x41-q2-2', 'eHe3-5x41-q2-10', 'eHe3-5x41-q2-50', 'eHe3-5x41cc',
                  'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-1-to-100', 'ep-10x100-q2-100','ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500', 'ep-10x100-wVtxConstraint',

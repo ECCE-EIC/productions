@@ -14,7 +14,7 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
-  productionVersion = "prop.5.1"
+  productionVersion = "prop.5.1_AI"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
@@ -82,9 +82,10 @@ def getProductionRequirements():
   steering.generator = getParameter("generator")
   steering.collisionType = getParameter("collision")
   steering.nTotalEvents = getParameter("nTotalEvents")
-  if steering.collisionType == "singlePion": steering.macrosBranch = "production_singlePion_0-20GeV"
-  if steering.collisionType == "singleElectron": steering.macrosBranch = "production_singleElectron_0-20GeV"
-  if steering.generator == "pythia8": steering.macrosBranch = "production_pythia8"
+  if "singlePion" in steering.collisionType: steering.macrosBranch = "production_singlePion_0-20GeV"
+  if "singleElectron" in steering.collisionType: steering.macrosBranch = "production_singleElectron_0-20GeV"
+  if "pythia8" in steering.generator: steering.macrosBranch = "production_pythia8"
+  if "AI" in steering.PWG: steering.macrosBranch = "production_AI_Optimization"
 
   checkRequirements(steering.PWG, config.ecceWorkingGroup)
   checkRequirements(steering.generator, config.ecceGenerator)
@@ -134,6 +135,7 @@ def getMacrosRepo():
   os.system(cmd)
 
 def setupJob():
+  steering.productionVersion = steering.macrosTag[0:8]
   arguments = "{} {} {} {} {} {} {} {} {} {} {} {} {}".format(steering.nEventsPerJob, 
                                                               steering.PWG, 
                                                               steering.generator, 
