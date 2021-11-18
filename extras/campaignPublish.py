@@ -49,6 +49,7 @@ import subprocess
 # and secret keys registered for it in your ~/.mcs3/config.json file
 # for the "S3" alias. 
 COPY_TO_S3 = True
+COPY_DST_TO_S3 = True
 mcs3 = '/cvmfs/eic.opensciencegrid.org/gcc-8.3/opt/fun4all/utils/bin/mcs3'
 
 # Get list of submitParameters.dat files from command
@@ -156,9 +157,14 @@ for submitParametersFile in submitParametersFiles:
 
     # Mirror all files in xrootd directory on S3
     if COPY_TO_S3:
-        print( '\nMirroring evaluator files from xrootd to S3 ...' )
-        S3DIR = EVALDIR.replace('/work/eic2/ECCE/MC', 'S3/eictest/ECCE/MC')
-        cmd = [mcs3, 'mirror', '--preserve', EVALDIR, S3DIR]
+        if COPY_DST_TO_S3:
+            print( '\nMirroring DST and evaluator files from xrootd to S3 ...' )
+            S3DIR = DSTDIR.replace('/work/eic2/ECCE/MC', 'S3/eictest/ECCE/MC')
+            cmd = [mcs3, 'mirror', '--preserve', DSTDIR, S3DIR]
+        else:
+            print( '\nMirroring evaluator files from xrootd to S3 ...' )
+            S3DIR = EVALDIR.replace('/work/eic2/ECCE/MC', 'S3/eictest/ECCE/MC')
+            cmd = [mcs3, 'mirror', '--preserve', EVALDIR, S3DIR]
         print( ' '.join(cmd) )
         subprocess.call( cmd )  # must use call() instead of run() since were using python 3.4.3 sometimes
 
