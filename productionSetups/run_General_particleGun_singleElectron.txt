@@ -1,6 +1,6 @@
-nightly prop.5
-tag prop.5.1-production-AI-Optimization 
-PWG AI
+nightly prop.6
+tag prop.6.0-production-singleElectron-0-20GeV
+PWG General
 generator particleGun
 collision singleElectron
 nTotalEvents 5000000
