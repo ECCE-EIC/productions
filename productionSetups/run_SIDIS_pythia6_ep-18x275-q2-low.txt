@@ -1,6 +1,6 @@
-nightly prop.5
-tag prop.5.1-production-AI-Optimization 
-PWG AI 
+nightly prop.4
+tag prop.4.4-production 
+PWG SIDIS
 generator pythia6
 collision ep-18x275-q2-low
 nTotalEvents 20000000
