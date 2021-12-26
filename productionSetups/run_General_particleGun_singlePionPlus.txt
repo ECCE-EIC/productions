@@ -2,5 +2,5 @@ nightly prop.6
 tag prop.6.1-production-singleParticle-0-20GeV
 PWG General
 generator particleGun
-collision singlePion
+collision singlePionPlus
 nTotalEvents 5000000

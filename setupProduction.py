@@ -85,6 +85,7 @@ def getProductionRequirements():
   if "singlePion" in steering.collisionType: steering.macrosBranch = "production_singlePion_0-20GeV"
   if "singleElectron" in steering.collisionType: steering.macrosBranch = "production_singleElectron_0-20GeV"
   if "pythia8" in steering.generator: steering.macrosBranch = "production_pythia8"
+  if "Particle" in steering.generator: steering.macrosBranch = "production_singleParticle"
   if "AI" in steering.PWG: steering.macrosBranch = "production_AI_Optimization"
 
   checkRequirements(steering.PWG, config.ecceWorkingGroup)
