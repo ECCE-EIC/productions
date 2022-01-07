@@ -2,5 +2,5 @@ nightly prop.7
 tag prop.7.0-production-singleParticle-0-20GeV
 PWG General
 generator particleGun
-collision singleElectron
+collision singlePionPlus
 nTotalEvents 5000000

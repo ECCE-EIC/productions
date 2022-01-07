@@ -51,6 +51,11 @@ macrosVersion = {
   "prop.6.0-production-pythia8" : "8dbed3a",
   "prop.6.0-production-singlePion-0-20GeV" : "5b4261f",
   "prop.6.0-production-singleElectron-0-20GeV" : "561f8e5",
+  "prop.6.1-production" : "984767f",
+  "prop.6.1-production-pythia8" : "a7a71d9",
+  "prop.6.1-production-singleParticle-0-20GeV" : "d37d30d",
+  "prop.7.0-production" : "ae4db87",
+  "prop.7.0-production-singleParticle-0-20GeV" : "d06b38a",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
@@ -91,12 +96,12 @@ ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILO
 
 #Collision type
 
-ecceCollision = ['singlePion', 'singlePion-wVtxConstraint', 'singleElectron', 'ep_18x100lowq2', 
+ecceCollision = ['singlePion', 'singlePion-wVtxConstraint', 'singleElectron', 'singleMuon', 'singleMuonPlus', 'singlePionPlus', 'singlePositron',
                  'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1', 'ep-5x100-q2-very-low', 'ep-5x41-wVtxConstraint',
                  'eHe3-5x41-q2-2', 'eHe3-5x41-q2-10', 'eHe3-5x41-q2-50', 'eHe3-5x41cc',
                  'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-1-to-100', 'ep-10x100-q2-100','ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500', 'ep-10x100-wVtxConstraint',
                  'eHe3-10x100-q2-2', 'eHe3-10x100-q2-10', 'eHe3-10x100-q2-100', 'eHe3-10x100-q2-500',
-                 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high',
+                 'ep-18x100', 'ep-18x100-q2-low', 'ep-18x100-q2-high', 'ep_18x100lowq2',
                  'eHe3-18x166-q2-2', 'eHe3-18x166-q2-10', 'eHe3-18x166-q2-100', 'eHe3-18x166-q2-1000', 'eHe3-18x166cc',
                  'ep-18x275', 'ep-18x275-q2-low', 'ep-18x275-q2-high', 'ep-18x275-q2-100', 'ep-18x275-q2-10', 'ep-18x275nc-q2-100', 'ep-18x275nc-q2-1000', 'ep-18x275cc', 'ep-18x275-q2-1-to-100', 'ep-18x275-noMagField',
                  'eAu-10x100-q2-1-to-100', 'eAu-10x100-q2-100', 'eAu-18x275-q2-1-to-100', 'eAu-18x275-q2-100',
