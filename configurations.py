@@ -54,6 +54,8 @@ macrosVersion = {
   "prop.6.1-production" : "984767f",
   "prop.6.1-production-pythia8" : "a7a71d9",
   "prop.6.1-production-singleParticle-0-20GeV" : "d37d30d",
+  "prop.7.0-production" : "ae4db87",
+  "prop.7.0-production-singleParticle-0-20GeV" : "d06b38a",
 #Diff and Tagg
 # r1
   "diff_tagg_physics_IP6_June_16_2021" : "9266a35",
@@ -94,7 +96,7 @@ ecceGenerator = ['particleGun', 'pythia6', 'pythia8', 'BeAGLE', 'Djangoh', 'MILO
 
 #Collision type
 
-ecceCollision = ['singlePion', 'singlePion-wVtxConstraint', 'singleElectron', 'singleMuon', 'singleMuonPlus', 'singlePionPLus', 'singlePositron',
+ecceCollision = ['singlePion', 'singlePion-wVtxConstraint', 'singleElectron', 'singleMuon', 'singleMuonPlus', 'singlePionPlus', 'singlePositron',
                  'ep-5x41', 'ep-5x41-q2-low', 'ep-5x41-q2-high', 'ep-5x41-q2-1', 'ep-5x100-q2-very-low', 'ep-5x41-wVtxConstraint',
                  'eHe3-5x41-q2-2', 'eHe3-5x41-q2-10', 'eHe3-5x41-q2-50', 'eHe3-5x41cc',
                  'ep-10x100', 'ep-10x100-q2-low', 'ep-10x100-q2-1-to-100', 'ep-10x100-q2-100','ep-10x100-q2-high', 'ep-10x100-q2-10', 'ep-10x100nc-q2-2', 'ep-10x100nc-q2-10', 'ep-10x100nc-q2-100', 'ep-10x100nc-q2-500', 'ep-10x100-wVtxConstraint',
