@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4-production-DiffractiveAndTagging-IP6-41GeV-r6
+PWG DiffractiveAndTagging
+generator DEMP
+collision ep-5x41-KLambda-IP6
+nTotalEvents 300000

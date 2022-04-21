@@ -1,0 +1,6 @@
+nightly ana.57
+tag prop.7.1-production-DiffractiveAndTagging-IP8-10x100GeV-hi_acc-r10
+PWG ExclusiveReactions
+generator MILOU3D
+collision ep-10x100-DVCS-Full-hi_acc-IP8
+nTotalEvents 1000000

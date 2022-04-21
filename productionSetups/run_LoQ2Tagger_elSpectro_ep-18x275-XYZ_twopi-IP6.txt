@@ -1,0 +1,6 @@
+nightly new
+tag lo_Q2_tagger.prop.7
+PWG DiffractiveAndTagging
+generator elSpectro
+collision ep-18x275-XYZ-twopi-IP6
+nTotalEvents 830000

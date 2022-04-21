@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4-production-DiffractiveAndTagging-IP8-41GeV-r6
+PWG DiffractiveAndTagging
+generator EIC_mesonMC
+collision ep-5x41-PiStruc-IP8
+nTotalEvents 250000

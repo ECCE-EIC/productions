@@ -1,0 +1,6 @@
+nightly new
+tag Dhevan_IP8_RP_v1
+PWG General
+generator BeAGLE
+collision eZr-18x122-JPsi-e-IP8
+nTotalEvents 720000

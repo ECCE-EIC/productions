@@ -1,0 +1,6 @@
+nightly ana.57
+tag prop.7.1-production-DiffractiveAndTagging-IP6-5x100GeV-hi_div-r10
+PWG ExclusiveReactions
+generator LAger
+collision ep-5x100-JPsi-e-lumi10-hi_div-IP6
+nTotalEvents 1582104

@@ -1,0 +1,6 @@
+nightly ana.57
+tag prop.7.1-production-DiffractiveAndTagging-IP6-82GeV-hi_acc-r10
+PWG ExclusiveReactions
+generator topeg
+collision eA-5x41_Nh-hi_acc-DVCS-IP6
+nTotalEvents 1000000

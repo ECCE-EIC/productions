@@ -1,0 +1,6 @@
+nightly new
+tag lo_Q2_tagger_IP6.prop.7
+PWG ExclusiveReactions
+generator EpIC
+collision ep-18x275-TCS-hel_minus-IP6
+nTotalEvents 1000000

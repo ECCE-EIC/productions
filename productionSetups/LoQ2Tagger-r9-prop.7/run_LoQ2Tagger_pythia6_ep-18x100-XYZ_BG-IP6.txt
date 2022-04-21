@@ -1,0 +1,6 @@
+nightly new
+tag lo_Q2_tagger_18x100_IP6.prop.7
+PWG DiffractiveAndTagging
+generator pythia6
+collision ep-18x100-XYZ-BG-IP6
+nTotalEvents 1000000

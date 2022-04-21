@@ -1,0 +1,6 @@
+nightly prop.5
+tag prop.5-production-DiffractiveAndTagging-IP8-275GeV-r7
+PWG ExclusiveReactions
+generator Sartre
+collision ePb-18x108-phi-KK-bsat-IP8
+nTotalEvents 3500000

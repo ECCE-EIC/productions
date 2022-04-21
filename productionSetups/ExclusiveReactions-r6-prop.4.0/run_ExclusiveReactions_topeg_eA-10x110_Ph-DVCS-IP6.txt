@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4-production-DiffractiveAndTagging-IP6-220GeV-r6
+PWG ExclusiveReactions
+generator topeg
+collision eA-10x110_Ph-DVCS-IP6
+nTotalEvents 1000000

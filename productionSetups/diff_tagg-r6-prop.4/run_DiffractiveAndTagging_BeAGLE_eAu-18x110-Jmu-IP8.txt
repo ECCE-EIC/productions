@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4-production-DiffractiveAndTagging-IP8-275GeV-r6
+PWG DiffractiveAndTagging
+generator BeAGLE
+collision eAu-18x110-JPsi-mu-IP8
+nTotalEvents 640000

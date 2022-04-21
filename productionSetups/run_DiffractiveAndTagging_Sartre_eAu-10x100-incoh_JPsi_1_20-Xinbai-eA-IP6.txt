@@ -1,0 +1,6 @@
+nightly ana.57
+tag prop.7.1-production-DiffractiveAndTagging-IP6-10x249GeV-eA-r10
+PWG DiffractiveAndTagging
+generator Sartre
+collision eAu-10x100-incoh_JPsi_1_20-Xinbai-eA-IP6
+nTotalEvents 5000000

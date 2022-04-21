@@ -1,0 +1,6 @@
+nightly prop.4
+tag prop.4-production-DiffractiveAndTagging-IP8-100GeV-r6
+PWG ExclusiveReactions
+generator LAger
+collision ep-5x100-JPsi-e-lumi10-IP8
+nTotalEvents 1582104 

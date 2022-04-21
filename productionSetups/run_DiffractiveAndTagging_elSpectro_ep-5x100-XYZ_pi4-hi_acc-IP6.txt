@@ -1,0 +1,6 @@
+nightly ana.57
+tag prop.7.1-production-DiffractiveAndTagging-IP6-5x100GeV-hi_acc-r10
+PWG DiffractiveAndTagging
+generator elSpectro
+collision ep-5x100-XYZ-pi4-hi_acc-IP6
+nTotalEvents 2000000

@@ -1,0 +1,6 @@
+nightly pana.45
+tag prop.7-production-DiffractiveAndTagging-IP6-275GeV-r9
+PWG ExclusiveReactions
+generator LAger
+collision ep-18x275-JPsi-e-lumi10-IP6
+nTotalEvents 5331724

@@ -1,0 +1,6 @@
+nightly new
+tag lo_Q2_tagger_IP6.prop.7
+PWG ExclusiveReactions
+generator EpIC
+collision ep-5x41-TCS-muon-IP6
+nTotalEvents 50000

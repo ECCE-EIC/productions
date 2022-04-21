@@ -1,0 +1,6 @@
+nightly ana.57
+tag prop.7.1-production-DiffractiveAndTagging-IP6-275GeV-eA-r10
+PWG ExclusiveReactions
+generator BeAGLE
+collision ePb-18x108-phi-eA-IP6
+nTotalEvents 3000000
