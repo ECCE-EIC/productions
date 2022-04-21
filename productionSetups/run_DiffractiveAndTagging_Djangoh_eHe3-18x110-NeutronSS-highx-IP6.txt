@@ -1,6 +1,0 @@
-nightly prop.4
-tag prop.4-production-DiffractiveAndTagging-IP6-165GeV-r6
-PWG DiffractiveAndTagging
-generator Djangoh
-collision eHe3-18x110-NeutronSS-highx-IP6
-nTotalEvents 990000

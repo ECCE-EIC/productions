@@ -27,3 +27,587 @@ Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA
 Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS
 Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS
 Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100BH_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100IPRO4_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275BH_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275IPRO4_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41BH_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41IPRO4_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-IP6
+Output directory: /work/eic2/ECCE/MC/ana.24/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eAu-18x110-Phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/ePb-18x108-Phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eZr-18x122-Phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eAu-18x110-Phi-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eAu-18x110-Phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/ePb-18x108-Phi-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/ePb-18x108-Phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eZr-18x122-Phi-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eZr-18x122-Phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-10x100-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-10x100-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-muon-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100BH_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100IPRO4_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275BH_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275IPRO4_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41BH_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41IPRO4_GK-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x110-phiKK-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP8
+
+
+
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eAu-18x110-Phi-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eAu-18x110-Phi-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/ePb-18x108-Phi-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/ePb-18x108-Phi-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eZr-18x122-Phi-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/BeAGLE/eZr-18x122-Phi-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-10x100-TCS-hel_minus-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-10x100-TCS-hel_plus-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_plus-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_minus-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-muon-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-muon-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-muon-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-muon-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100BH_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-pi0-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100IPRO4_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275BH_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-pi0-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275IPRO4_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41BH_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-pi0-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41IPRO4_GK-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x110-phiKK-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Nh-DVCS-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x100_Ph-DVCS-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Nh-DVCS-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-10x110_Ph-DVCS-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Nh-DVCS-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-18x110_Ph-DVCS-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Nh-DVCS-IP8
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP6
+/work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/topeg/eA-5x41_Ph-DVCS-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-3T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-3T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-3T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-3T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-0p7T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-0p7T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-0p7T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-0p7T-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-IP6
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-IP6
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-IP8
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP6
+Output directory: /work/eic2/ECCE/MC/prop.5/5.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-IP8
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-10x100-Pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/EpIC/ep-18x275-Pi0-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.4/prop.4.0/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.6/prop.6.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.7/prop.7.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.7/prop.7.0/ExclusiveReactions/EpIC/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.7/prop.7.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.7/prop.7.0/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/prop.7/prop.7.0/ExclusiveReactions/KM20/ep-18x275-DVCS-Full-IP6
+Output directory: /work/eic2/ECCE/MC/prop.7/prop.7.0/ExclusiveReactions/KM20/ep-18x275-DVCS-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-10x100-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-10x100-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-18x275-TCS-muon-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_minus-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.0/ExclusiveReactions/EpIC/ep-5x41-TCS-muon-IP6
+Output directory: /work/eic2/ECCE/MC/ana.45/prop.7.0/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/pana.45/prop.7.0/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/ana.45/prop.7.0/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/ana.45/prop.7.0/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP6
+Output directory: /work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Nh-hi_acc-DVCS
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Nh-hi_div-DVCS
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Ph-hi_acc-DVCS
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Ph-hi_div-DVCS
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_plus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_minus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_minus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_plus-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-18x275-TCS-hel_plus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_minus-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_minus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/EpIC/ep-5x41-TCS-hel_plus-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/pnew/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/pnew/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/pnew/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/pnew/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/prop.7.1/prop.7.1/ExclusiveReactions/BeAGLE/ePb-18x108-phi-eA-IP6
+/work/eic2/ECCE/MC/prop.7.1/prop.7.1/ExclusiveReactions/Sartre/ePb-18x108-phi-eA-IP6
+/work/eic2/ECCE/MC/prop.7.1/prop.7.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-eA-IP6
+/work/eic2/ECCE/MC/prop.7.1/prop.7.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-eA-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/BeAGLE/ePb-18x108-phi-eA-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/Sartre/ePb-18x108-phi-eA-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bnonsat-eA-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/Sartre/ePb-18x108-phi-KK-bsat-eA-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-10x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-18x275-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x100-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/LAger/ep-5x41-JPsi-e-lumi10-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Nh-hi_acc-DVCS-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Nh-hi_acc-DVCS-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Nh-hi_div-DVCS-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Ph-hi_acc-DVCS-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Ph-hi_acc-DVCS-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Ph-hi_div-DVCS-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/topeg/eA-5x41_Ph-hi_div-DVCS-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP8
+
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/new/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-10x100-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-18x275-DVCS-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-BH-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-Full-hi_div-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_acc-IP8
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP6
+/work/eic2/ECCE/MC/ana.57/prop.7.1/ExclusiveReactions/MILOU3D/ep-5x41-DVCS-hi_div-IP8

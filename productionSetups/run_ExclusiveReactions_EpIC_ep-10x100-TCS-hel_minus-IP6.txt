@@ -1,6 +1,0 @@
-nightly prop.4
-tag prop.4-production-DiffractiveAndTagging-IP6-100GeV-r6
-PWG ExclusiveReactions
-generator EpIC
-collision ep-10x100-TCS-hel_minus
-nTotalEvents 500000

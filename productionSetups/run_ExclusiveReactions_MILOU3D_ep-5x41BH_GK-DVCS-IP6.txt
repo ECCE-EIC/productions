@@ -1,6 +1,0 @@
-nightly prop.4
-tag prop.4-production-DiffractiveAndTagging-IP6-41GeV-r6
-PWG ExclusiveReactions
-generator MILOU3D
-collision ep-5x41BH_GK-DVCS
-nTotalEvents 500000

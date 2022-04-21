@@ -2,7 +2,11 @@
 
 source /cvmfs/eic.opensciencegrid.org/ecce/gcc-8.3/opt/fun4all/core/bin/ecce_setup.sh -n $6
 
-export CALIBRATIONROOT=/work/eic/users/billlee/build/calibrations
+#export MYINSTALL=/work/eic/users/billlee/build/install
+
+source ${OPT_FUN4ALL}/bin/setup_local.sh $MYINSTALL
+
+#export CALIBRATIONROOT=/work/eic/users/billlee/build/calibrations
 
 export ROOT_INCLUDE_PATH=$(pwd)/../../common:$ROOT_INCLUDE_PATH
 
@@ -31,6 +35,13 @@ Number of events: $1
 Skip: $4
 =====================================
 EOF
+
+echo Local Install DIR
+
+echo "litsing the CALIBRATIONROOT DIR"
+ls $CALIBRATIONROOT
+echo "listing the MYINSTALL DIR"
+ls $MYINSTALL
 
 # Run Fun4all. Send output to stdout but also capture to temporary local file
 echo running root.exe -q -b Fun4All_G4_EICDetector.C\($1,\"$2\",\"$3\",\"\",$4,\"$5\"\)
@@ -61,7 +72,7 @@ md5sum ${5}/${3} | awk '{print $1}' >> ${metaDataFile}
 echo "DST has been created"
 echo "Now producing evaluators"
 
-root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
+# root.exe -q -b Fun4All_runEvaluators.C\(0,\"$3\",\"$5\",0,\"$5\"\)
 
 rc_eval=$?
 echo " rc for eval: $rc_eval"

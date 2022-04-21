@@ -14,7 +14,11 @@ if nArgs != 3:
 # submissionTopDir  : Directory where this script is being run from (typically "productions")
 
 class steering():
-  productionVersion = "prop.4.0"
+#  productionVersion = "prop.4.0"
+#  productionVersion = "prop.5.1"
+#  productionVersion = "prop.6.0"
+#  productionVersion = "prop.7.0"
+  productionVersion = "prop.7.1"
   fileName = sys.argv[2]
   nightly = ""
   macrosTag = ""
@@ -36,6 +40,8 @@ class steering():
 #  macrosBranch = "production"
 
   nEventsPerJob = 1000
+#  nEventsPerJob = 500
+#  nEventsPerJob = 10
   nTotalEvents = 0
   site = sys.argv[1]
 

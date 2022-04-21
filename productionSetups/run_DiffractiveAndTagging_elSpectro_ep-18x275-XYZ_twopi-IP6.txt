@@ -1,6 +1,0 @@
-nightly prop.4
-tag prop.4-production-DiffractiveAndTagging-IP6-275GeV-r6
-PWG DiffractiveAndTagging
-generator elSpectro
-collision ep-18x275-XYZ-twopi-IP6
-nTotalEvents 830000

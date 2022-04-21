@@ -1,6 +1,0 @@
-nightly ana.24
-tag prop.4-production-DiffractiveAndTagging-IP8-275GeV-r6
-PWG ExclusiveReactions
-generator LAger
-collision ep-18x275-JPsi-e-IP8
-nTotalEvents 500000

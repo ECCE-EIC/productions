@@ -1,6 +1,0 @@
-nightly prop.4
-tag prop.4-production-DiffractiveAndTagging-IP6-275GeV-r6
-PWG DiffractiveAndTagging
-generator Sartre
-collision ePb-18x108-mu-IP6
-nTotalEvents 300000
