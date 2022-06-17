@@ -37,7 +37,7 @@ myShell='/bin/bash'
 # prodTopDir        : Directory where setProduction.py is being run from (typically "productions")
 
 class pars:
-  simulationsTopDir = '/work/eic2/ECCE/MC'
+  simulationsTopDir = '/work/eic2/Detector_1/MC'
   randomTimeDelay   = '180'        # set to 0 for no random delay. Otherwise it will be between 0 and this many seconds
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]

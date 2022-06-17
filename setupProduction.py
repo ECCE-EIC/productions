@@ -35,15 +35,15 @@ if steering.site not in config.sites:
   sys.exit()
 
 if steering.site == "JLAB":
-  steering.productionTopDir = '/work/eic2/ECCE/PRODUCTION/MACROS'
+  steering.productionTopDir = '/work/eic2/Detector_1/PRODUCTION/MACROS'
   steering.simulationsDir = steering.productionTopDir
 
 if steering.site == "OSG":
-  steering.productionTopDir = '/work/eic2/ECCE/PRODUCTION/MACROS'
+  steering.productionTopDir = '/work/eic2/Detector_1/PRODUCTION/MACROS'
   steering.simulationsDir = steering.productionTopDir
 
 if steering.site == "BNL":
-  steering.productionTopDir = '/gpfs/mnt/gpfs02/eic/DATA/ECCE_Productions/simulationProductions'
+  steering.productionTopDir = '/gpfs/mnt/gpfs02/eic/DATA/Detector_1_Productions/simulationProductions'
   steering.simulationsDir = steering.productionTopDir
 
 if steering.site == "OSG@BNL":
@@ -88,9 +88,9 @@ def getProductionRequirements():
   if "particleGun" in steering.generator: steering.macrosBranch = "production_singleParticle_0-20GeV"
   if "AI" in steering.PWG: steering.macrosBranch = "production_AI_Optimization"
 
-  checkRequirements(steering.PWG, config.ecceWorkingGroup)
-  checkRequirements(steering.generator, config.ecceGenerator)
-  checkRequirements(steering.collisionType, config.ecceCollision)
+  checkRequirements(steering.PWG, config.det1WorkingGroup)
+  checkRequirements(steering.generator, config.det1Generator)
+  checkRequirements(steering.collisionType, config.det1Collision)
 
 def getMacrosRepo():
   steering.simulationsDir += "/ECCE_build_{}/macros_tag_{}".format(steering.nightly,
@@ -178,10 +178,10 @@ def createSubmissionFiles():
 
 def printSimulation():
   print("====== Your production details ======")
-  print("ECCE nightly: {}".format(steering.nightly))
-  print("ECCE macros repo: {}".format(steering.macrosRepo))
-  print("ECCE macros tag: {}, hash: {}".format(steering.macrosTag, config.macrosVersion[steering.macrosTag]))
-  print("ECCE macros directory: {}".format(steering.simulationsDir))
+  print("Detector 1 nightly: {}".format(steering.nightly))
+  print("Detector 1 macros repo: {}".format(steering.macrosRepo))
+  print("Detector 1 macros tag: {}, hash: {}".format(steering.macrosTag, config.macrosVersion[steering.macrosTag]))
+  print("Detector 1 macros directory: {}".format(steering.simulationsDir))
   print("PWG: {}".format(steering.PWG))
   print("Generator: {}".format(steering.generator))
   print("Collision Type: {}".format(steering.collisionType))

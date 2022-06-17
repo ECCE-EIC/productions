@@ -18,7 +18,7 @@ if myShell not in goodShells:
 
 
 class pars:
-  simulationsTopDir = '/gpfs/mnt/gpfs02/eic/DATA/ECCE_Productions/MC'
+  simulationsTopDir = '/gpfs/mnt/gpfs02/eic/DATA/Detector_1_Productions/MC'
   nEventsPerJob = int(sys.argv[1])
   thisWorkingGroup = sys.argv[2]
   thisGenerator = sys.argv[3]
