@@ -56,7 +56,8 @@ macrosVersion = {
   "prop.6.1-production-singleParticle-0-20GeV" : "d37d30d",
   "prop.7.0-production" : "ae4db87",
   "prop.7.0-production-singleParticle-0-20GeV" : "d06b38a",
-  "Det1-22.1-prop.8.0-production-singleParticle-0-20GeV" : "52cae85",
+  "Det1-22.1-prop.8.0" : "63b164d",
+  "Det1-22.1-prop.8.0-production-singleParticle-0-20GeV" : "fdb0c58",
 
 #Diff and Tagg
 # r1
